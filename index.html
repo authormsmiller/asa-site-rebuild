@@ -4,12 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Angry Skipper Association, Inc. | Delta Co., 2nd Bn, 8th Cavalry (Airborne)</title>
-  <meta name="keywords" content="1st Cavalry Division, 1st Cav, Army, Airmobile, Vietnam, Grunt, grunt, infantry, M16, war, military, helicopter, chopper, combat assault, Angry Skipper Association, angry skipper, 2/8th Cavalry">
+  <meta name="keywords" content="1st Cavalry Division, 1st Cav, Army, Airmobile, Vietnam, Grunt, infantry, M16, Angry Skipper Association, 2/8th Cavalry">
   
-  <!-- Google Fonts: Cinzel (Regimental Serif) & Source Sans 3 (Legible Body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -24,6 +23,7 @@
       --border-subtle: #D8DDD0;
       --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
       --shadow-md: 0 4px 12px rgba(22, 26, 29, 0.08);
+      --radius-card: 10px;
     }
 
     * {
@@ -34,8 +34,8 @@
 
     body {
       font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      font-size: 18px;
-      line-height: 1.6;
+      font-size: 17px;
+      line-height: 1.5;
       background-color: var(--bg-page);
       color: var(--charcoal);
       display: flex;
@@ -49,53 +49,53 @@
       background-color: var(--field-olive-dark);
       color: #FFFFFF;
       border-bottom: 5px solid var(--cav-gold);
-      padding: 36px 20px 28px;
+      padding: 28px 16px 22px;
       text-align: center;
     }
 
     .site-header .unit-sub {
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--cav-gold);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
-.site-header h1 {
-  font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
-  font-size: clamp(1.8rem, 4vw, 2.7rem);
-  font-weight: 800; /* Richer, bolder weight */
-  line-height: 1.25;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
+    .site-header h1 {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: clamp(1.6rem, 4.5vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
 
-.site-header .association-title {
-  font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
-  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-  font-weight: 700;
-  color: #FFFFFF;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
+    .site-header .era-badge {
+      display: inline-block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #D6DDC8;
+      margin-bottom: 4px;
+    }
 
     .site-header .association-title {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-      font-weight: 600;
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 700;
       color: #FFFFFF;
       letter-spacing: 1.5px;
       text-transform: uppercase;
     }
 
-    /* Layout Container */
+    /* Main Container */
     .container {
       width: 100%;
-      max-width: 1080px;
+      max-width: 1040px;
       margin: 0 auto;
-      padding: 36px 20px;
+      padding: 24px 16px 40px;
       flex: 1;
     }
 
@@ -103,9 +103,9 @@
     .hero-card {
       background: var(--bg-surface);
       border: 2px solid var(--cav-gold);
-      border-radius: 8px;
-      padding: 32px 24px;
-      margin-bottom: 40px;
+      border-radius: var(--radius-card);
+      padding: 24px 20px;
+      margin-bottom: 32px;
       text-align: center;
       box-shadow: var(--shadow-md);
       position: relative;
@@ -126,52 +126,62 @@
       display: inline-block;
       background-color: var(--field-olive);
       color: #FFFFFF;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      padding: 4px 14px;
+      padding: 4px 12px;
       border-radius: 4px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
-.hero-card h2 {
-  font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
-  font-size: clamp(1.6rem, 3.2vw, 2.1rem);
-  font-weight: 700;
-  color: var(--field-olive-dark);
-  margin-bottom: 12px;
-}
+    .hero-card h2 {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: clamp(1.4rem, 3.2vw, 1.85rem);
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      margin-bottom: 8px;
+    }
 
     .hero-date-venue {
-      font-size: 1.15rem;
-      margin-bottom: 18px;
+      font-size: 1.05rem;
+      margin-bottom: 14px;
     }
 
     .hero-date-venue strong {
       color: var(--field-olive);
-      font-size: 1.25rem;
+      font-size: 1.15rem;
+    }
+
+    .hero-card p {
+      max-width: 700px;
+      margin: 0 auto 16px;
+      color: var(--charcoal);
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 12px;
       justify-content: center;
-      margin: 24px 0 16px;
+      margin: 16px 0 10px;
     }
 
     .btn {
-      display: inline-block;
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 1.05rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
       font-weight: 700;
       text-decoration: none;
-      padding: 12px 24px;
-      border-radius: 6px;
+      padding: 12px 22px;
+      min-height: 48px;
+      border-radius: 8px;
       transition: all 0.2s ease-in-out;
       cursor: pointer;
       text-align: center;
+      flex: 1 1 200px;
+      max-width: 300px;
     }
 
     .btn-primary {
@@ -185,43 +195,129 @@
       border-color: var(--cav-gold-hover);
     }
 
-    .btn-secondary {
-      background-color: transparent;
-      color: var(--field-olive-dark);
-      border: 2px solid var(--field-olive);
-    }
-
-    .btn-secondary:hover {
-      background-color: var(--field-olive);
-      color: #FFFFFF;
-    }
-
     .hero-meta {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       margin-top: 10px;
     }
 
-    /* Insignia & Featured Feature */
+    /* Categorized Hub Navigation */
+    .archive-categories {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .category-block {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 20px 18px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .category-title {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+    }
+
+    .category-title::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: var(--cav-gold);
+      margin-right: 8px;
+      border-radius: 50%;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 680px) {
+      .category-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+    }
+
+    .cat-card {
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--field-olive);
+      border-radius: 8px;
+      padding: 14px 14px;
+      text-decoration: none;
+      color: var(--charcoal);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 72px;
+      transition: all 0.15s ease-in-out;
+    }
+
+    .cat-card:hover, .cat-card:active {
+      background: #FFFFFF;
+      border-color: var(--cav-gold);
+      border-left-color: var(--cav-gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .cat-card h4 {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      margin-bottom: 3px;
+    }
+
+    .cat-card p {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    .highlight-card {
+      border-left-color: var(--cav-gold);
+      background-color: #FCFBF7;
+    }
+
+    /* Insignia Section */
     .insignia-section {
       text-align: center;
-      margin-bottom: 44px;
+      margin: 10px 0 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
     }
 
     .insignia-section img {
-      max-width: 260px;
+      max-width: 220px;
       height: auto;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
-      transition: transform 0.2s ease;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
     }
 
     .featured-link-box {
-      margin-top: 18px;
+      margin-top: 14px;
     }
 
     .featured-link {
       display: inline-block;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--field-olive);
       text-decoration: none;
@@ -231,72 +327,15 @@
 
     .featured-link:hover {
       color: var(--cav-gold-hover);
-      border-bottom-color: var(--field-olive);
-    }
-
-    /* Archive Grid */
-.section-title {
-  font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
-  font-size: 1.45rem;
-  font-weight: 700;
-  color: var(--field-olive-dark);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  text-align: center;
-  margin-bottom: 26px;
-  position: relative;
-}
-
-    .section-title::after {
-      content: "";
-      display: block;
-      width: 70px;
-      height: 3px;
-      background-color: var(--cav-gold);
-      margin: 8px auto 0;
-    }
-
-.nav-grid .grid-card h3 {
-  font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--field-olive-dark);
-  margin-bottom: 4px;
-}
-
-    .grid-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-left: 4px solid var(--field-olive);
-      border-radius: 6px;
-      padding: 20px 18px;
-      text-decoration: none;
-      color: var(--charcoal);
-      transition: transform 0.15s ease, border-left-color 0.15s ease, box-shadow 0.15s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .grid-card:hover {
-      transform: translateY(-2px);
-      border-left-color: var(--cav-gold);
-      box-shadow: var(--shadow-md);
-    }
-
-    .grid-card span {
-      font-size: 0.88rem;
-      color: var(--text-muted);
     }
 
     /* Footer */
     .site-footer {
       background-color: var(--charcoal);
       color: #A3ACB4;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       text-align: center;
-      padding: 36px 20px;
+      padding: 30px 16px;
       border-top: 4px solid var(--field-olive);
     }
 
@@ -305,27 +344,17 @@
       text-decoration: none;
     }
 
-    .site-footer a:hover {
-      text-decoration: underline;
-    }
-
     .footer-meta {
-      margin-bottom: 12px;
       font-weight: 600;
       color: #D6DDC8;
-    }
-
-    .footer-credit {
-      margin-bottom: 12px;
-      font-size: 0.85rem;
+      margin-bottom: 8px;
     }
 
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      margin-top: 14px;
-      font-size: 0.88rem;
+      gap: 16px;
+      margin-top: 12px;
     }
   </style>
 </head>
@@ -341,31 +370,112 @@
 
   <main class="container">
     
-    <!-- 2026 Reunion Highlight -->
+    <!-- Reunion Recap Card -->
     <section class="hero-card">
-      <span class="hero-badge">Upcoming Reunion</span>
+      <span class="hero-badge">Recent Event</span>
       <h2>2026 ASA Reunion &mdash; San Diego, CA</h2>
       <div class="hero-date-venue">
-        <strong>Monday 27 April &ndash; 3 May 2026</strong><br>
-        DoubleTree San Diego Bayside<br>
-        4875 North Harbor Drive, San Diego, CA 92106
+        <strong>April 27 &ndash; May 3, 2026</strong><br>
+        DoubleTree San Diego Bayside
       </div>
 
+      <p>
+        Thank you to all veterans, families, and guests who attended our San Diego gathering. Photographs and dispatches from the reunion are being collected for the archive.
+      </p>
+
       <div class="hero-actions">
-        <a href="https://www.events.afr-reg.com/e/AngrySkipper26" class="btn btn-primary" target="_blank" rel="noopener">
-          Registration via AFR
-        </a>
-        <a href="https://redirme.com/chhwh7" class="btn btn-secondary" target="_blank" rel="noopener">
-          Hotel Reservations (619-221-3058)
+        <a href="reunions.htm" class="btn btn-primary">
+          View Reunion Photo Galleries
         </a>
       </div>
       
       <div class="hero-meta">
-        Hotel Code: Mention <em>Angry Skipper</em> &bull; AFR Cut-Off Date: April 1, 2026 &bull; AFR Phone: 757-625-6401
+        Announcements regarding the 2027 reunion site and schedule will be published in upcoming newsletters.
       </div>
     </section>
 
-    <!-- Crest / Insignia & Feature -->
+    <!-- Categorized Hub Section -->
+    <section class="archive-categories">
+      
+      <!-- Group 1: Combat History & Archives -->
+      <div class="category-block">
+        <h3 class="category-title">Unit History &amp; Combat Records</h3>
+        <div class="category-grid">
+          <a href="after_action_reports.htm" class="cat-card">
+            <h4>After Action Reports</h4>
+            <p>Operational combat accounts and declassified records</p>
+          </a>
+          <a href="vietnam_photos_main_page.htm" class="cat-card">
+            <h4>Vietnam Photos</h4>
+            <p>Field photography archives (1965&ndash;1972)</p>
+          </a>
+          <a href="d_company_2_8th_cav_in_iraq.htm" class="cat-card">
+            <h4>D 2/8 in Iraq (OIF)</h4>
+            <p>Deployments (2006&ndash;2008) and updates (2009&ndash;2010)</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Group 2: Roster & Memorial -->
+      <div class="category-block">
+        <h3 class="category-title">Roster &amp; Association Records</h3>
+        <div class="category-grid">
+          <a href="d_2_8_honor_roll.htm" class="cat-card highlight-card">
+            <h4>D 2/8 Honor Roll</h4>
+            <p>In memoriam: our fallen brothers and tributes</p>
+          </a>
+          <a href="asa_active_members.htm" class="cat-card">
+            <h4>Active Members</h4>
+            <p>Current roster and contact directory</p>
+          </a>
+          <a href="asa_inc_officers_corp_docs.htm" class="cat-card">
+            <h4>Corporate Documents</h4>
+            <p>Association officers, bylaws, and filings</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Group 3: Publications & Reunions -->
+      <div class="category-block">
+        <h3 class="category-title">Media &amp; Dispatches</h3>
+        <div class="category-grid">
+          <a href="angry_skipper_association_newsletters.htm" class="cat-card">
+            <h4>Newsletters</h4>
+            <p>Archived association dispatches and issues (PDF)</p>
+          </a>
+          <a href="reunions.htm" class="cat-card">
+            <h4>Reunion Galleries</h4>
+            <p>Photographs from past annual gatherings</p>
+          </a>
+          <a href="video_media.htm" class="cat-card">
+            <h4>Video &amp; Media</h4>
+            <p>Archived footage, sound clips, and interviews</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Group 4: Service & Support -->
+      <div class="category-block">
+        <h3 class="category-title">Veteran Resources &amp; Support</h3>
+        <div class="category-grid">
+          <a href="medals_request.htm" class="cat-card">
+            <h4>Medals Request</h4>
+            <p>Guidance for replacement awards and DD-214 records</p>
+          </a>
+          <a href="PTSD_Information.htm" class="cat-card">
+            <h4>PTSD Resources</h4>
+            <p>Veteran mental health support and counseling links</p>
+          </a>
+          <a href="links_to_vet_related_website.htm" class="cat-card">
+            <h4>Veteran Links</h4>
+            <p>1st Cavalry Division and military community links</p>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Crest / Insignia Grounding -->
     <section class="insignia-section">
       <img src="images/ASA%20Logo%20Transparent_web.gif" alt="Angry Skipper Association Insignia">
       <div class="featured-link-box">
@@ -375,75 +485,6 @@
       </div>
     </section>
 
-    <!-- Association Archive Hub -->
-    <h2 class="section-title">Association Records &amp; Archives</h2>
-    <nav class="nav-grid" aria-label="Association Archive Grid">
-      <a href="vietnam_photos_main_page.htm" class="grid-card">
-        <h3>Vietnam Photos</h3>
-        <span>Photographs from operations 1965&ndash;1972</span>
-      </a>
-
-      <a href="reunions.htm" class="grid-card">
-        <h3>Reunion Photos</h3>
-        <span>Photographs from past association reunions</span>
-      </a>
-
-      <a href="angry_skipper_association_newsletters.htm" class="grid-card">
-        <h3>Newsletters</h3>
-        <span>Archived PDF association dispatches</span>
-      </a>
-
-      <a href="d_2_8_honor_roll.htm" class="grid-card">
-        <h3>D 2/8 Honor Roll</h3>
-        <span>In memoriam and unit honor roll</span>
-      </a>
-
-      <a href="asa_active_members.htm" class="grid-card">
-        <h3>Active Members</h3>
-        <span>Association roster &amp; membership directory</span>
-      </a>
-
-      <a href="asa_inc_officers_corp_docs.htm" class="grid-card">
-        <h3>Corporate Documents</h3>
-        <span>Officers, contacts, bylaws &amp; filings</span>
-      </a>
-
-      <a href="after_action_reports.htm" class="grid-card">
-        <h3>After Action Reports</h3>
-        <span>Historical combat operations records</span>
-      </a>
-
-      <a href="video_media.htm" class="grid-card">
-        <h3>Video &amp; Media</h3>
-        <span>Recorded interviews and historical video</span>
-      </a>
-
-      <a href="medals_request.htm" class="grid-card">
-        <h3>Medals Request</h3>
-        <span>Military records &amp; replacement medal guidance</span>
-      </a>
-
-      <a href="d_company_2_8th_cav_in_iraq.htm" class="grid-card">
-        <h3>D 2/8 (OIF)</h3>
-        <span>Operation Iraqi Freedom 2006&ndash;2008</span>
-      </a>
-
-      <a href="demon-update-nov27-2008.htm" class="grid-card">
-        <h3>Demon Updates</h3>
-        <span>Deployment updates 2009&ndash;2010</span>
-      </a>
-
-      <a href="PTSD_Information.htm" class="grid-card">
-        <h3>PTSD Information</h3>
-        <span>Veteran health resources and support links</span>
-      </a>
-
-      <a href="links_to_vet_related_website.htm" class="grid-card">
-        <h3>Veteran Links</h3>
-        <span>External 1st Cav and military web resources</span>
-      </a>
-    </nav>
-
   </main>
 
   <!-- Site Footer -->
@@ -451,7 +492,7 @@
     <div class="footer-meta">
       Delta Co., 2nd Bn, 8th Cavalry (Airborne) &bull; 1st Cavalry Division (Airmobile)
     </div>
-    <div class="footer-credit">
+    <div style="font-size: 0.82rem; margin-bottom: 8px;">
       Angry Skipper Association, Inc. &bull; Original Webmaster: Robin Woo (<a href="mailto:rwoo@surewest.net">rwoo@surewest.net</a>)
     </div>
     <div class="footer-links">

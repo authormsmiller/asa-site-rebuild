@@ -1,183 +1,469 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<style>
-<!--
- /* Font Definitions */
-@font-face
-	{font-family:"Times New Roman";
-	mso-font-charset:0;
-	mso-generic-font-family:roman;
-	mso-font-pitch:variable;
-	panose-1:2 2 6 3 5 4 5 2 3 4;
-	mso-font-signature:-536839425 -1073711039 9 0 1073742335 -65536;}
- /* Style Definitions */
-div.MsoNormal
-	{mso-style-parent:"";
-	margin-right:0pt;
-	text-indent:0pt;
-	margin-top:0pt;
-	margin-bottom:5.9759pt;
-	text-align:left;
-	font-family:"Times New Roman";
-	font-size:9.5pt;
-	color:black;
-	}
-li.MsoNormal
-	{mso-style-parent:"";
-	margin-right:0pt;
-	text-indent:0pt;
-	margin-top:0pt;
-	margin-bottom:5.9759pt;
-	text-align:left;
-	font-family:"Times New Roman";
-	font-size:9.5pt;
-	color:black;
-	}
-p.MsoNormal
-	{mso-style-parent:"";
-	margin-right:0pt;
-	text-indent:0pt;
-	margin-top:0pt;
-	margin-bottom:5.9759pt;
-	text-align:left;
-	font-family:"Times New Roman";
-	font-size:9.5pt;
-	color:black;
-	}
-ol
-	{margin-top:0in;
-	margin-bottom:0in;
-	margin-left:-2197in;}
-ul
-	{margin-top:0in;
-	margin-bottom:0in;
-	margin-left:-2197in;}
-@page
-	{mso-hyphenate:auto;}
--->
-	</style>
-<meta http-equiv="Content-Language" content="en-us">
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Angry Skipper Association, Inc.</title>
-<meta name="keywords" content="1st Cavalry Division, 1st Cav, Army, Airmobile, Vietnam, Grunt, grunt, infantry, M16, war, military, helicopter, chopper, combat assault, Angry Skipper Association, angry skipper">
-<bgsound src="helicopter%201%20.wav" loop="0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angry Skipper Association, Inc. | Delta Co., 2nd Bn, 8th Cavalry (Airborne)</title>
+  <meta name="keywords" content="1st Cavalry Division, 1st Cav, Army, Airmobile, Vietnam, Grunt, grunt, infantry, M16, war, military, helicopter, chopper, combat assault, Angry Skipper Association, angry skipper, 2/8th Cavalry">
+  
+  <!-- Google Fonts: Cinzel (Regimental Serif) & Source Sans 3 (Legible Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cav-gold: #E5A823;
+      --cav-gold-hover: #C98F15;
+      --field-olive: #394220;
+      --field-olive-dark: #222814;
+      --charcoal: #161A1D;
+      --text-muted: #535B62;
+      --bg-page: #F5F6F3;
+      --bg-surface: #FFFFFF;
+      --border-subtle: #D8DDD0;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(22, 26, 29, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
+      background-color: var(--bg-page);
+      color: var(--charcoal);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Regimental Header */
+    .site-header {
+      background-color: var(--field-olive-dark);
+      color: #FFFFFF;
+      border-bottom: 5px solid var(--cav-gold);
+      padding: 36px 20px 28px;
+      text-align: center;
+    }
+
+    .site-header .unit-sub {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cav-gold);
+      margin-bottom: 8px;
+    }
+
+    .site-header h1 {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .site-header .era-badge {
+      display: inline-block;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #D6DDC8;
+      margin-bottom: 6px;
+    }
+
+    .site-header .association-title {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* Layout Container */
+    .container {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 36px 20px;
+      flex: 1;
+    }
+
+    /* Reunion Hero Card */
+    .hero-card {
+      background: var(--bg-surface);
+      border: 2px solid var(--cav-gold);
+      border-radius: 8px;
+      padding: 32px 24px;
+      margin-bottom: 40px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: var(--cav-gold);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background-color: var(--field-olive);
+      color: #FFFFFF;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 4px 14px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    .hero-card h2 {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+      color: var(--field-olive-dark);
+      margin-bottom: 12px;
+    }
+
+    .hero-date-venue {
+      font-size: 1.15rem;
+      margin-bottom: 18px;
+    }
+
+    .hero-date-venue strong {
+      color: var(--field-olive);
+      font-size: 1.25rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin: 24px 0 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background-color: var(--cav-gold);
+      color: var(--charcoal);
+      border: 2px solid var(--cav-gold);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--cav-gold-hover);
+      border-color: var(--cav-gold-hover);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--field-olive-dark);
+      border: 2px solid var(--field-olive);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--field-olive);
+      color: #FFFFFF;
+    }
+
+    .hero-meta {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    /* Insignia & Featured Feature */
+    .insignia-section {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .insignia-section img {
+      max-width: 260px;
+      height: auto;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
+      transition: transform 0.2s ease;
+    }
+
+    .featured-link-box {
+      margin-top: 18px;
+    }
+
+    .featured-link {
+      display: inline-block;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--field-olive);
+      text-decoration: none;
+      border-bottom: 2px solid var(--cav-gold);
+      padding-bottom: 2px;
+    }
+
+    .featured-link:hover {
+      color: var(--cav-gold-hover);
+      border-bottom-color: var(--field-olive);
+    }
+
+    /* Archive Grid */
+    .section-title {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 1.45rem;
+      color: var(--field-olive-dark);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+      margin-bottom: 26px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 70px;
+      height: 3px;
+      background-color: var(--cav-gold);
+      margin: 8px auto 0;
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .grid-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--field-olive);
+      border-radius: 6px;
+      padding: 20px 18px;
+      text-decoration: none;
+      color: var(--charcoal);
+      transition: transform 0.15s ease, border-left-color 0.15s ease, box-shadow 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .grid-card:hover {
+      transform: translateY(-2px);
+      border-left-color: var(--cav-gold);
+      box-shadow: var(--shadow-md);
+    }
+
+    .grid-card h3 {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      margin-bottom: 4px;
+    }
+
+    .grid-card span {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--charcoal);
+      color: #A3ACB4;
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 36px 20px;
+      border-top: 4px solid var(--field-olive);
+    }
+
+    .site-footer a {
+      color: var(--cav-gold);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-meta {
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: #D6DDC8;
+    }
+
+    .footer-credit {
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 14px;
+      font-size: 0.88rem;
+    }
+  </style>
 </head>
+<body>
 
-<body background="images/background1.gif" link="#663300" vlink="#996633" alink="#996633" style="text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
+  <!-- Regimental Banner -->
+  <header class="site-header">
+    <div class="unit-sub">1st Cavalry Division (Airmobile)</div>
+    <h1>Delta Co., 2nd Bn, 8th Cavalry (Airborne)</h1>
+    <div class="era-badge">Vietnam War 1965 &ndash; 1972</div>
+    <div class="association-title">Angry Skipper Association, Inc.</div>
+  </header>
 
-<table border="0" width="99%">
-	<tr>
-		<td width="107">
-		<img border="0" src="images/spacer.gif" width="1" height="1"></td>
-		<td width="617"><p align="center"><font face="Arial"><b><font size="5">Delta Co., 2nd Bn, 8th Cavalry (Airborne)<br>
-1st 
-Cavalry Division (Airmobile)<br>
-</font>Vietnam War 1965 - 1972<br>
-<font size="2">Angry Skipper Association, Inc.</font></b></font></p>
-<p align="center">
-<b><font face="Arial" size="2">____________________________________</font></b></p>
-<p align="center">2026 ASA Reunion<br>
-Monday 27 April - 3 May 2026<br>
-Double Tree San Diego Bayside<br>
-4875 North Harbor Drive<br>
-San Diego, CA 92106</p>
+  <main class="container">
+    
+    <!-- 2026 Reunion Highlight -->
+    <section class="hero-card">
+      <span class="hero-badge">Upcoming Reunion</span>
+      <h2>2026 ASA Reunion &mdash; San Diego, CA</h2>
+      <div class="hero-date-venue">
+        <strong>Monday 27 April &ndash; 3 May 2026</strong><br>
+        DoubleTree San Diego Bayside<br>
+        4875 North Harbor Drive, San Diego, CA 92106
+      </div>
 
-<p align="center">Hotel Reservations: 619-221-3058<br>
-Mention Angry Skipper<br>
-<a href="https://redirme.com/chhwh7">https://redirme.com/chhwh7</a></p>
+      <div class="hero-actions">
+        <a href="https://www.events.afr-reg.com/e/AngrySkipper26" class="btn btn-primary" target="_blank" rel="noopener">
+          Registration via AFR
+        </a>
+        <a href="https://redirme.com/chhwh7" class="btn btn-secondary" target="_blank" rel="noopener">
+          Hotel Reservations (619-221-3058)
+        </a>
+      </div>
+      
+      <div class="hero-meta">
+        Hotel Code: Mention <em>Angry Skipper</em> &bull; AFR Cut-Off Date: April 1, 2026 &bull; AFR Phone: 757-625-6401
+      </div>
+    </section>
 
-<p align="center">Registration via AFR:<br>
-<a href="https://www.events.afr-reg.com/e/AngrySkipper26">https://www.events.afr-reg.com/e/AngrySkipper26</a><br>
-Cut-Off date is April 1, 2026<br>
-757-625-6401</p>
-  <strong></strong></p>
-<p align="center"><img border="0" src="images/ASA%20Logo%20Transparent_web.gif" width="293" height="502"><br>
-  <a href="https://www.jimgarvin.org/then--now.html"><strong>Then and Now, by James Garvin</strong></a></p>
-<p align="center"><br>
-</p>
-<div align="center">
-  <table border="0" width="0%" id="table2">
-		<tr>
-			<td align="center"><font face="Arial">
-			<!--<a href="members_online.htm">
-			<font color="#000000">Members<br>
-			Online</font></a></b></font></td>-->
-			<td align="left" width="50"><div align="center"><font face="Arial"><b><a href="vietnam_photos_main_page.htm"><font color="#000000">Vietnam<br>
-		    Photos</font></a></b></font></div></td>
-			<td align="left" width="101"><div align="center"><font face="Arial"><b><a href="asa_active_members.htm"><font color="#000000">Active<br>
-		    Members</font></a></b></font></div></td>
-			<td align="left" width="101"><div align="center"><font face="Arial"><b><a href="d_2_8_honor_roll.htm"><font color="#000000">D 2/8<br>
-		    Honor Roll</font></a></b></font></div></td>
-			<td align="left" width="101"><div align="center"><font face="Arial"><b>
-			  <a href="asa_inc_officers_corp_docs.htm"><font color="#000000">Corporate 
-			    Contacts &amp; 
-		    Documents</font></a><a href="d_2_8_honor_roll.htm"></a></b></font></div></td>
-		</tr>
-		<tr>
-			<td align="center"><font face="Arial"><b><a href="vietnam_photos_main_page.htm"></a></b></font></td>
-			<td align="center" width="50"><font face="Arial"><b><a href="reunions.htm">
-			<font color="#000000">Reunion Photographs</font></a></b></font></td>
-			<td align="center" width="142"><font face="Arial"><b>
-			<a href="angry_skipper_association_newsletters.htm">
-			<font color="#000000">Newsletters</font></a></b></font></td>
-			<td align="center" width="127"><font face="Arial"><b><a href="medals_request.htm">
-			<font color="#000000">Medals<br>
-			Request</font></a></b></font></td>
-			<td align="center"><font face="Arial"><b><a href="video_media.htm">
-			<font color="#000000">Video<br>
-			Media</font></a></b></font></td>
-		</tr>
-		<tr>
-			<td align="center">&nbsp;</td>
-			<td align="center" width="50">
-			<font face="Arial"><b><a href="after_action_reports.htm">
-			<font color="#000000"><br>
-			After 
-			Action Reports</font></a></b></font><p>&nbsp;</td>
-			<td align="center" width="142"><font face="Arial" color="#000000"><b>D 2/8 
-			(OIF) </b></font>
-	<font face="Arial"><br>
-	</font>
-	<font face="Arial" color="#000000"><b>
-	<a href="d_company_2_8th_cav_in_iraq.htm">
-	<font color="#000000">2006-2008</font></a></b></font><font face="Arial"><br>
-	</font>
-	<font face="Arial" color="#000000"><b> 
-	<a href="demon-update-nov27-2008.htm"><font color="#000000">2009-2010</font></a></b></font><font face="Arial"><br>
-	&nbsp;</font></td><font color="#000000"><td align="center"><font face="Arial"><b><a href="PTSD_Information.htm">
-		<font color="#000000">PTSD Information
-		<font color="#000000"><td align="center" width="142"><font face="Arial"><b><a href="links_to_vet_related_website.htm">
-			<font color="#000000">Links<br>
-		</tr>
-		</table>
-	<![if pub11]>
-	
-</div>
-			<div align="center">
-				<table border="1" width="80%" id="table1">
-					<tr>
-						<td>&nbsp;</td>
-					</tr>
-				</table>
-			</div>
-	<![if pub11]>
-	<p align="center"><font color="#663300"><b>Website Created January 14, 2006<br>
-Angry Skipper Association<font face="Times New Roman"> </font> Website<br>
-Layout, Design and Revisions Copyright 2006</b></font></p>
-<p align="center"><b><a href="rwoo@surewest.net">Webmaster: Robin Woo</a></b></p>
-<p align="center"><b><a href="legal_disclaimer.htm">Legal Disclaimer</a></b></p>
-<p align="center"><a href="../Privacy Statement.html"><strong>Privacy Statement</strong></a></p>
-	<p align="center">&nbsp;</p>
-	
-		</td>
-	</tr>
-</table>
-	<![if pub11]>
+    <!-- Crest / Insignia & Feature -->
+    <section class="insignia-section">
+      <img src="images/ASA%20Logo%20Transparent_web.gif" alt="Angry Skipper Association Insignia">
+      <div class="featured-link-box">
+        <a href="https://www.jimgarvin.org/then--now.html" class="featured-link" target="_blank" rel="noopener">
+          &ldquo;Then and Now&rdquo; by James Garvin
+        </a>
+      </div>
+    </section>
 
-<p align="center">&nbsp;
-</p>
+    <!-- Association Archive Hub -->
+    <h2 class="section-title">Association Records &amp; Archives</h2>
+    <nav class="nav-grid" aria-label="Association Archive Grid">
+      <a href="vietnam_photos_main_page.htm" class="grid-card">
+        <h3>Vietnam Photos</h3>
+        <span>Photographs from operations 1965&ndash;1972</span>
+      </a>
+
+      <a href="reunions.htm" class="grid-card">
+        <h3>Reunion Photos</h3>
+        <span>Photographs from past association reunions</span>
+      </a>
+
+      <a href="angry_skipper_association_newsletters.htm" class="grid-card">
+        <h3>Newsletters</h3>
+        <span>Archived PDF association dispatches</span>
+      </a>
+
+      <a href="d_2_8_honor_roll.htm" class="grid-card">
+        <h3>D 2/8 Honor Roll</h3>
+        <span>In memoriam and unit honor roll</span>
+      </a>
+
+      <a href="asa_active_members.htm" class="grid-card">
+        <h3>Active Members</h3>
+        <span>Association roster &amp; membership directory</span>
+      </a>
+
+      <a href="asa_inc_officers_corp_docs.htm" class="grid-card">
+        <h3>Corporate Documents</h3>
+        <span>Officers, contacts, bylaws &amp; filings</span>
+      </a>
+
+      <a href="after_action_reports.htm" class="grid-card">
+        <h3>After Action Reports</h3>
+        <span>Historical combat operations records</span>
+      </a>
+
+      <a href="video_media.htm" class="grid-card">
+        <h3>Video &amp; Media</h3>
+        <span>Recorded interviews and historical video</span>
+      </a>
+
+      <a href="medals_request.htm" class="grid-card">
+        <h3>Medals Request</h3>
+        <span>Military records &amp; replacement medal guidance</span>
+      </a>
+
+      <a href="d_company_2_8th_cav_in_iraq.htm" class="grid-card">
+        <h3>D 2/8 (OIF)</h3>
+        <span>Operation Iraqi Freedom 2006&ndash;2008</span>
+      </a>
+
+      <a href="demon-update-nov27-2008.htm" class="grid-card">
+        <h3>Demon Updates</h3>
+        <span>Deployment updates 2009&ndash;2010</span>
+      </a>
+
+      <a href="PTSD_Information.htm" class="grid-card">
+        <h3>PTSD Information</h3>
+        <span>Veteran health resources and support links</span>
+      </a>
+
+      <a href="links_to_vet_related_website.htm" class="grid-card">
+        <h3>Veteran Links</h3>
+        <span>External 1st Cav and military web resources</span>
+      </a>
+    </nav>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-meta">
+      Delta Co., 2nd Bn, 8th Cavalry (Airborne) &bull; 1st Cavalry Division (Airmobile)
+    </div>
+    <div class="footer-credit">
+      Angry Skipper Association, Inc. &bull; Original Webmaster: Robin Woo (<a href="mailto:rwoo@surewest.net">rwoo@surewest.net</a>)
+    </div>
+    <div class="footer-links">
+      <a href="legal_disclaimer.htm">Legal Disclaimer</a>
+      <a href="Privacy%20Statement.html">Privacy Statement</a>
+    </div>
+  </footer>
 
 </body>
-
 </html>

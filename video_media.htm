@@ -1,67 +1,61 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Language" content="en-us">
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Video Media</title>
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video &amp; Media | Angry Skipper Association, Inc.</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 
-<body background="images/background100.jpg">
+  <style>
+    .media-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 8px;
+    }
 
-<p align="center"><b><a href="index.html">BACK</a></b></p>
-<p align="center"><b><font size="5">Video Links</font></b></p>
-<div align="center">
-	<table border="1" width="50%">
-		<tr>
-			<td>
-	<p align="center">
-	<b>
-	<a href="http://www.youtube.com/watch_popup?v=ASETse4oNlI&feature=youtube_gdata_player">
-	<font color="#0000FF">&quot;GOODBYE VIETNAM&quot; video</font></a></b></p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-	<p align="center"><b><a href="http://youtu.be/1k9yZKjE6Ro">1st Cavalry 
-	Division in Vietnam</a></b></td>
-		</tr>
-		<tr>
-			<td>
-			&nbsp;</td>
-		</tr>
-		<tr>
-			<td>
-			<p align="center"><br>
-			<b><a href="http://www.militarytimes.com/multimedia/video/hancock">
-			<span class="h">Remembering the fallen</span><br>
-			An artist uses her gifts to preserve the memories of fallen troops.</a><br>
-&nbsp;</b></td>
-		</tr>
-		<tr>
-			<td>
-			<p align="center"><br>
-			<b><a href="http://www.operationmom.org/ToOurParents.html">From The 
-			Children Of Vietnam Vets</a></b><br>
-&nbsp;</td>
-		</tr>
-		<tr>
-			<td>
-			<p align="center"><br>
-			<b><a href="Video/02_FEB_07_ABC_DFW_Welcome.wmv">ABC Person Of The 
-			Week<br>
-			Welcome Home</a></b><br>
-&nbsp;</td>
-		</tr>
-		<tr>
-			<td>
-			<p align="center"><br>
-			<b><a href="http://www.youtube.com/watch?v=ervaMPt4Ha0">Remember Me</a></b><br>
-&nbsp;</td>
-		</tr>
-	</table>
-</div>
-<p align="center"><b><a href="index.html">BACK</a></b></p>
+    .media-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--field-olive);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--charcoal);
+      transition: all 0.15s ease-in-out;
+    }
 
-</body>
+    .media-card:hover {
+      background: var(--bg-surface);
+      border-color: var(--cav-gold);
+      border-left-color: var(--cav-gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
 
-</html>
+    .media-icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      fill: var(--field-olive);
+      transition: fill 0.15s ease;
+    }
+
+    .media-card:hover .media-icon {
+      fill: var(--cav-gold-hover);
+    }
+
+    .media-info {
+      flex-grow: 1;
+    }
+
+    .media-title {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size:

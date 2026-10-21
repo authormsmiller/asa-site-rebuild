@@ -1,297 +1,770 @@
-<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns="http://www.w3.org/TR/REC-html40">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Language" content="en-us">
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<link rel="File-List" href="reunions_files/filelist.xml">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reunions | Angry Skipper Association, Inc.</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 
-<title>Reunions</title>
-<!--[if !mso]>
-<style>
-v\:*         { behavior: url(#default#VML) }
-o\:*         { behavior: url(#default#VML) }
-.shape       { behavior: url(#default#VML) }
-</style>
-<![endif]--><!--[if gte mso 9]>
-<xml><o:shapedefaults v:ext="edit" spidmax="1027"/>
-</xml><![endif]-->
+  <style>
+    /* Historical Notice Banner */
+    .reunion-archive-banner {
+      background: var(--bg-surface);
+      border-left: 4px solid var(--cav-gold);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .reunion-archive-banner h3 {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      margin-bottom: 4px;
+    }
+
+    .reunion-archive-banner p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Reunion Chronological Grid */
+    .reunions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 8px;
+    }
+
+    .reunion-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .reunion-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--cav-gold);
+      box-shadow: var(--shadow-md);
+    }
+
+    .reunion-photo-frame {
+      width: 100%;
+      height: 190px;
+      background: #ECEEEA;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .reunion-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.25s ease;
+    }
+
+    .reunion-card:hover .reunion-photo-frame img {
+      transform: scale(1.02);
+    }
+
+    .reunion-meta-box {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .reunion-title {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .reunion-venue {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .reunion-actions {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .reunion-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: all 0.15s ease-in-out;
+    }
+
+    .btn-photos {
+      background-color: var(--bg-page);
+      color: var(--field-olive-dark);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-photos:hover {
+      background-color: var(--cav-gold);
+      color: var(--charcoal);
+      border-color: var(--cav-gold);
+    }
+
+    .btn-pdf {
+      background-color: #FAF4E6;
+      color: #7A5200;
+      border: 1px solid #E6D2A8;
+    }
+
+    .btn-pdf:hover {
+      background-color: #EEDBAA;
+      color: var(--charcoal);
+    }
+
+    .btn-pdf svg, .btn-photos svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+  </style>
 </head>
+<body>
 
-<body background="images/background100.jpg" text="#000080" link="#0000FF" vlink="#0066FF">
+  <!-- Regimental Global Header -->
+  <header class="site-header">
+    <a href="index.html">
+      <div class="unit-sub">1st Cavalry Division (Airmobile)</div>
+      <h1>Delta Co., 2nd Bn, 8th Cavalry (Airborne)</h1>
+      <div class="association-title">Angry Skipper Association, Inc.</div>
+    </a>
+  </header>
 
-<p align="center"><b>Homepage</b></p>
-<div align="center">
-  <table border="0" width="50%">
-    <tr>
-      <th scope="col">&nbsp;</th>
-    </tr>
-		<tr>
-		  <td>
-			<div dir="ltr" align="left">
-				<p align="center"><b><font size="5">Reunions</font></b></p>
-			  <p align="center"><font size="4" color="#0000FF">
-				San Francisco Reunion Video<br>
-			  News Coverage - KRON Channel 4<br>
-			  May 30-31, 1993 </font></p>
-			 
-			  <table width="1040" border="1">
-			    <tr>
-			      <th width="544" scope="col"><p><a href="ReunionSanAntonio_2025/2025 Group pic.jpg"><img src="ReunionSanAntonio_2025/2025 Group Thumbtack.jpg" width="573" height="242"></a><br>
-			        <a href="ReunionSanAntonio_2025/Group photos.html">San Antonio 2025</a></p>
-			        <form name="form1" method="post" action="">
-			          Holiday Inn Riverwalk<br>
-			          <br>
-<br>
-	              </form></th>
-			      <th width="544" scope="col"><p align="center"><a href="Reunion Jacksonville 2024/456995879_10161472830049454_3414369822834761591_n.jpg"><img src="Reunion Jacksonville 2024/456995879_10161472830049454_3414369822834761591_n.jpg" width="513" height="273"></a><br>
-			          Reunion Jacksonville 2024
-		              <strong><br />
-DoubleTree by Hilton </strong><br>
-			          <br>
-			        </p>
-<br>
-	              </form></th>
-		        </tr>
-		      </table>
-			  <table width="1040" border="1">
-			    <tr>
-			      <th width="480" height="80" scope="col"><p><a href="Reunion Dallas 2019/Reunion 2019.html"><img src="Reunion Dallas 2019/group thumb nail.jpg" width="393" height="154"><br>
-			      </a>D<strong>allas, TX. 2019<br>
-                      <a href="Reunion Dallas 2019/2019 Registration Demographics.pdf">Registration Demographics</a></strong><br>
-		            <br>
-	              </p></th>
-			      <th width="544" scope="col"><p><a href="Reunion Mesa 2023/2023 ASA Group.JPG"><img src="Reunion Mesa 2023/2023 ASA Group.JPG" width="573" height="242"></a><br>
-			        <a href="Reunion Mesa 2023/Group photos.html">Reunion Mesa 2023/Group photos.html</a></p>
-			        <form name="form1" method="post" action="">
-			          Mesa, AZ 2023<br>
-			          <a href="Reunion Mesa 2023/2023 Demographics Rpt.pdf">Registration Demographics </a><br>
-<br>
-	              </form></th>
-		        </tr>
-		      </table>
-			  <table width="1040" border="1">
-		      <tr>
-				    <th width="480" height="80" scope="col"><a href="Reunion_DC_2017/Reunion DC 2017.html"><img src="Reunion_DC_2017/EJ6A5977_thumb.jpg" width="380" height="203"></a><br>
-				      <strong>Washington D.C. 2017<br>
-                      <a href="Reunion_DC_2017/DEMOGRAPHICS_FINAL.pdf">Registration Demographics</a></strong></th>
-				    <th width="544" scope="col"><a href="Reunion_Orlando_2018/Orlando Reunion.html"><img src="Reunion_Orlando_2018/Group Thumbtack.jpg" width="435" height="208"></a><br>
-				      Orlando, Florida 2018<br>
-				      <a href="Reunion_Orlando_2018/Demographics 2018.pdf">Registration Demographics</a></th>
-			      </tr>
-			  </table>
-			  <table border="0" width="100%">
-			    <tr>
-  <td width="47%" height="100"><div align="center"><a href="Reunion_Seattle_2016/Reunion 2016 Renton.html"><img src="Reunion_Seattle_2016/Group Thumbnail.jpg" width="360" height="162" align="top" longdesc="Reunion_Seattle_2016/Group Thumbnail.jpg"></a><br>
-      <a href="Reunion_Seattle_2016/Reunion 2016 Renton.html">Seattle, WA 2016</a><br>
-      <a href="Reunion_Seattle_2016/DEMOGRAPHICS_FINAL.pdf">Registration Demographics</a><br>    
-    <br>
-  </div></td>
-  <td width="53%" height="100"><div align="center">
-    <p><a href="Reunion_San Antonio 2015/SA Reunion.html"><img src="../Reunion_San Antonio 2015/Group resize web 2015.jpg" width="362" height="178"></a><br>
-      <a href="Reunion_San Antonio 2015/SA Reunion.html">San Antonio, TX  2015</a><br>
-      <a href="Reunion_San Antonio 2015/DEMOGRAPHICS_5-20-15.pdf">Registration Demographics</a></p>
-  </div></td>
-</tr>
-<tr>
-						<td height="100">
-						<p align="center"> <a href="Reunion_MyrtleBeach_2014/angry_skipper_association_myrtle_beach.htm"><img border="1" src="images/2014 group photo_small.jpg" width="358" height="212"></a><br>
-						<strong><a href="Reunion_MyrtleBeach_2014/angry_skipper_association_myrtle_beach.htm">Myrtle Beach, S.C. 2014 </a></strong><a href="Reunion_MyrtleBeach_2014/angry_skipper_association_myrtle_beach.htm"></a>
-						<br>
-				    <a href="Reunion_Myrtle Beach_2014/DEMOGRAPHICS_2014.pdf"><strong>Registration Demographics </strong></a></td>
-						<td height="100">
-						<p align="center">
-						<a href="Reunion_SanDiego_2013/angry_skipper_association_san_di.htm">
-						<img border="1" src="images/ASA%202013%20San%20Diego%20Group_web.jpg" width="307" height="221"></a><br>
-						<b><a href="Reunion_SanDiego_2013/angry_skipper_association_san_di.htm">San 
-						Diego, CA 2013</a><br>
-						<a href="Reunion_SanDiego_2013/Registration%20Demographics%202013.pdf">
-						Registration Demographics</a></b></td>
-				</tr>
-					<tr>
-						<td height="100">
-						<p align="center">
-						<a href="Reunion_Denver_2012/angry_skipper_association_denver.htm">
-						<img border="1" src="Reunion_Denver_2012/2012%20ASA%20Group.jpg" width="317" height="187"></a><br>
-						<b>
-						<a href="Reunion_Denver_2012/angry_skipper_association_denver.htm">
-						Denver, CO 2012</a><br>
-						<a href="Reunion_Denver_2012/DEMOGRAPHICS_6-18-12.pdf">Registration Demographics</a></b></td>
-						<td height="100">
-						<p align="center">
-						<a href="Reunion_WashingtonDC_2011/D.C.%202011.htm">
-						<img border="1" src="Reunion_WashingtonDC_2011/cropped%20member%20photo.jpg" width="305" height="172"></a><br>
-						<b><a href="Reunion_WashingtonDC_2011/D.C.%202011.htm">Washington, D.C. 2011</a></b><br>
-						<b>
-						<a href="Reunion_WashingtonDC_2011/DEMOGRAPHICS_5-17-11.pdf">
-						Registration Demographics</a><u><br>
-&nbsp;</u></b></td>
-					</tr>
-					<tr>
-						<td height="100">
-						<p align="center">
-						<a href="Reunion_St%20Pete_2010/St%20Pete%20Beach.htm">
-						<img border="1" src="Group%20Master_cropped.jpg" width="314" height="153"></a><br>
-						<font color="#0000FF"><b>
-						<a href="Reunion_St%20Pete_2010/St%20Pete%20Beach.htm">St. Pete Beach, Florida 2010</a></b></font><br>
-						<b>
-						<a href="Reunion_St%20Pete_2010/DEMOGRAPHIC%20REPORT%20FINAL.pdf">Registration Demographics</a></b></td>
-						<td height="100">
-						<p align="center">
-						<span style="font-size: 12.0pt; font-family: 'Times New Roman',serif"><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
- coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
- filled="f" stroked="f">
- <v:stroke joinstyle="miter"/>
- <v:formulas>
-  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
-  <v:f eqn="sum @0 1 0"/>
-  <v:f eqn="sum 0 0 @1"/>
-  <v:f eqn="prod @2 1 2"/>
-  <v:f eqn="prod @3 21600 pixelWidth"/>
-  <v:f eqn="prod @3 21600 pixelHeight"/>
-  <v:f eqn="sum @0 0 1"/>
-  <v:f eqn="prod @6 1 2"/>
-  <v:f eqn="prod @7 21600 pixelWidth"/>
-  <v:f eqn="sum @8 21600 0"/>
-  <v:f eqn="prod @7 21600 pixelHeight"/>
-  <v:f eqn="sum @10 21600 0"/>
- </v:formulas>
- <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
- <o:lock v:ext="edit" aspectratio="t"/>
-</v:shapetype><v:shape id="_x0000_s1025" type="#_x0000_t75" alt=""
- href="Reunion_SanAntonio2009/San_Antonio_2009.htm" style='width:178.5pt;
- height:141.75pt' stroked="t" strokecolor="blue">
- <v:imagedata src="reunions_files/image001.jpg" o:href="cid:AB434975-2A0A-44FF-A19D-D14CC4C6ED9C"/>
-</v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'><a
-href="Reunion_SanAntonio2009/San_Antonio_2009.htm"><img border=0 width=240
-height=191 src="reunions_files/image002.jpg" title="" v:shapes="_x0000_s1025"></a></span><![endif]></span><br>
-						<b><a href="Reunion_SanAntonio2009/San_Antonio_2009.htm">San 
-						Antonio, Texas 2009</a><br>
-						<a href="Reunion_SanAntonio2009/DEMOGRAPHICS%20REPORT%20FINAL.pdf">
-						Registration Demographics</a></b><br>
-&nbsp;</p></td>
-					</tr>
-					<tr>
-						<td>
-						<p align="center">
-						<a href="reunion_salt_lake_city_2008/angry_skipper_salt_lake_city_2008.htm">
-						<img border="2" src="reunion_salt_lake_city_2008/Group%20Photo%202008_300x192.jpg" width="300" height="192"></a><br>
-						<b>
-						<a href="reunion_salt_lake_city_2008/angry_skipper_salt_lake_city_2008.htm">
-						Salt Lake City Reunion 2008</a><br>
-						<a href="reunion_salt_lake_city_2008/SLC%20DEMOGRAPHIC%20REPORT%205-21-08.pdf">
-						Registration Demographics</a><br>
-&nbsp;</b></td>
-						<td>
-						<p align="center"><br>
-						<a href="Reunion_WashingtonDC_2007/angry_skipper_washington_DC_2007.htm">
-						<img border="2" src="Reunion_WashingtonDC_2007/2007_DC_ASA_Group_Pic_800x628_small.jpg" xthumbnail-orig-image="Reunion_WashingtonDC_2007/2007_DC_ASA_Group_Pic_800x628.jpg" width="230" height="180"></a><br>
-						<b>
-						<a href="Reunion_WashingtonDC_2007/angry_skipper_washington_DC_2007.htm">
-						Washington DC Reunion 2007</a><br>
-						<a href="pdf_documents/DC%202007%20Attendee's%20List.pdf">
-						DC List of Attendees pdf document</a></b><br>
-&nbsp;</td>
-					</tr>
-					<tr>
-						<td>
-						<p align="center">
-						<a href="Reunion_OrlandoFlorida_2006/angry_skipper_orlando_florida_2006.htm">
-						<img border="2" src="images/2006AngrySkipperAssnGroupPhotoOrlandoFL_small.jpg" xthumbnail-orig-image="Reunion_OrlandoFlorida_2006/2006AngrySkipperAssnGroupPhotoOrlandoFL.jpg" width="249" height="201"></a></p>
-						<p align="center"><b>
-						<a href="Reunion_OrlandoFlorida_2006/angry_skipper_orlando_florida_2006.htm">
-						Orlando, Florida Reunion May 2006</a><br>
-						<a href="pdf_documents/Orlando_List_of_Attendees.pdf">
-						Orlando List of Attendees pdf document</a></b></td>
-						<td>
-						<p align="center">
-						<a href="Reunion_lasvegas_2005/angry_skipper_Vegas2005.htm">
-						<img border="2" src="Reunion_lasvegas_2005/ASA_Group_300x206.jpg" width="300" height="206"></a></p>
-						<p align="center">
-				<b><a href="Reunion_lasvegas_2005/angry_skipper_Vegas2005.htm">Las Vegas Reunion 
-				Photos May 2005</a></b><br>
-&nbsp;</td>
-					</tr>
-					<tr>
-						<td>
-						<p align="center">
-						<a href="Reunion_sandiego_2004/angry_skipper_san_diego2004.htm">
-						<img border="2" src="Reunion_sandiego_2004/Group_Photo_200x248.jpg" width="200" height="248"></a><p align="center">
-				<b>
-				<a href="Reunion_sandiego_2004/angry_skipper_san_diego2004.htm">San Diego Reunion 
-						Photos May 2004</a></b><br>
-&nbsp;</p>
-						</td>
-						<td>
-						<p align="center">
-						<a href="Reunion_chicago_2003/angry_skipper_chicago2003.htm">
-						<img border="2" src="Reunion_chicago_2003/ChicagoGroupPic2003_286x150.jpg" width="286" height="150"></a><p align="center">
-						<b>
-				<span class="234291413-21012006">
-						<a href="Reunion_chicago_2003/angry_skipper_chicago2003.htm">
-				Chicago Reunion Photos May 2003</a></span></b><br>
-&nbsp;</td>
-					</tr>
-					<tr>
-						<td>
-						<p align="center">
-						<a href="Reunion_washington_dc_2002/angry_skipper_wash_dc_reunion2002.htm">
-						<img border="2" src="Reunion_washington_dc_2002/reunion2002_260x140.jpg" width="262" height="140"></a><p align="center">
-				<b>
-				<a href="Reunion_washington_dc_2002/angry_skipper_wash_dc_reunion2002.htm">Washington D. C. Reunion Photos May 2002</a></b></p>
-						<p align="center"><b>
-						<a href="http://www.skytroopers.org/washington_d_c_reunion_page_1.htm">
-				More Washington D.C. Reunion Photos May 2002</a></b><br>
-&nbsp;</td>
-						<td>
-						<p align="center">
-						<a href="Reunion_vegas_2000/angry_skipper_las_vegas_reunion_.htm">
-						<img border="2" src="Reunion_vegas_2000/y2k_262x113.jpg" width="280" height="131"></a><br>
-						<br>
-				<b>
-				<a href="Reunion_vegas_2000/angry_skipper_las_vegas_reunion_.htm">Las Vegas Reunion Photos May 2000</a></b></p></td>
-					</tr>
-					<tr>
-						<td>
-						<p align="center"><br>
-						<a href="SanFrancisco_reunion_1993.htm">
-						<img border="2" src="images/SanFran_Reunion1993_small.jpg" xthumbnail-orig-image="images/SanFran_Reunion1993.jpg" width="200" height="143"></a><br>
-						<b><a href="SanFrancisco_reunion_1993.htm">San Francisco 
-						Reunion May 30, 1993</a><br>
-&nbsp;</b></td>
-						<td>
-						<p align="center"><br>
-						<a href="1st_annual_angry_skipper_1992_reunion_.htm">
-						<img border="2" src="images/regan_soper_pierce_higgins_patek_small.jpg" xthumbnail-orig-image="Reunion_houston_tx_1992/regan_soper_pierce_higgins_patek.jpg" width="200" height="170"></a><br>
-						<b><a href="1st_annual_angry_skipper_1992_reunion_.htm">1st Annual Angry Skipper Reunion in Houston, TX on 
-						Memorial Day weekend 1992</a></b><br>
-&nbsp;</td>
-					</tr>
-					<tr>
-						<td>
-						<p align="center"><br>
-						<a href="RangePlatoon_reunion_1991.htm">
-						<img border="2" src="images/RangeReunion1991_small.jpg" xthumbnail-orig-image="images/RangeReunion1991.jpg" width="200" height="153"></a><br>
-						<b><a href="RangePlatoon_reunion_1991.htm">Range Platoon 
-						Reunion Nashville 1991</a></b><br>
-&nbsp;</td>
-						<td>
-						<p align="center"><br>
-						<a href="MyrtleBeach_reunion_1989.htm">
-						<img border="2" src="images/MyrtleBeach1989_small.jpg" xthumbnail-orig-image="images/MyrtleBeach1989.jpg" width="200" height="139"></a><br>
-						<b><a href="MyrtleBeach_reunion_1989.htm">Myrtle Beach 
-						Reunion 1989</a></b></td>
-					</tr>
-			  </table>
-			  <p align="center">
-		    <b><a href="index.html">Homepage</a></b></p></div></td>
-		</tr>
-		<tr>
-		  <td>&nbsp;</td>
-    </tr>
-	</table>
-</div>
-<p align="center">&nbsp;</p>
+  <!-- Subpage Breadcrumb Navigation -->
+  <nav class="sub-nav" aria-label="Breadcrumb">
+    <div class="container-nav">
+      <a href="index.html" class="back-home">&larr; Return to Association Home</a>
+      <span class="crumb-current">Reunions Archive</span>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="container">
+
+    <section class="page-title-card">
+      <h2>Annual Reunion Galleries &amp; Archives</h2>
+      <p>Annual gatherings of the Angry Skipper Association, celebrating fellowship, memory, and unit history from 1989 to the present.</p>
+    </section>
+
+    <!-- Historical Broadcast Notice -->
+    <aside class="reunion-archive-banner">
+      <h3>Featured Historical Coverage</h3>
+      <p>San Francisco Reunion Video &bull; News Coverage &mdash; KRON Channel 4 &bull; May 30&ndash;31, 1993</p>
+    </aside>
+
+    <section class="content-card">
+      <div class="reunions-grid">
+
+        <!-- 2025 San Antonio -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="ReunionSanAntonio_2025/2025%20Group%20pic.jpg" target="_blank" rel="noopener">
+              <img src="ReunionSanAntonio_2025/2025%20Group%20Thumbtack.jpg" alt="San Antonio 2025 Reunion Group Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">San Antonio, Texas &mdash; 2025</h3>
+            <div class="reunion-venue">Holiday Inn Riverwalk</div>
+            <div class="reunion-actions">
+              <a href="ReunionSanAntonio_2025/Group%20photos.html" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Group Photos
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2024 Jacksonville -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion%20Jacksonville%202024/456995879_10161472830049454_3414369822834761591_n.jpg" target="_blank" rel="noopener">
+              <img src="Reunion%20Jacksonville%202024/456995879_10161472830049454_3414369822834761591_n.jpg" alt="Jacksonville 2024 Reunion Group Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Jacksonville, Florida &mdash; 2024</h3>
+            <div class="reunion-venue">DoubleTree by Hilton</div>
+            <div class="reunion-actions">
+              <a href="Reunion%20Jacksonville%202024/456995879_10161472830049454_3414369822834761591_n.jpg" class="reunion-btn btn-photos" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                View Photo
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2023 Mesa -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion%20Mesa%202023/2023%20ASA%20Group.JPG" target="_blank" rel="noopener">
+              <img src="Reunion%20Mesa%202023/2023%20ASA%20Group.JPG" alt="Mesa 2023 Reunion Group Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Mesa, Arizona &mdash; 2023</h3>
+            <div class="reunion-venue">Annual Association Reunion</div>
+            <div class="reunion-actions">
+              <a href="Reunion%20Mesa%202023/Group%20photos.html" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Group Photos
+              </a>
+              <a href="Reunion%20Mesa%202023/2023%20Demographics%20Rpt.pdf" class="reunion-btn btn-pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                Demographics
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2019 Dallas -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion%20Dallas%202019/Reunion%202019.html">
+              <img src="Reunion%20Dallas%202019/group%20thumb%20nail.jpg" alt="Dallas 2019 Reunion Group Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Dallas, Texas &mdash; 2019</h3>
+            <div class="reunion-venue">Annual Association Reunion</div>
+            <div class="reunion-actions">
+              <a href="Reunion%20Dallas%202019/Reunion%202019.html" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+              <a href="Reunion%20Dallas%202019/2019%20Registration%20Demographics.pdf" class="reunion-btn btn-pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                Demographics
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2018 Orlando -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_Orlando_2018/Orlando%20Reunion.html">
+              <img src="Reunion_Orlando_2018/Group%20Thumbtack.jpg" alt="Orlando 2018 Reunion Group Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Orlando, Florida &mdash; 2018</h3>
+            <div class="reunion-venue">Annual Association Reunion</div>
+            <div class="reunion-actions">
+              <a href="Reunion_Orlando_2018/Orlando%20Reunion.html" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+              <a href="Reunion_Orlando_2018/Demographics%202018.pdf" class="reunion-btn btn-pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                Demographics
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2017 Washington D.C. -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_DC_2017/Reunion%20DC%202017.html">
+              <img src="Reunion_DC_2017/EJ6A5977_thumb.jpg" alt="Washington DC 2017 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Washington, D.C. &mdash; 2017</h3>
+            <div class="reunion-venue">Annual Association Reunion</div>
+            <div class="reunion-actions">
+              <a href="Reunion_DC_2017/Reunion%20DC%202017.html" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+              <a href="Reunion_DC_2017/DEMOGRAPHICS_FINAL.pdf" class="reunion-btn btn-pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                Demographics
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2016 Seattle -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_Seattle_2016/Reunion%202016%20Renton.html">
+              <img src="Reunion_Seattle_2016/Group%20Thumbnail.jpg" alt="Seattle 2016 Reunion Group Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Seattle (Renton), WA &mdash; 2016</h3>
+            <div class="reunion-venue">Annual Association Reunion</div>
+            <div class="reunion-actions">
+              <a href="Reunion_Seattle_2016/Reunion%202016%20Renton.html" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+              <a href="Reunion_Seattle_2016/DEMOGRAPHICS_FINAL.pdf" class="reunion-btn btn-pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                Demographics
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2015 San Antonio -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_San%20Antonio%202015/SA%20Reunion.html">
+              <img src="Reunion_San%20Antonio%202015/Group%20resize%20web%202015.jpg" alt="San Antonio 2015 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">San Antonio, Texas &mdash; 2015</h3>
+            <div class="reunion-venue">Annual Association Reunion</div>
+            <div class="reunion-actions">
+              <a href="Reunion_San%20Antonio%202015/SA%20Reunion.html" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+              <a href="Reunion_San%20Antonio%202015/DEMOGRAPHICS_5-20-15.pdf" class="reunion-btn btn-pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                Demographics
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2014 Myrtle Beach -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_MyrtleBeach_2014/angry_skipper_association_myrtle_beach.htm">
+              <img src="images/2014%20group%20photo_small.jpg" alt="Myrtle Beach 2014 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Myrtle Beach, SC &mdash; 2014</h3>
+            <div class="reunion-venue">Annual Association Reunion</div>
+            <div class="reunion-actions">
+              <a href="Reunion_MyrtleBeach_2014/angry_skipper_association_myrtle_beach.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+              <a href="Reunion_Myrtle%20Beach_2014/DEMOGRAPHICS_2014.pdf" class="reunion-btn btn-pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                Demographics
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2013 San Diego -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_SanDiego_2013/angry_skipper_association_san_di.htm">
+              <img src="images/ASA%202013%20San%20Diego%20Group_web.jpg" alt="San Diego 2013 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">San Diego, CA &mdash; 2013</h3>
+            <div class="reunion-venue">Annual Association Reunion</div>
+            <div class="reunion-actions">
+              <a href="Reunion_SanDiego_2013/angry_skipper_association_san_di.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+              <a href="Reunion_SanDiego_2013/Registration%20Demographics%202013.pdf" class="reunion-btn btn-pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                Demographics
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2012 Denver -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_Denver_2012/angry_skipper_association_denver.htm">
+              <img src="Reunion_Denver_2012/2012%20ASA%20Group.jpg" alt="Denver 2012 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Denver, CO &mdash; 2012</h3>
+            <div class="reunion-venue">Annual Association Reunion</div>
+            <div class="reunion-actions">
+              <a href="Reunion_Denver_2012/angry_skipper_association_denver.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+              <a href="Reunion_Denver_2012/DEMOGRAPHICS_6-18-12.pdf" class="reunion-btn btn-pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                Demographics
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2011 Washington D.C. -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_WashingtonDC_2011/D.C.%202011.htm">
+              <img src="Reunion_WashingtonDC_2011/cropped%20member%20photo.jpg" alt="Washington DC 2011 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Washington, D.C. &mdash; 2011</h3>
+            <div class="reunion-venue">Annual Association Reunion</div>
+            <div class="reunion-actions">
+              <a href="Reunion_WashingtonDC_2011/D.C.%202011.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+              <a href="Reunion_WashingtonDC_2011/DEMOGRAPHICS_5-17-11.pdf" class="reunion-btn btn-pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                Demographics
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2010 St. Pete Beach -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_St%20Pete_2010/St%20Pete%20Beach.htm">
+              <img src="Group%20Master_cropped.jpg" alt="St Pete Beach 2010 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">St. Pete Beach, FL &mdash; 2010</h3>
+            <div class="reunion-venue">Annual Association Reunion</div>
+            <div class="reunion-actions">
+              <a href="Reunion_St%20Pete_2010/St%20Pete%20Beach.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+              <a href="Reunion_St%20Pete_2010/DEMOGRAPHIC%20REPORT%20FINAL.pdf" class="reunion-btn btn-pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                Demographics
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2009 San Antonio -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_SanAntonio2009/San_Antonio_2009.htm">
+              <img src="reunions_files/image002.jpg" alt="San Antonio 2009 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">San Antonio, Texas &mdash; 2009</h3>
+            <div class="reunion-venue">Annual Association Reunion</div>
+            <div class="reunion-actions">
+              <a href="Reunion_SanAntonio2009/San_Antonio_2009.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+              <a href="Reunion_SanAntonio2009/DEMOGRAPHICS%20REPORT%20FINAL.pdf" class="reunion-btn btn-pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                Demographics
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2008 Salt Lake City -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="reunion_salt_lake_city_2008/angry_skipper_salt_lake_city_2008.htm">
+              <img src="reunion_salt_lake_city_2008/Group%20Photo%202008_300x192.jpg" alt="Salt Lake City 2008 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Salt Lake City, UT &mdash; 2008</h3>
+            <div class="reunion-venue">Annual Association Reunion</div>
+            <div class="reunion-actions">
+              <a href="reunion_salt_lake_city_2008/angry_skipper_salt_lake_city_2008.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+              <a href="reunion_salt_lake_city_2008/SLC%20DEMOGRAPHIC%20REPORT%205-21-08.pdf" class="reunion-btn btn-pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                Demographics
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2007 Washington D.C. -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_WashingtonDC_2007/angry_skipper_washington_DC_2007.htm">
+              <img src="Reunion_WashingtonDC_2007/2007_DC_ASA_Group_Pic_800x628_small.jpg" alt="Washington DC 2007 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Washington, D.C. &mdash; 2007</h3>
+            <div class="reunion-venue">Annual Association Reunion</div>
+            <div class="reunion-actions">
+              <a href="Reunion_WashingtonDC_2007/angry_skipper_washington_DC_2007.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+              <a href="pdf_documents/DC%202007%20Attendee's%20List.pdf" class="reunion-btn btn-pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                Attendee List
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2006 Orlando -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_OrlandoFlorida_2006/angry_skipper_orlando_florida_2006.htm">
+              <img src="images/2006AngrySkipperAssnGroupPhotoOrlandoFL_small.jpg" alt="Orlando 2006 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Orlando, Florida &mdash; 2006</h3>
+            <div class="reunion-venue">Annual Association Reunion (May 2006)</div>
+            <div class="reunion-actions">
+              <a href="Reunion_OrlandoFlorida_2006/angry_skipper_orlando_florida_2006.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+              <a href="pdf_documents/Orlando_List_of_Attendees.pdf" class="reunion-btn btn-pdf" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                Attendee List
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2005 Las Vegas -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_lasvegas_2005/angry_skipper_Vegas2005.htm">
+              <img src="Reunion_lasvegas_2005/ASA_Group_300x206.jpg" alt="Las Vegas 2005 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Las Vegas, NV &mdash; 2005</h3>
+            <div class="reunion-venue">Annual Association Reunion (May 2005)</div>
+            <div class="reunion-actions">
+              <a href="Reunion_lasvegas_2005/angry_skipper_Vegas2005.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Photo Gallery
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2004 San Diego -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_sandiego_2004/angry_skipper_san_diego2004.htm">
+              <img src="Reunion_sandiego_2004/Group_Photo_200x248.jpg" alt="San Diego 2004 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">San Diego, CA &mdash; 2004</h3>
+            <div class="reunion-venue">Annual Association Reunion (May 2004)</div>
+            <div class="reunion-actions">
+              <a href="Reunion_sandiego_2004/angry_skipper_san_diego2004.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Photo Gallery
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2003 Chicago -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_chicago_2003/angry_skipper_chicago2003.htm">
+              <img src="Reunion_chicago_2003/ChicagoGroupPic2003_286x150.jpg" alt="Chicago 2003 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Chicago, Illinois &mdash; 2003</h3>
+            <div class="reunion-venue">Annual Association Reunion (May 2003)</div>
+            <div class="reunion-actions">
+              <a href="Reunion_chicago_2003/angry_skipper_chicago2003.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Photo Gallery
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2002 Washington D.C. -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_washington_dc_2002/angry_skipper_wash_dc_reunion2002.htm">
+              <img src="Reunion_washington_dc_2002/reunion2002_260x140.jpg" alt="Washington DC 2002 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Washington, D.C. &mdash; 2002</h3>
+            <div class="reunion-venue">Annual Association Reunion (May 2002)</div>
+            <div class="reunion-actions">
+              <a href="Reunion_washington_dc_2002/angry_skipper_wash_dc_reunion2002.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Photo Gallery
+              </a>
+              <a href="http://www.skytroopers.org/washington_d_c_reunion_page_1.htm" class="reunion-btn btn-photos" target="_blank" rel="noopener">
+                More Photos
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2000 Las Vegas -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="Reunion_vegas_2000/angry_skipper_las_vegas_reunion_.htm">
+              <img src="Reunion_vegas_2000/y2k_262x113.jpg" alt="Las Vegas 2000 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Las Vegas, NV &mdash; 2000</h3>
+            <div class="reunion-venue">Annual Association Reunion (May 2000)</div>
+            <div class="reunion-actions">
+              <a href="Reunion_vegas_2000/angry_skipper_las_vegas_reunion_.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Photo Gallery
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 1993 San Francisco -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="SanFrancisco_reunion_1993.htm">
+              <img src="images/SanFran_Reunion1993_small.jpg" alt="San Francisco 1993 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">San Francisco, CA &mdash; 1993</h3>
+            <div class="reunion-venue">Memorial Gathering (May 30, 1993)</div>
+            <div class="reunion-actions">
+              <a href="SanFrancisco_reunion_1993.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 1992 Houston (1st Annual) -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="1st_annual_angry_skipper_1992_reunion_.htm">
+              <img src="images/regan_soper_pierce_higgins_patek_small.jpg" alt="Houston 1992 1st Annual Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Houston, Texas &mdash; 1992</h3>
+            <div class="reunion-venue">1st Annual Angry Skipper Reunion (Memorial Day)</div>
+            <div class="reunion-actions">
+              <a href="1st_annual_angry_skipper_1992_reunion_.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 1991 Nashville -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="RangePlatoon_reunion_1991.htm">
+              <img src="images/RangeReunion1991_small.jpg" alt="Range Platoon 1991 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Nashville, TN &mdash; 1991</h3>
+            <div class="reunion-venue">Range Platoon Reunion</div>
+            <div class="reunion-actions">
+              <a href="RangePlatoon_reunion_1991.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 1989 Myrtle Beach -->
+        <article class="reunion-card">
+          <div class="reunion-photo-frame">
+            <a href="MyrtleBeach_reunion_1989.htm">
+              <img src="images/MyrtleBeach1989_small.jpg" alt="Myrtle Beach 1989 Reunion Photo">
+            </a>
+          </div>
+          <div class="reunion-meta-box">
+            <h3 class="reunion-title">Myrtle Beach, SC &mdash; 1989</h3>
+            <div class="reunion-venue">Inaugural Association Reunion Gathering</div>
+            <div class="reunion-actions">
+              <a href="MyrtleBeach_reunion_1989.htm" class="reunion-btn btn-photos">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                Reunion Page
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="footer-meta">
+      Delta Co., 2nd Bn, 8th Cavalry (Airborne) &bull; 1st Cavalry Division (Airmobile)
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="legal_disclaimer.htm">Legal Disclaimer</a>
+      <a href="Privacy%20Statement.html">Privacy Statement</a>
+    </div>
+  </footer>
 
 </body>
-
 </html>

@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&display=swap');
+
+:root {
+  --cav-gold: #E5A823;
+  --cav-gold-hover: #C98F15;
+  --field-olive: #394220;
+  --field-olive-dark: #222814;
+  --charcoal: #161A1D;
+  --text-muted: #535B62;
+  --bg-page: #F5F6F3;
+  --bg-surface: #FFFFFF;
+  --border-subtle: #D8DDD0;
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(22, 26, 29, 0.08);
+  --radius-card: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  background-color: var(--bg-page);
+  color: var(--charcoal);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Regimental Global Header */
+.site-header {
+  background-color: var(--field-olive-dark);
+  color: #FFFFFF;
+  border-bottom: 5px solid var(--cav-gold);
+  padding: 24px 16px 20px;
+  text-align: center;
+}
+
+.site-header a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.site-header .unit-sub {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cav-gold);
+  margin-bottom: 6px;
+}
+
+.site-header h1 {
+  font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+  font-size: clamp(1.5rem, 4vw, 2.3rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.site-header .association-title {
+  font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+  font-size: clamp(0.95rem, 2.2vw, 1.2rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* Subpage Breadcrumb Navigation */
+.sub-nav {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 12px 20px;
+}
+
+.sub-nav .container-nav {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sub-nav a.back-home {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--field-olive);
+  text-decoration: none;
+}
+
+.sub-nav a.back-home:hover {
+  color: var(--cav-gold-hover);
+}
+
+.sub-nav .crumb-current {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Page Body Container */
+.container {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 28px 16px 48px;
+  flex: 1;
+}
+
+.page-title-card {
+  background: var(--bg-surface);
+  border-left: 5px solid var(--cav-gold);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.page-title-card h2 {
+  font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  color: var(--field-olive-dark);
+  margin-bottom: 6px;
+}
+
+.page-title-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Universal Article & Content Wrapper */
+.content-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.content-card h3 {
+  font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+  font-size: 1.3rem;
+  color: var(--field-olive-dark);
+  margin: 20px 0 10px;
+  border-bottom: 2px solid var(--border-subtle);
+  padding-bottom: 6px;
+}
+
+.content-card h3:first-child {
+  margin-top: 0;
+}
+
+.content-card p {
+  margin-bottom: 14px;
+}
+
+.content-card ul, .content-card ol {
+  margin-left: 24px;
+  margin-bottom: 16px;
+}
+
+.content-card a {
+  color: var(--field-olive);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.content-card a:hover {
+  color: var(--cav-gold-hover);
+}
+
+/* Responsive Table Styling (Honor Roll, Rosters, Corporate Docs) */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.styled-table th {
+  background-color: var(--field-olive-dark);
+  color: #FFFFFF;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 700;
+  padding: 12px 16px;
+  border: 1px solid var(--field-olive);
+}
+
+.styled-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.styled-table tr:nth-child(even) {
+  background-color: #FAFBF9;
+}
+
+.styled-table tr:hover {
+  background-color: #F0F4E8;
+}
+
+/* Photo Gallery Grid (Vietnam Photos & Reunions) */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.photo-item {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.photo-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--cav-gold);
+}
+
+.photo-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.photo-caption {
+  font-size: 0.85rem;
+  color: var(--charcoal);
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* Global Footer */
+.site-footer {
+  background-color: var(--charcoal);
+  color: #A3ACB4;
+  font-size: 0.88rem;
+  text-align: center;
+  padding: 30px 16px;
+  border-top: 4px solid var(--field-olive);
+}
+
+.site-footer a {
+  color: var(--cav-gold);
+  text-decoration: none;
+}
+
+.site-footer .footer-meta {
+  font-weight: 600;
+  color: #D6DDC8;
+  margin-bottom: 8px;
+}
+
+.site-footer .footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+}

@@ -54,7 +54,7 @@
       cursor: default;
     }
 
-    /* Photo Grid & Polaroid-style Item Cards */
+    /* Photo Grid & Cards */
     .photo-gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -70,8 +70,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-decoration: none;
-      color: var(--charcoal);
+      cursor: pointer;
       box-shadow: var(--shadow-sm);
       transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
@@ -130,6 +129,70 @@
     .gallery-card:hover .click-hint {
       color: var(--cav-gold-hover);
     }
+
+    /* Modal / Lightbox Overlay */
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(22, 26, 29, 0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+    }
+
+    .lightbox-container {
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .lightbox-container img {
+      max-width: 100%;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 6px;
+      border: 2px solid var(--cav-gold);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-caption {
+      color: #FFFFFF;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.1rem;
+      margin-top: 14px;
+      max-width: 800px;
+      line-height: 1.4;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -36px;
+      right: 0;
+      color: #FFFFFF;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      border: none;
+      background: transparent;
+      padding: 4px;
+    }
+
+    .lightbox-close:hover {
+      color: var(--cav-gold);
+    }
   </style>
 </head>
 <body>
@@ -156,7 +219,7 @@
 
     <section class="page-title-card">
       <h2>Vietnam Photos &mdash; 1965 to 1966</h2>
-      <p>Deployment, An Khe base camp, Camp Radcliff operations, and Pleiku reconnaissance.</p>
+      <p>Deployment, An Khe base camp, Camp Radcliff operations, and Pleiku reconnaissance. Tap or click any photograph to view high-resolution scan.</p>
     </section>
 
     <!-- Top Pagination -->
@@ -170,136 +233,136 @@
       <div class="photo-gallery-grid">
 
         <!-- 1 -->
-        <a href="ChuckKline_KenPerkins_PorfirioPerez1965.htm" class="gallery-card">
+        <div class="gallery-card" data-full="images/Pleiku_to_Plei_Me_Special_Forces_Camp_1965.jpg" data-caption="Chuck Kline, Ken Perkins, and in the background Porfirio Perez">
           <div class="img-wrap">
             <img src="images/Pleiku_to_Plei_Me_Special_Forces_Camp_1965_small.jpg" alt="Chuck Kline, Ken Perkins, and Porfirio Perez">
           </div>
           <div class="caption-box">
             <div class="caption-text">Chuck Kline, Ken Perkins, and in the background Porfirio Perez</div>
-            <span class="click-hint">View Photo Detail &rarr;</span>
+            <span class="click-hint">Enlarge Photo &oplus;</span>
           </div>
-        </a>
+        </div>
 
         <!-- 2 -->
-        <a href="basecamp_ankhe1965.htm" class="gallery-card">
+        <div class="gallery-card" data-full="images/BaseCamp_AnKhe_Co_Area1965.jpg" data-caption="Tommy Lowman, Ken Perkins, Clarence Keith, Chuck Kline">
           <div class="img-wrap">
             <img src="images/BaseCamp_AnKhe_Co_Area1965_small.jpg" alt="Tommy Lowman, Ken Perkins, Clarence Keith, Chuck Kline">
           </div>
           <div class="caption-box">
             <div class="caption-text">Tommy Lowman, Ken Perkins, Clarence Keith, Chuck Kline</div>
-            <span class="click-hint">View Photo Detail &rarr;</span>
+            <span class="click-hint">Enlarge Photo &oplus;</span>
           </div>
-        </a>
+        </div>
 
         <!-- 3 -->
-        <a href="base_camp_camp_radcliff.htm" class="gallery-card">
+        <div class="gallery-card" data-full="images/BaseCamp_CampRadcliff_MainEntrance1965.jpg" data-caption="Base Camp Camp Radcliff Main Entrance to 1st Cav. We were heading out!">
           <div class="img-wrap">
             <img src="images/BaseCamp_CampRadcliff_MainEntrance1965_small.jpg" alt="Base Camp Camp Radcliff Main Entrance">
           </div>
           <div class="caption-box">
             <div class="caption-text">Base Camp Camp Radcliff Main Entrance to 1st Cav. We were heading out!</div>
-            <span class="click-hint">View Photo Detail &rarr;</span>
+            <span class="click-hint">Enlarge Photo &oplus;</span>
           </div>
-        </a>
+        </div>
 
         <!-- 4 -->
-        <a href="HongKongMountain1965.htm" class="gallery-card">
+        <div class="gallery-card" data-full="images/HongKongMountain1965.jpg" data-caption="Base Camp, An Khe &mdash; Hong Kong Mountain">
           <div class="img-wrap">
             <img src="images/HongKongMountain1965_small.jpg" alt="Base Camp, An Khe, Hong Kong Mountain">
           </div>
           <div class="caption-box">
             <div class="caption-text">Base Camp, An Khe &mdash; Hong Kong Mountain</div>
-            <span class="click-hint">View Photo Detail &rarr;</span>
+            <span class="click-hint">Enlarge Photo &oplus;</span>
           </div>
-        </a>
+        </div>
 
         <!-- 5 -->
-        <a href="PleikuChuckKlineRadio1966.htm" class="gallery-card">
+        <div class="gallery-card" data-full="images/ChuckKlinePleiku1966.jpg" data-caption="1966 Pleiku &mdash; &ldquo;Out like a light&rdquo; Chuck Kline">
           <div class="img-wrap">
             <img src="images/ChuckKlinePleiku1966_small.jpg" alt="1966 Pleiku Chuck Kline">
           </div>
           <div class="caption-box">
             <div class="caption-text">1966 Pleiku &mdash; &ldquo;Out like a light&rdquo; Chuck Kline</div>
-            <span class="click-hint">View Photo Detail &rarr;</span>
+            <span class="click-hint">Enlarge Photo &oplus;</span>
           </div>
-        </a>
+        </div>
 
         <!-- 6 -->
-        <a href="WaitingForC130s_ChuckKline1966.htm" class="gallery-card">
+        <div class="gallery-card" data-full="images/WaitingForC130s_ChuckKline.jpg" data-caption="Waiting in our sticks for the C-130s; 1st Lt Frank Trapnell in front and Ronald Lassiter Jr. in foreground">
           <div class="img-wrap">
             <img src="images/WaitingForC130s_ChuckKline_small.jpg" alt="Waiting in sticks for C-130s">
           </div>
           <div class="caption-box">
             <div class="caption-text">Waiting in our sticks for the C-130s; 1st Lt Frank Trapnell in front and Ronald Lassiter Jr. in foreground</div>
-            <span class="click-hint">View Photo Detail &rarr;</span>
+            <span class="click-hint">Enlarge Photo &oplus;</span>
           </div>
-        </a>
+        </div>
 
         <!-- 7 -->
-        <a href="MangYangPass_on_Highway19.htm" class="gallery-card">
+        <div class="gallery-card" data-full="images/MangYangPassHighway19ChuckKline.jpg" data-caption="Mang Yang Pass on Highway 19 heading to Pleiku from An Khe">
           <div class="img-wrap">
             <img src="images/MangYangPassHighway19ChuckKline_small.jpg" alt="Mang Yang Pass on Highway 19">
           </div>
           <div class="caption-box">
             <div class="caption-text">Mang Yang Pass on Highway 19 heading to Pleiku from An Khe</div>
-            <span class="click-hint">View Photo Detail &rarr;</span>
+            <span class="click-hint">Enlarge Photo &oplus;</span>
           </div>
-        </a>
+        </div>
 
         <!-- 8 -->
-        <a href="ChuckKlineDryingMyFeet.htm" class="gallery-card">
+        <div class="gallery-card" data-full="images/ChuckKlineDryingMyFeet1966.jpg" data-caption="Out of the sun and drying my feet &mdash; Chuck Kline">
           <div class="img-wrap">
             <img src="images/ChuckKlineDryingMyFeet1966_small.jpg" alt="Chuck Kline drying feet">
           </div>
           <div class="caption-box">
             <div class="caption-text">Out of the sun and drying my feet &mdash; Chuck Kline</div>
-            <span class="click-hint">View Photo Detail &rarr;</span>
+            <span class="click-hint">Enlarge Photo &oplus;</span>
           </div>
-        </a>
+        </div>
 
         <!-- 9 -->
-        <a href="MontagnardTribePleikuChuckKline.htm" class="gallery-card">
+        <div class="gallery-card" data-full="images/MontagnardTribeChuckKline1.jpg" data-caption="1966 Pleiku &mdash; The Montagnard Tribe">
           <div class="img-wrap">
             <img src="images/MontagnardTribeChuckKline1_small.jpg" alt="1966 Pleiku Montagnard Tribe">
           </div>
           <div class="caption-box">
             <div class="caption-text">1966 Pleiku &mdash; The Montagnard Tribe</div>
-            <span class="click-hint">View Photo Detail &rarr;</span>
+            <span class="click-hint">Enlarge Photo &oplus;</span>
           </div>
-        </a>
+        </div>
 
         <!-- 10 -->
-        <a href="MontagnardTribePleikuChuckKline2.htm" class="gallery-card">
+        <div class="gallery-card" data-full="images/MontagnardTribeChuckKline2.jpg" data-caption="1966 Pleiku &mdash; The Montagnard Tribe (Group)">
           <div class="img-wrap">
             <img src="images/MontagnardTribeChuckKline2_small.jpg" alt="1966 Pleiku Montagnard Tribe 2">
           </div>
           <div class="caption-box">
             <div class="caption-text">1966 Pleiku &mdash; The Montagnard Tribe (Group)</div>
-            <span class="click-hint">View Photo Detail &rarr;</span>
+            <span class="click-hint">Enlarge Photo &oplus;</span>
           </div>
-        </a>
+        </div>
 
         <!-- 11 -->
-        <a href="JimTaylorNewHaircutWidcat1966.htm" class="gallery-card">
+        <div class="gallery-card" data-full="images/JimTaylorWildcat1966.jpg" data-caption="Wildcat 1966 &mdash; Jim Taylor">
           <div class="img-wrap">
             <img src="images/JimTaylorWildcat1966_small.jpg" alt="Wildcat 1966 Jim Taylor">
           </div>
           <div class="caption-box">
             <div class="caption-text">Wildcat 1966 &mdash; Jim Taylor</div>
-            <span class="click-hint">View Photo Detail &rarr;</span>
+            <span class="click-hint">Enlarge Photo &oplus;</span>
           </div>
-        </a>
+        </div>
 
         <!-- 12 -->
-        <a href="FreshFoodChuckKline.htm" class="gallery-card">
+        <div class="gallery-card" data-full="images/FreshFoodChuckKline.jpg" data-caption="Fresh Food">
           <div class="img-wrap">
             <img src="images/FreshFoodChuckKline_small.jpg" alt="Fresh Food">
           </div>
           <div class="caption-box">
             <div class="caption-text">Fresh Food</div>
-            <span class="click-hint">View Photo Detail &rarr;</span>
+            <span class="click-hint">Enlarge Photo &oplus;</span>
           </div>
-        </a>
+        </div>
 
       </div>
     </section>
@@ -313,6 +376,15 @@
 
   </main>
 
+  <!-- Lightbox Modal Markup -->
+  <div id="lightbox" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Expanded Photograph">
+    <div class="lightbox-container">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Close image">&times;</button>
+      <img id="lightbox-img" src="" alt="Enlarged military photograph">
+      <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+  </div>
+
   <!-- Global Regimental Footer -->
   <footer class="site-footer">
     <div class="footer-meta">
@@ -324,6 +396,39 @@
       <a href="Privacy%20Statement.html">Privacy Statement</a>
     </div>
   </footer>
+
+  <!-- Vanilla Lightbox Script -->
+  <script>
+    const modal = document.getElementById('lightbox');
+    const modalImg = document.getElementById('lightbox-img');
+    const modalCaption = document.getElementById('lightbox-caption');
+    const closeBtn = document.getElementById('lightbox-close');
+
+    document.querySelectorAll('.gallery-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const fullSrc = card.getAttribute('data-full');
+        const caption = card.getAttribute('data-caption');
+        modalImg.src = fullSrc;
+        modalCaption.innerHTML = caption;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeModal() {
+      modal.classList.remove('active');
+      modalImg.src = '';
+      document.body.style.overflow = 'auto';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    });
+  </script>
 
 </body>
 </html>

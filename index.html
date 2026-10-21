@@ -62,24 +62,24 @@
       margin-bottom: 8px;
     }
 
-    .site-header h1 {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: clamp(1.8rem, 4vw, 2.7rem);
-      font-weight: 800;
-      line-height: 1.2;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
+.site-header h1 {
+  font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  font-weight: 800; /* Richer, bolder weight */
+  line-height: 1.25;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
 
-    .site-header .era-badge {
-      display: inline-block;
-      font-size: 1.05rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: #D6DDC8;
-      margin-bottom: 6px;
-    }
+.site-header .association-title {
+  font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
 
     .site-header .association-title {
       font-family: 'Cinzel', Georgia, serif;
@@ -135,12 +135,13 @@
       margin-bottom: 12px;
     }
 
-    .hero-card h2 {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: clamp(1.6rem, 3.2vw, 2.1rem);
-      color: var(--field-olive-dark);
-      margin-bottom: 12px;
-    }
+.hero-card h2 {
+  font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+  font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+  font-weight: 700;
+  color: var(--field-olive-dark);
+  margin-bottom: 12px;
+}
 
     .hero-date-venue {
       font-size: 1.15rem;
@@ -234,16 +235,17 @@
     }
 
     /* Archive Grid */
-    .section-title {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 1.45rem;
-      color: var(--field-olive-dark);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      text-align: center;
-      margin-bottom: 26px;
-      position: relative;
-    }
+.section-title {
+  font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--field-olive-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+  margin-bottom: 26px;
+  position: relative;
+}
 
     .section-title::after {
       content: "";
@@ -254,12 +256,13 @@
       margin: 8px auto 0;
     }
 
-    .nav-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-      gap: 16px;
-      margin-bottom: 48px;
-    }
+.nav-grid .grid-card h3 {
+  font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--field-olive-dark);
+  margin-bottom: 4px;
+}
 
     .grid-card {
       background: var(--bg-surface);
@@ -280,14 +283,6 @@
       transform: translateY(-2px);
       border-left-color: var(--cav-gold);
       box-shadow: var(--shadow-md);
-    }
-
-    .grid-card h3 {
-      font-family: 'Cinzel', Georgia, serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--field-olive-dark);
-      margin-bottom: 4px;
     }
 
     .grid-card span {

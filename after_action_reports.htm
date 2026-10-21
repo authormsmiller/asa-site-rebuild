@@ -1,32 +1,151 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Language" content="en-us">
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Links to Veteran Related Websites</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>After Action Reports | Angry Skipper Association, Inc.</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .report-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--field-olive);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--charcoal);
+      transition: all 0.15s ease-in-out;
+      margin: 14px 0;
+    }
+
+    .report-card:hover {
+      background: var(--bg-surface);
+      border-color: var(--cav-gold);
+      border-left-color: var(--cav-gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .report-icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      fill: var(--field-olive);
+    }
+
+    .report-card:hover .report-icon {
+      fill: var(--cav-gold-hover);
+    }
+
+    .report-info {
+      flex-grow: 1;
+    }
+
+    .report-title {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      margin-bottom: 2px;
+    }
+
+    .report-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .report-badge {
+      flex-shrink: 0;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--field-olive);
+      background: #E8EDE0;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .eagle-crest {
+      text-align: center;
+      margin: 20px 0 10px;
+    }
+
+    .eagle-crest img {
+      max-width: 200px;
+      height: auto;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    }
+  </style>
 </head>
+<body>
 
-<body background="images/background3.gif" link="#663300" vlink="#996633">
+  <!-- Regimental Global Header -->
+  <header class="site-header">
+    <a href="index.html">
+      <div class="unit-sub">1st Cavalry Division (Airmobile)</div>
+      <h1>Delta Co., 2nd Bn, 8th Cavalry (Airborne)</h1>
+      <div class="association-title">Angry Skipper Association, Inc.</div>
+    </a>
+  </header>
 
-<div align="center">
-	<table border="0" width="100%">
-		<tr>
-			<td>
-			<p align="center">
-			<img border="0" src="images/spacer.gif" width="1" height="1"></td>
-			<td width="1146">
-			<p align="center">
-	<b><a href="index.html">Homepage</a></b></p>
-			<p align="center"><b><font size="5">After Action Reports<br>
-			<img border="0" src="images/Eagle.gif" width="244" height="288"><br>
-			</font><a href="after_action_reports/AA%20Rpt%204Nov65.pdf">Prepared 
-			6Nov65 concerning the action of 4Nov65</a></b></p>
-			<p align="center"><b><a href="index.html">Homepage</a></b></td>
-		</tr>
-	</table>
-</div>
-<p align="center">&nbsp;</p>
+  <!-- Subpage Breadcrumb Navigation -->
+  <nav class="sub-nav" aria-label="Breadcrumb">
+    <div class="container-nav">
+      <a href="index.html" class="back-home">&larr; Return to Association Home</a>
+      <span class="crumb-current">After Action Reports</span>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="container">
+
+    <section class="page-title-card">
+      <h2>After Action Reports</h2>
+      <p>Official combat documentation and declassified operational accounts from Delta Company, 2nd Battalion, 8th Cavalry Regiment.</p>
+    </section>
+
+    <div class="eagle-crest">
+      <img src="images/Eagle.gif" alt="Unit Eagle Emblem">
+    </div>
+
+    <section class="content-card">
+      <h3>Historical Combat Reports</h3>
+      
+      <a href="after_action_reports/AA%20Rpt%204Nov65.pdf" class="report-card" target="_blank" rel="noopener">
+        <svg class="report-icon" viewBox="0 0 24 24">
+          <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+        </svg>
+        <div class="report-info">
+          <div class="report-title">Combat Action of 4 November 1965</div>
+          <div class="report-meta">Official report prepared 6 November 1965</div>
+        </div>
+        <span class="report-badge">PDF Document</span>
+      </a>
+
+    </section>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="footer-meta">
+      Delta Co., 2nd Bn, 8th Cavalry (Airborne) &bull; 1st Cavalry Division (Airmobile)
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="legal_disclaimer.htm">Legal Disclaimer</a>
+      <a href="Privacy%20Statement.html">Privacy Statement</a>
+    </div>
+  </footer>
 
 </body>
-
 </html>

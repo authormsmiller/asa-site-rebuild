@@ -401,3 +401,121 @@ body {
   gap: 16px;
   margin-top: 12px;
 }
+/* ==========================================================================
+   BOARD THEME & TYPOGRAPHY SELECTOR
+   ========================================================================== */
+
+/* Theme 1: Default First Cav "Field & Gold" (Active in :root) */
+
+/* Theme 2: Regimental Navy & Gold (Traditional Naval / Joint Service) */
+body[data-theme="navy-gold"] {
+  --cav-gold: #D4AF37;
+  --cav-gold-hover: #AA8C2C;
+  --field-olive: #1B2B4C;
+  --field-olive-dark: #0D1B2A;
+  --charcoal: #1E252B;
+  --text-muted: #5A6570;
+  --bg-page: #F0F4F8;
+  --bg-surface: #FFFFFF;
+  --border-subtle: #CFDCE8;
+}
+
+/* Theme 3: High-Contrast Woodland Camo (OD Green & Bronze) */
+body[data-theme="woodland"] {
+  --cav-gold: #C28E46;
+  --cav-gold-hover: #9E7032;
+  --field-olive: #2D3A27;
+  --field-olive-dark: #1A2216;
+  --charcoal: #1F241E;
+  --text-muted: #566153;
+  --bg-page: #F2F4F0;
+  --bg-surface: #FFFFFF;
+  --border-subtle: #D2DBCF;
+}
+
+/* Theme 4: Classic 1990s Web Archive (Silver & Regimental Blue) */
+body[data-theme="heritage"] {
+  --cav-gold: #B8860B;
+  --cav-gold-hover: #8B6508;
+  --field-olive: #334E68;
+  --field-olive-dark: #102A43;
+  --charcoal: #101820;
+  --text-muted: #627D98;
+  --bg-page: #F5F7FA;
+  --bg-surface: #FFFFFF;
+  --border-subtle: #D9E2EC;
+}
+
+/* Font Family Overrides */
+body[data-font="modern"] {
+  font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+body[data-font="modern"] h1,
+body[data-font="modern"] h2,
+body[data-font="modern"] h3,
+body[data-font="modern"] h4,
+body[data-font="modern"] .association-title,
+body[data-font="modern"] .category-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+}
+
+body[data-font="classic"] {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+body[data-font="classic"] h1,
+body[data-font="classic"] h2,
+body[data-font="classic"] h3,
+body[data-font="classic"] h4,
+body[data-font="classic"] .association-title,
+body[data-font="classic"] .category-title {
+  font-family: 'Times New Roman', Times, Georgia, serif;
+}
+
+body[data-font="military-sans"] {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+body[data-font="military-sans"] h1,
+body[data-font="military-sans"] h2,
+body[data-font="military-sans"] h3,
+body[data-font="military-sans"] h4,
+body[data-font="military-sans"] .association-title,
+body[data-font="military-sans"] .category-title {
+  font-family: "Arial Black", Impact, -apple-system, sans-serif;
+  letter-spacing: 1px;
+}
+
+/* Floating Selector Toolbar */
+.board-preview-bar {
+  background: var(--charcoal);
+  color: #FFFFFF;
+  padding: 10px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-bottom: 2px solid var(--cav-gold);
+  font-size: 0.88rem;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+}
+
+.board-preview-bar label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #D6DDC8;
+}
+
+.board-preview-select {
+  background: #FFFFFF;
+  color: #161A1D;
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 5px 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}

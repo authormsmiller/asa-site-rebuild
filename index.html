@@ -13,7 +13,55 @@
   
 </head>
 <body>
+<!-- Board Interactive Preview Toolbar -->
+<aside class="board-preview-bar" aria-label="Theme Preview Controls">
+  <span style="color: var(--cav-gold); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Board Review Tool:</span>
+  
+  <label for="themeChooser">
+    Palette:
+    <select id="themeChooser" class="board-preview-select">
+      <option value="field-gold">1st Cav Field &amp; Gold</option>
+      <option value="woodland">Woodland OD &amp; Bronze</option>
+      <option value="navy-gold">Regimental Navy &amp; Gold</option>
+      <option value="heritage">Heritage Blue &amp; Slate</option>
+    </select>
+  </label>
 
+  <label for="fontChooser">
+    Typography:
+    <select id="fontChooser" class="board-preview-select">
+      <option value="modern">Serif Headers / Sans Body (Current)</option>
+      <option value="classic">Traditional Times / Georgia</option>
+      <option value="military-sans">Bold Modern Sans (Clean / High Contrast)</option>
+    </select>
+  </label>
+</aside>
+
+<script>
+  (function() {
+    const themeSelect = document.getElementById('themeChooser');
+    const fontSelect = document.getElementById('fontChooser');
+
+    // Load saved preferences if previously chosen
+    const savedTheme = localStorage.getItem('asa_board_theme') || 'field-gold';
+    const savedFont = localStorage.getItem('asa_board_font') || 'modern';
+
+    document.body.setAttribute('data-theme', savedTheme);
+    document.body.setAttribute('data-font', savedFont);
+    themeSelect.value = savedTheme;
+    fontSelect.value = savedFont;
+
+    themeSelect.addEventListener('change', (e) => {
+      document.body.setAttribute('data-theme', e.target.value);
+      localStorage.setItem('asa_board_theme', e.target.value);
+    });
+
+    fontSelect.addEventListener('change', (e) => {
+      document.body.setAttribute('data-font', e.target.value);
+      localStorage.setItem('asa_board_font', e.target.value);
+    });
+  })();
+</script>
   <!-- Regimental Banner -->
   <header class="site-header">
     <div class="unit-sub">1st Cavalry Division (Airmobile)</div>

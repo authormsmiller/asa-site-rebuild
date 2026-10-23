@@ -1,209 +1,564 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>D Company 2/8th Cav In Iraq</title>
-<style>
-<!--
-div.Section1
-	{page:Section1;}
--->
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D Company, 2/8th Cav in Iraq (OIF 2006-2008) | Angry Skipper Association, Inc.</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* Hero Insignia & Quote Block */
+    .hero-insignia-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .hero-insignia-panel img {
+      max-width: 220px;
+      height: auto;
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.2));
+      margin-bottom: 16px;
+    }
+
+    .quote-box {
+      background: var(--bg-page);
+      border-left: 4px solid var(--cav-gold);
+      border-right: 1px solid var(--border-subtle);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card, 8px);
+      padding: 16px 20px;
+      margin: 10px 0 24px;
+      font-style: italic;
+      color: var(--field-olive-dark);
+      text-align: center;
+      max-width: 760px;
+    }
+
+    .quote-author {
+      display: block;
+      margin-top: 6px;
+      font-weight: 700;
+      font-style: normal;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Narrative Field Dispatch */
+    .field-dispatch {
+      line-height: 1.7;
+      color: var(--charcoal);
+      margin-bottom: 28px;
+    }
+
+    .field-dispatch p {
+      margin-bottom: 1.15rem;
+      font-size: 1rem;
+    }
+
+    /* Roster of Modern Platoon Leadership */
+    .leadership-table-wrapper {
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card, 8px);
+      padding: 18px 20px;
+      margin: 20px 0 28px;
+    }
+
+    .leadership-table-wrapper h3 {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      margin-bottom: 12px;
+      border-bottom: 2px solid var(--border-subtle);
+      padding-bottom: 6px;
+    }
+
+    .platoon-roster-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    .platoon-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-size: 0.92rem;
+    }
+
+    .platoon-name {
+      font-weight: 700;
+      color: var(--field-olive);
+    }
+
+    .platoon-leads {
+      color: var(--charcoal);
+      text-align: right;
+    }
+
+    /* Command Showcase */
+    .command-feature {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin: 28px 0;
+      padding: 20px;
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card, 8px);
+    }
+
+    .command-feature img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 12px;
+    }
+
+    /* Tarmiyah Valorous Action Banner */
+    .valor-banner {
+      display: block;
+      text-align: center;
+      padding: 18px 20px;
+      background: #FFFDF5;
+      border: 2px solid var(--cav-gold);
+      border-radius: var(--radius-card, 8px);
+      text-decoration: none;
+      color: var(--field-olive-dark);
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin: 24px 0 32px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.15s ease-in-out;
+    }
+
+    .valor-banner:hover {
+      background: #FFF8E1;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Gallery Grid for Platoons & Artifacts */
+    .gallery-section-title {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      margin: 32px 0 16px;
+      border-bottom: 2px solid var(--border-subtle);
+      padding-bottom: 6px;
+    }
+
+    .iraq-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .photo-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 10px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.15s ease-in-out;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--cav-gold);
+      box-shadow: var(--shadow-md);
+    }
+
+    .photo-card-img-wrap {
+      width: 100%;
+      height: 175px;
+      background-color: #ECEEEA;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.25s ease;
+    }
+
+    .photo-card:hover .photo-card-img-wrap img {
+      transform: scale(1.03);
+    }
+
+    .photo-card-label {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    /* Hub Links & Operational Dispatches */
+    .links-hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      margin: 16px 0 28px;
+    }
+
+    .hub-link-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--field-olive);
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--charcoal);
+      transition: all 0.15s ease-in-out;
+      min-height: 48px;
+    }
+
+    .hub-link-card:hover {
+      background: var(--bg-surface);
+      border-color: var(--cav-gold);
+      border-left-color: var(--cav-gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hub-icon {
+      width: 20px;
+      height: 20px;
+      fill: var(--field-olive);
+      flex-shrink: 0;
+    }
+
+    .hub-link-card:hover .hub-icon {
+      fill: var(--cav-gold-hover);
+    }
+
+    .hub-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      line-height: 1.3;
+    }
+
+    .honor-roll-featured {
+      background: #FAF7F0;
+      border-left-color: #B22222;
+    }
+
+    .honor-roll-featured .hub-icon {
+      fill: #B22222;
+    }
+
+    .honor-roll-featured .hub-title {
+      color: #8B0000;
+    }
+  </style>
 </head>
+<body>
 
-<body background="images/background100.jpg">
+  <!-- Regimental Global Header -->
+  <header class="site-header">
+    <a href="index.html">
+      <div class="unit-sub">1st Cavalry Division (Airmobile)</div>
+      <h1>Delta Co., 2nd Bn, 8th Cavalry (Airborne)</h1>
+      <div class="association-title">Angry Skipper Association, Inc.</div>
+    </a>
+  </header>
 
-<div align="center">
-	<table border="0" width="80%">
-		<tr>
-			<td colspan="2">
-			<p align="center"><font color="#663300"><b><a href="index.html">BACK</a></b></font></p>
-			<p align="center">
-			<img border="0" src="images/DEMON1.jpg" width="265" height="259"></p>
-			<p align="center"><b><font size="5">D Company, 2/8<sup>th</sup> Cav, 
-			Operation Iraqi Freedom (OIF), 2006-2008</font></b><p align="center">
-			<b><font face="Arial" size="2">&quot;I have found that being a soldier's 
-			father is tougher than being a soldier.&quot; <br>
-			LTC H Colavita (retired)&nbsp; Skipper 6, 68-69</font></b></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-			<div>
-				<span class="656503616-17022007"></span>
-				<p><font face="Arial" size="2"><span class="656503616-17022007">&quot;</span>The 
-				2-8th Cav,&nbsp;Company D (DEMON) has reorganized into two tank 
-				platoons and two infantry platoons. They are attached to the 1st 
-				Brigade. Co. D, 2nd Battalion, 8th Cavalry Regiment, 1st Cavalry 
-				Division.&nbsp;&nbsp;Every soldier is now a veteran. 
-				They have seen firefights, mortars, RPGs, and IEDs. . . . they 
-				have all been tested and each performed well under fire. The 
-				company commander is CPT Mike Doyle and the First Sergeant 
-				is 
-				</font><span class="656503616-17022007">
-				<span style="color: black"><font size="2" face="Arial">1SG Ricky 
-				Linton</font></span></span><font size="2"><font face="Arial">.</font>&nbsp;&nbsp;</font><font face="Arial" size="2"><br>
-				&nbsp;<br>
-				</font><span class="656503616-17022007">
-				<font face="Arial" size="2">Our platoons are HQ, Red, White, 
-				Blue, and Green. They correspond with their number Red = 1st, 
-				White = 2nd, and so on. Poor HQ platoon is just HQ.&nbsp;On the 
-				radio, they answer to Red, White, Blue, and Green. If they are 
-				with another company and there are two Reds, then they become 
-				&quot;Demon Red&quot;.&nbsp;<br>
-				<br>
-				As for the call signs, the Platoon Leader is 1 (Blue 1). The 
-				Platoon Sergeant is 4 (Blue 4). I think in the straight Infantry 
-				companies, the Platoon Leader is still 6. But as I told you 
-				before, by MTOE we are a tank company. So we make our poor 
-				grunts adhere to the Armor standard.<br>
-				<br>
-				The Commander is still and will forever be known as 6. Only in 
-				the CAV, is the 1SG called 9. In most units he is called 7. I�m 
-				not sure why the CAV does it differently. </font></div>
-			<div>
-				<font face="Arial" size="2">The Platoon Leader and Platoon 
-				Sergeant for each platoon are:</font>
-				<div class="Section1">
-					<p class="MsoNormal" style="TEXT-ALIGN: center" align="center">
-					DEMON - CPT Mike Doyle &amp;
-					<span style="font-size: 11pt; color: black">1</span><span style="color: black">SG 
-					Ricky Linton</span><br>
-					HQ - CPT Cory Wallace &amp; SGT Ryan Nickerson<br>
-					RED - 2LT Bart Fletcher &amp; SSG Ratcliff<br>
-					WHITE - 1LT Shawn Jokinen &amp; SFC Kendrick Battle<br>
-					BLUE - 2LT Matt Jung &amp; SFC Freddie Housey</div>
-				<p><font face="Arial"><font size="2">White and Green are the 
-				Infantry Platoons.&nbsp; Most of the company is on its second 
-				tour. I would say that half of the company was here with the CAV 
-				last time. Some of the others were with other units. I'd say 
-				less than a third of the company are here for the first time.&quot; &nbsp;</font><font size="1">by 
-				1SG Tramel,&nbsp;D 2-8CAV in Iraq</font></font></div>
-			</span>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-			<p align="center"><span class="015045405-09022007">
-			<font face="Arial" color="#0000ff" size="2"><br>
-			</font></span>
-			<img border="0" src="images/DemonCMD.jpg" width="600" height="412"></p>
-			<p align="center"><span class="937092613-14022007"><b>
-			<font face="Times New Roman" size="4">
-			<a href="pdf_documents/Demon_change_of_responsibility.pdf">Demon 
-			Change Of Responsibility</a></font></b></span></p>
-			<p align="center">
-			<a href="demon_company_commanders_group_photo.htm">
-			<img border="2" src="images/last_4_demon_6s_small.JPG" xthumbnail-orig-image="images/last_4_demon_6s.JPG" width="150" height="112"></a><br>
-			<b><span style="FONT-SIZE: 13.5pt">D Company Commanders, past and 
-			present.<br>
-			</span><span style="font-size: 13.5pt;">L to R, James Mijares (2008- 
-			), Mike Doyle (2007-2008), Jerome Barbour (2006-2007)<br>
-			and Mark Weaver (2005-2006)</span></b></p>
-			<p align="center">
-			<b><font size="4" color="#000080">
-			<a href="valorous_awards_feb_19_tarmiyah.htm">
-			<span style="font-family: Arial,sans-serif">P</span></a></font><a href="valorous_awards_feb_19_tarmiyah.htm"><span style="font-family: Arial,sans-serif; color: navy"><font size="4">ress 
-			releases from 1BCT HQ for the valorous awards earned<br>
-			by the Demons for actions on 19 February in Tarmiyah</font></span></a></b></p>
-			<div align="center">
-				<table border="0" width="100%">
-					<tr>
-						<td align="center"><br>
-						<a href="demon_company_red_platoon.htm">
-						<img border="2" src="images/Red%20PLT_small.jpg" xthumbnail-orig-image="images/Red PLT.jpg" width="200" height="127"></a><br>
-&nbsp;</td>
-						<td align="center"><br>
-						<a href="demon_company_blue_platoon.htm">
-						<img border="2" src="images/Blue%20platoon_small.jpg" xthumbnail-orig-image="images/Blue platoon.jpg" width="200" height="112"></a><br>
-&nbsp;</td>
-						<td align="center">
-						<br>
-						<a href="demon_company_hq_platoon.htm">
-						<img border="2" src="images/Hq_small.jpg" xthumbnail-orig-image="images/Hq.jpg" width="200" height="132"></a><br>
-&nbsp;</td>
-					</tr>
-					<tr>
-						<td align="center"><br>
-						<a href="demon_company_white_platoon.htm">
-						<img border="2" src="images/white%20platoon_small.jpg" xthumbnail-orig-image="images/white platoon.jpg" width="200" height="105"></a><br>
-&nbsp;</td>
-						<td align="center"><br>
-						<a href="demon_company_tshirts.htm">
-						<img border="2" src="images/D%20Co_T%20shirts_group_small.jpg" xthumbnail-orig-image="images/D Co_T shirts_group.jpg" width="194" height="59"></a><br>
-&nbsp;</td>
-						<td align="center">
-						&nbsp;</td>
-					</tr>
-					<tr>
-						<td align="center"><a href="purple_heart_award.htm">
-						<img border="2" src="images/SGTWalker_rec_PurpleHeart_from_LTC_Efflandt_small.JPG" xthumbnail-orig-image="images/SGTWalker_rec_PurpleHeart_from_LTC_Efflandt.JPG" width="200" height="132"></a></td>
-						<td align="center"><a href="HQ_Platoon.htm">
-						<img border="2" src="images/HQ_Platoon_small.JPG" xthumbnail-orig-image="images/HQ_Platoon.JPG" width="200" height="132"></a></td>
-						<td align="center">
-						<a href="SFC_Battle_with_WhitePlatoon.htm">
-						<img border="2" src="images/SFC_Battle_w_White_Platton_Native_Lunch_small.jpg" xthumbnail-orig-image="images/SFC_Battle_w_White_Platton_Native_Lunch.jpg" width="200" height="150"></a></td>
-					</tr>
-				</table>
-			</div>
-			<p align="center">
-			<b><font size="4">D 2-8<sup>th</sup> CAV returned home in January, 
-			2008</font></b><p align="center">
-			<span class="015045405-09022007"><b><font face="Arial" size="2">
-			<a href="photos_from_our_d_2_8_soldiers_in_iraq.htm">Photos from our 
-			D 2/8 soldiers in Iraq</a></font></b></span><p align="center">
-			<span class="015045405-09022007"><b><font face="Arial" size="2">
-			<a href="demon_co_photos_shutterfly.htm">Demon Company Photos Posted 
-			at Shutterfly</a></font></b></span><p align="center">
-			<span class="015045405-09022007"><b><font face="Arial" size="2">
-			<a href="demon_company_commanders.htm">Demon Company Commanders</a></font></b></span><p align="center">
-			<span class="015045405-09022007"><b><font face="Arial" size="2">
-			<a href="demon_company_change_of_command.htm">Demon Company Change 
-			of Command Ceremony</a></font></b></span><p align="center">
-			<span class="015045405-09022007"><b><font face="Arial" size="4">
-			<a href="demon_company_honor_roll.htm">Demon Co Honor Roll</a></font></b></span><b><span class="015045405-09022007"><font face="Arial" size="2"><br>
-&nbsp;</font></span></b></td>
-		</tr>
-		<tr>
-			<td align="center">
-			<br>
-			<b><a href="pdf_documents/Edition_17_Taji_Times_Color-1.pdf">Tajii 
-			Times Edition 17</a></b><br>
-&nbsp;</td>
-			<td align="center">
-			<br>
-			<b><a href="pdf_documents/DEMON%20JAN%20FRG.pdf">Family Readiness 
-			Group Letter January 2008</a></b><br>
-&nbsp;</td>
-		</tr>
-		<tr>
-			<td align="center">
-			<br>
-			<b><a href="pdf_documents/6%20July%2007.pdf">Update from 1SG Tramel 
-			6 July 07</a></b><br>
-&nbsp;</td>
-			<td align="center">
-			<b><a href="pdf_documents/Christmas%20FRG.pdf">Christmas Family 
-			Readiness Group Letter 2007</a></b></td>
-		</tr>
-		<tr>
-			<td>
-			<p align="center">
-			<b><a href="pdf_documents/Edition_16_Taji_Times_Color.pdf">Tajii 
-			Times Edition 16</a></b></td>
-			<td>
-			<p align="center"><br>
-			<b><a href="pdf_documents/1%20DEC%20FRG.pdf">Family Readiness Group 
-			Letter Dec 1 2007</a></b><br>
-&nbsp;</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-			<p align="center"><br>
-			<font color="#663300"><b><a href="index.html">BACK</a></b></font></td>
-		</tr>
-	</table>
-</div>
+  <!-- Subpage Breadcrumb Navigation -->
+  <nav class="sub-nav" aria-label="Breadcrumb">
+    <div class="container-nav">
+      <a href="index.html" class="back-home">&larr; Return to Association Home</a>
+      <span class="crumb-current">D Co. in Iraq (OIF)</span>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="container">
+
+    <section class="page-title-card">
+      <h2>D Company, 2/8th Cavalry &mdash; Operation Iraqi Freedom</h2>
+      <p>Operational records, dispatches, command transition, and platoon galleries from the 2006&ndash;2008 deployment.</p>
+    </section>
+
+    <section class="content-card">
+
+      <!-- Hero Insignia & Father's Quote -->
+      <div class="hero-insignia-panel">
+        <img src="images/DEMON1.jpg" alt="D Company 2/8th Cavalry Demon Insignia">
+        <div class="quote-box">
+          &ldquo;I have found that being a soldier's father is tougher than being a soldier.&rdquo;
+          <span class="quote-author">&mdash; LTC H. Colavita (Ret.), Skipper 6 (1968&ndash;1969)</span>
+        </div>
+      </div>
+
+      <!-- Field Dispatch by 1SG Tramel -->
+      <article class="field-dispatch">
+        <p>
+          &ldquo;The 2-8th Cav, Company D (DEMON) has reorganized into two tank platoons and two infantry platoons. They are attached to the 1st Brigade, Co. D, 2nd Battalion, 8th Cavalry Regiment, 1st Cavalry Division. Every soldier is now a veteran. They have seen firefights, mortars, RPGs, and IEDs . . . they have all been tested and each performed well under fire. The company commander is CPT Mike Doyle and the First Sergeant is 1SG Ricky Linton.
+        </p>
+        <p>
+          Our platoons are HQ, Red, White, Blue, and Green. They correspond with their number: Red = 1st, White = 2nd, and so on. Poor HQ platoon is just HQ. On the radio, they answer to Red, White, Blue, and Green. If they are with another company and there are two Reds, then they become 'Demon Red.'
+        </p>
+        <p>
+          As for the call signs, the Platoon Leader is 1 (Blue 1). The Platoon Sergeant is 4 (Blue 4). I think in the straight Infantry companies, the Platoon Leader is still 6. But as I told you before, by MTOE we are a tank company. So we make our poor grunts adhere to the Armor standard.
+        </p>
+        <p>
+          The Commander is still and will forever be known as 6. Only in the CAV is the 1SG called 9. In most units he is called 7. I'm not sure why the CAV does it differently.
+        </p>
+        <p>
+          White and Green are the Infantry Platoons. Most of the company is on its second tour. I would say that half of the company was here with the CAV last time. Some of the others were with other units. I'd say less than a third of the company are here for the first time.&rdquo;
+        </p>
+        <div style="text-align: right; font-weight: 700; color: var(--text-muted); font-size: 0.9rem;">
+          &mdash; 1SG Tramel, D Co., 2-8 CAV in Iraq
+        </div>
+      </article>
+
+      <!-- Platoon Leadership Roster -->
+      <div class="leadership-table-wrapper">
+        <h3>Platoon Leadership Roster</h3>
+        <div class="platoon-roster-grid">
+          <div class="platoon-row">
+            <span class="platoon-name">DEMON 6 &amp; 9</span>
+            <span class="platoon-leads">CPT Mike Doyle &amp; 1SG Ricky Linton</span>
+          </div>
+          <div class="platoon-row">
+            <span class="platoon-name">HQ PLATOON</span>
+            <span class="platoon-leads">CPT Cory Wallace &amp; SGT Ryan Nickerson</span>
+          </div>
+          <div class="platoon-row">
+            <span class="platoon-name">RED PLATOON</span>
+            <span class="platoon-leads">2LT Bart Fletcher &amp; SSG Ratcliff</span>
+          </div>
+          <div class="platoon-row">
+            <span class="platoon-name">WHITE PLATOON</span>
+            <span class="platoon-leads">1LT Shawn Jokinen &amp; SFC Kendrick Battle</span>
+          </div>
+          <div class="platoon-row">
+            <span class="platoon-name">BLUE PLATOON</span>
+            <span class="platoon-leads">2LT Matt Jung &amp; SFC Freddie Housey</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarmiyah Action Feature -->
+      <a href="valorous_awards_feb_19_tarmiyah.htm" class="valor-banner">
+        Press Releases from 1BCT HQ for the Valorous Awards Earned by the Demons &bull; Actions on 19 February in Tarmiyah &rarr;
+      </a>
+
+      <!-- Command Photographs -->
+      <div class="command-feature">
+        <img src="images/DemonCMD.jpg" alt="Demon Company Command Ceremony">
+        <div style="margin: 8px 0 16px;">
+          <a href="pdf_documents/Demon_change_of_responsibility.pdf" class="hub-link-card" style="display: inline-flex;" target="_blank" rel="noopener">
+            <svg class="hub-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            <span class="hub-title">Demon Change of Responsibility (PDF)</span>
+          </a>
+        </div>
+        <div style="margin-top: 14px; max-width: 600px;">
+          <a href="demon_company_commanders_group_photo.htm">
+            <img src="images/last_4_demon_6s.JPG" alt="D Company Commanders Past and Present" style="max-width: 320px;">
+          </a>
+          <div style="font-weight: 700; color: var(--field-olive-dark); font-size: 0.95rem; line-height: 1.4;">
+            D Company Commanders, Past and Present<br>
+            <span style="font-size: 0.88rem; font-weight: normal; color: var(--text-muted);">
+              L to R: James Mijares (2008&ndash; ), Mike Doyle (2007&ndash;2008), Jerome Barbour (2006&ndash;2007), and Mark Weaver (2005&ndash;2006)
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Platoon & Action Photo Galleries -->
+      <h3 class="gallery-section-title">Platoon Photos &amp; Field Galleries</h3>
+      <div class="iraq-gallery-grid">
+
+        <a href="demon_company_red_platoon.htm" class="photo-card">
+          <div class="photo-card-img-wrap">
+            <img src="images/Red PLT.jpg" alt="Red Platoon" loading="lazy">
+          </div>
+          <span class="photo-card-label">Red Platoon</span>
+        </a>
+
+        <a href="demon_company_blue_platoon.htm" class="photo-card">
+          <div class="photo-card-img-wrap">
+            <img src="images/Blue platoon.jpg" alt="Blue Platoon" loading="lazy">
+          </div>
+          <span class="photo-card-label">Blue Platoon</span>
+        </a>
+
+        <a href="demon_company_hq_platoon.htm" class="photo-card">
+          <div class="photo-card-img-wrap">
+            <img src="images/Hq.jpg" alt="HQ Platoon" loading="lazy">
+          </div>
+          <span class="photo-card-label">HQ Platoon</span>
+        </a>
+
+        <a href="demon_company_white_platoon.htm" class="photo-card">
+          <div class="photo-card-img-wrap">
+            <img src="images/white platoon.jpg" alt="White Platoon" loading="lazy">
+          </div>
+          <span class="photo-card-label">White Platoon</span>
+        </a>
+
+        <a href="demon_company_tshirts.htm" class="photo-card">
+          <div class="photo-card-img-wrap">
+            <img src="images/D Co_T shirts_group.jpg" alt="Demon Company T-Shirts" loading="lazy">
+          </div>
+          <span class="photo-card-label">D Co. Unit T-Shirts</span>
+        </a>
+
+        <a href="purple_heart_award.htm" class="photo-card">
+          <div class="photo-card-img-wrap">
+            <img src="images/SGTWalker_rec_PurpleHeart_from_LTC_Efflandt.JPG" alt="SGT Walker Receiving Purple Heart" loading="lazy">
+          </div>
+          <span class="photo-card-label">Purple Heart Presentation (SGT Walker)</span>
+        </a>
+
+        <a href="HQ_Platoon.htm" class="photo-card">
+          <div class="photo-card-img-wrap">
+            <img src="images/HQ_Platoon.JPG" alt="HQ Platoon Group" loading="lazy">
+          </div>
+          <span class="photo-card-label">HQ Platoon in Theater</span>
+        </a>
+
+        <a href="SFC_Battle_with_WhitePlatoon.htm" class="photo-card">
+          <div class="photo-card-img-wrap">
+            <img src="images/SFC_Battle_w_White_Platton_Native_Lunch.jpg" alt="SFC Battle with White Platoon" loading="lazy">
+          </div>
+          <span class="photo-card-label">SFC Battle &amp; White Platoon</span>
+        </a>
+
+      </div>
+
+      <!-- Feature Pages & Memorial Subpages -->
+      <h3 class="gallery-section-title">Soldier Portals &amp; Event Galleries</h3>
+      <div class="links-hub-grid">
+        
+        <a href="demon_company_honor_roll.htm" class="hub-link-card honor-roll-featured">
+          <svg class="hub-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <span class="hub-title">Demon Company Honor Roll</span>
+        </a>
+
+        <a href="photos_from_our_d_2_8_soldiers_in_iraq.htm" class="hub-link-card">
+          <svg class="hub-icon" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+          <span class="hub-title">Photos from D 2/8 Soldiers in Iraq</span>
+        </a>
+
+        <a href="demon_co_photos_shutterfly.htm" class="hub-link-card">
+          <svg class="hub-icon" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+          <span class="hub-title">Demon Company Photos (Shutterfly)</span>
+        </a>
+
+        <a href="demon_company_commanders.htm" class="hub-link-card">
+          <svg class="hub-icon" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 3s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          <span class="hub-title">Demon Company Commanders</span>
+        </a>
+
+        <a href="demon_company_change_of_command.htm" class="hub-link-card">
+          <svg class="hub-icon" viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>
+          <span class="hub-title">Change of Command Ceremony</span>
+        </a>
+
+      </div>
+
+      <!-- Published Dispatches & FRG Letters -->
+      <h3 class="gallery-section-title">Deployment Publications &amp; FRG Newsletters</h3>
+      <div class="links-hub-grid">
+
+        <a href="pdf_documents/Edition_17_Taji_Times_Color-1.pdf" class="hub-link-card" target="_blank" rel="noopener">
+          <svg class="hub-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          <span class="hub-title">Taji Times &mdash; Edition 17 (Color)</span>
+        </a>
+
+        <a href="pdf_documents/Edition_16_Taji_Times_Color.pdf" class="hub-link-card" target="_blank" rel="noopener">
+          <svg class="hub-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          <span class="hub-title">Taji Times &mdash; Edition 16 (Color)</span>
+        </a>
+
+        <a href="pdf_documents/DEMON%20JAN%20FRG.pdf" class="hub-link-card" target="_blank" rel="noopener">
+          <svg class="hub-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          <span class="hub-title">Family Readiness Group Letter (Jan 2008)</span>
+        </a>
+
+        <a href="pdf_documents/Christmas%20FRG.pdf" class="hub-link-card" target="_blank" rel="noopener">
+          <svg class="hub-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          <span class="hub-title">FRG Christmas Letter (2007)</span>
+        </a>
+
+        <a href="pdf_documents/1%20DEC%20FRG.pdf" class="hub-link-card" target="_blank" rel="noopener">
+          <svg class="hub-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          <span class="hub-title">FRG Letter (Dec 1, 2007)</span>
+        </a>
+
+        <a href="pdf_documents/6%20July%2007.pdf" class="hub-link-card" target="_blank" rel="noopener">
+          <svg class="hub-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          <span class="hub-title">Update from 1SG Tramel (6 July 2007)</span>
+        </a>
+
+      </div>
+
+      <div style="text-align: center; margin-top: 30px; font-weight: 700; color: var(--field-olive-dark); font-size: 1.1rem;">
+        D 2-8th CAV returned home from Iraq in January 2008.
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="footer-meta">
+      Delta Co., 2nd Bn, 8th Cavalry (Airborne) &bull; 1st Cavalry Division (Airmobile)
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="legal_disclaimer.htm">Legal Disclaimer</a>
+      <a href="Privacy%20Statement.html">Privacy Statement</a>
+    </div>
+  </footer>
+
+  <!-- Board Palette Preference Sync -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('asa_board_theme');
+      const savedFont = localStorage.getItem('asa_board_font');
+      if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+      if (savedFont) document.body.setAttribute('data-font', savedFont);
+    })();
+  </script>
 
 </body>
-
 </html>

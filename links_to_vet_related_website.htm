@@ -1,5 +1,378 @@
-<html><head><meta http-equiv="Content-Language" content="en-us"><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><title>Links to Veteran Related Websites</title></head><body background="images/background3.gif" link="#663300" vlink="#996633" bgcolor="#000000"><div align="left"><table border="0" width="100%"><tr><td><p align="left"><img border="0" src="images/spacer.gif" width="1" height="1"></td><td width="1146"><p align="left"><b><a href="index.html">Homepage</a></b></p><p align="left"><b><font face="Arial" size="5">Veteran Related Website Links<br>&nbsp;</font></b></p><p align="left"><font face="Arial"><b><a href="http://www-static.cc.gatech.edu/fac/Thomas.Pilsch/Vietnam.html">Vietnam War Resources</a></b></font></p><p align="left"><font face="Arial"><b><a href="someone_has_gone_to_a_lot_of_tro.htm">Huge list of helpful websites that provide info on Veterans benefits</a></b></font></p><p align="left"><a href="http://www.virtualwall.org/index.html"><img src="http://www.virtualwall.org/pics/vwtop3.gif"></a></p><p align="left"><font face="Arial"><b><a href="http://www.1cda.org">1st Cavalry Division Association Homepage</a></b></font></p><p align="left"><font face="Arial"><b><a href="http://www.hood.army.mil/1stcavdiv">First Team, 1st Cavalry Division</a></b></font></p><p align="left"><b><font face="Arial"><a href="http://www.1cda.org/Foundation_Overview.htm">The Foundation of the <br>1st Cavalry Division Association<br>Scholarship Grants</a></font></b></p><p align="left"><b><font face="Arial"><a href="http://www.thewall-usa.com">Vietnam Veterans Memorial</a></font></b></p><h1 align="left"><font size="3" face="Arial"><a href="http://go.footnote.com/thewall?xid=238">Interactive Vietnam Veterans Memorial</a></font></h1><h1 align="left"><font size="3" face="Arial"><a href="http://www.asbestos.com/veterans/">Mesothelioma Veterans</a></font></h1><p align="left"><font face="Arial"><b><a href="http://militarysignatures.com/index.php">Make a military email signature graphic.</a></b></font></p><p align="left"><font face="Arial"><b><a href="http://www.cavhooah.com/">CAVHOOAH.COM</a></b></font></p><p align="left"><font face="Arial"><b><a href="http://www.veteranprograms.com/">U. S. Veteran Compensation Programs</a></b></font></p><p align="left"><font face="Arial"><b><a href="http://www1.va.gov/agentorange">Agent Orange</a></b></font></p>
-<p align="left"><font face="Arial"><b><a href="http://www.dav.org">Disabled American Veterans</a></b></font></p>
-<p align="left"><font face="Arial"><b><a href="http://www.229thavbn.com">229th Aviation Battalion</a></b></font></p><p align="left"><font face="Arial"><b><a href="http://www.neverforgotteninc.org">Never Forgotten Inc. POW/MIA 1955 Chevy Gas Dragster</a></b></font><p align="left"><span style="font-family: Arial; font-weight: 700"><a href="http://www.eagerarms.com/">Bravo Company, 2-8th Cav 1967-68</a></span></p>
-<p class="MsoNormal" align="left"><span style="font-family: Arial,sans-serif"><a style="color: blue; text-decoration: underline; text-underline: single; font-weight: 700" href="http://www.EagerArms1968-1969.com">www.EagerArms1968-1969.com</a></span></p><p align="left"><tt><font face="Arial" color="#663300"><span style="font-family; font-weight: 700"><a href="http://vetrecs.archives.gov/">*DD-214 NOW AVAILABLE ON-LINE*.<br>The National Personnel Records Center (NPRC) has<br>provided the web site for veterans to<br>gain access their DD-214 on-line. </a></span></font></tt></p>
-<div><div align="left"><b><font face="Arial"><a href="http://maketheconnection.net">Make the Connection<br>Shared Experiences and Support for Veterans.</a></font></b></div><p class="MsoNormal" align="left">&nbsp;</p></div><p align="left"><b><a href="index.html">Homepage</a></b></td></tr></table></div><p align="left">&nbsp;</p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veteran Resources &amp; Related Links | Angry Skipper Association, Inc.</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* Category Section Layout */
+    .links-section {
+      margin-bottom: 28px;
+    }
+
+    .links-section:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .links-section h3 {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      margin-bottom: 14px;
+      border-bottom: 2px solid var(--border-subtle);
+      padding-bottom: 6px;
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 14px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--field-olive);
+      border-radius: var(--radius-card, 8px);
+      text-decoration: none;
+      color: var(--charcoal);
+      transition: all 0.15s ease-in-out;
+      min-height: 52px;
+    }
+
+    .link-card:hover {
+      background: var(--bg-surface);
+      border-color: var(--cav-gold);
+      border-left-color: var(--cav-gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .link-icon {
+      width: 24px;
+      height: 24px;
+      fill: var(--field-olive);
+      flex-shrink: 0;
+      transition: fill 0.15s ease;
+    }
+
+    .link-card:hover .link-icon {
+      fill: var(--cav-gold-hover);
+    }
+
+    .link-info {
+      flex-grow: 1;
+    }
+
+    .link-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+
+    .link-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .featured-banner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      background: #FDFCF7;
+      border: 1px solid var(--border-subtle);
+      border-left: 5px solid var(--cav-gold);
+      border-radius: var(--radius-card, 8px);
+      text-decoration: none;
+      color: var(--charcoal);
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .featured-banner:hover {
+      transform: translateY(-2px);
+      border-color: var(--cav-gold-hover);
+    }
+
+    .featured-banner img {
+      max-height: 48px;
+      width: auto;
+      flex-shrink: 0;
+    }
+
+    .featured-info {
+      flex-grow: 1;
+    }
+
+    .featured-title {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      margin-bottom: 2px;
+    }
+
+    .featured-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Regimental Global Header -->
+  <header class="site-header">
+    <a href="index.html">
+      <div class="unit-sub">1st Cavalry Division (Airmobile)</div>
+      <h1>Delta Co., 2nd Bn, 8th Cavalry (Airborne)</h1>
+      <div class="association-title">Angry Skipper Association, Inc.</div>
+    </a>
+  </header>
+
+  <!-- Subpage Breadcrumb Navigation -->
+  <nav class="sub-nav" aria-label="Breadcrumb">
+    <div class="container-nav">
+      <a href="index.html" class="back-home">&larr; Return to Association Home</a>
+      <span class="crumb-current">Veteran Related Links</span>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="container">
+
+    <section class="page-title-card">
+      <h2>Veteran Resources &amp; Related Links</h2>
+      <p>A directory of 1st Cavalry division associations, sister unit archives, memorial registries, and official veterans assistance programs.</p>
+    </section>
+
+    <section class="content-card">
+
+      <!-- Featured Memorial Registry -->
+      <a href="https://www.virtualwall.org/index.html" class="featured-banner" target="_blank" rel="noopener">
+        <img src="http://www.virtualwall.org/pics/vwtop3.gif" alt="The Virtual Wall Vietnam Veterans Memorial" loading="lazy">
+        <div class="featured-info">
+          <div class="featured-title">The Virtual Wall&reg; &mdash; Vietnam Veterans Memorial</div>
+          <div class="featured-desc">Online companion registry preserving casualties, citations, photos, and memorial letters.</div>
+        </div>
+      </a>
+
+      <!-- 1st Cavalry & Sister Units -->
+      <div class="links-section">
+        <h3>1st Cavalry Division &amp; Sister Units</h3>
+        <div class="links-grid">
+
+          <a href="http://www.1cda.org" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>
+            <div class="link-info">
+              <div class="link-title">1st Cavalry Division Association</div>
+              <div class="link-desc">Official headquarters homepage and active member hub</div>
+            </div>
+          </a>
+
+          <a href="http://www.1cda.org/Foundation_Overview.htm" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+            <div class="link-info">
+              <div class="link-title">1st Cavalry Association Foundation</div>
+              <div class="link-desc">Scholarship grants and educational foundation programs</div>
+            </div>
+          </a>
+
+          <a href="http://www.hood.army.mil/1stcavdiv" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>
+            <div class="link-info">
+              <div class="link-title">First Team, 1st Cavalry Division</div>
+              <div class="link-desc">Fort Hood (Fort Cavazos) official command portal</div>
+            </div>
+          </a>
+
+          <a href="http://www.eagerarms.com/" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 3s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+            <div class="link-info">
+              <div class="link-title">Bravo Company, 2/8th Cav (1967&ndash;1968)</div>
+              <div class="link-desc">Eager Arms sister company archives and history[cite: 10]</div>
+            </div>
+          </a>
+
+          <a href="http://www.EagerArms1968-1969.com" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 3s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+            <div class="link-info">
+              <div class="link-title">Bravo Company, 2/8th Cav (1968&ndash;1969)</div>
+              <div class="link-desc">Eager Arms operational rosters and tour records[cite: 10]</div>
+            </div>
+          </a>
+
+          <a href="http://www.229thavbn.com" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+            <div class="link-info">
+              <div class="link-title">229th Aviation Battalion</div>
+              <div class="link-desc">1st Cavalry assault helicopter battalion history[cite: 10]</div>
+            </div>
+          </a>
+
+          <a href="http://www.cavhooah.com/" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+            <div class="link-info">
+              <div class="link-title">CavHooah.com</div>
+              <div class="link-desc">Cavalry gear, Stetson supplies, spurs, and unit lore[cite: 10]</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Service Records, Claims & Benefits -->
+      <div class="links-section">
+        <h3>Records, Claims &amp; Veterans Benefits</h3>
+        <div class="links-grid">
+
+          <a href="someone_has_gone_to_a_lot_of_tro.htm" class="link-card">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+            <div class="link-info">
+              <div class="link-title">Master Veterans Benefits Index</div>
+              <div class="link-desc">Extensive curated index of benefits portals and guides[cite: 10]</div>
+            </div>
+          </a>
+
+          <a href="https://vetrecs.archives.gov/" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            <div class="link-info">
+              <div class="link-title">Online DD-214 Records Request (NPRC)</div>
+              <div class="link-desc">Official National Archives military service records portal[cite: 10]</div>
+            </div>
+          </a>
+
+          <a href="https://www.dav.org" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            <div class="link-info">
+              <div class="link-title">Disabled American Veterans (DAV)</div>
+              <div class="link-desc">Veteran advocacy, claim representation, and rides[cite: 10]</div>
+            </div>
+          </a>
+
+          <a href="https://www.va.gov/disability/eligibility/hazardous-materials-exposure/agent-orange/" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+            <div class="link-info">
+              <div class="link-title">VA Agent Orange Health Registry</div>
+              <div class="link-desc">Presumptive conditions, disability claims, and registry exams[cite: 10]</div>
+            </div>
+          </a>
+
+          <a href="http://www.veteranprograms.com/" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+            <div class="link-info">
+              <div class="link-title">U.S. Veteran Compensation Programs</div>
+              <div class="link-desc">Benefit claims compensation counseling and information[cite: 10]</div>
+            </div>
+          </a>
+
+          <a href="https://www.asbestos.com/veterans/" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+            <div class="link-info">
+              <div class="link-title">Mesothelioma &amp; Asbestos Veterans Center</div>
+              <div class="link-desc">Military exposure information, VA claims, and treatment[cite: 10]</div>
+            </div>
+          </a>
+
+          <a href="https://www.maketheconnection.net" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M16.5 13c-1.2 0-3.07.34-4.5 1-1.43-.66-3.3-1-4.5-1C5.13 13 2 14.13 2 16.25V19h15v-2.75c0-2.12-3.13-3.25-5.5-3.25zm-9 0c1.38 0 2.5-1.12 2.5-2.5S8.88 8 7.5 8 5 9.12 5 10.5 6.12 13 7.5 13z"/></svg>
+            <div class="link-info">
+              <div class="link-title">Make the Connection</div>
+              <div class="link-desc">Shared experiences, transition, and mental health support[cite: 10]</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Memorials & Historical Archives -->
+      <div class="links-section">
+        <h3>Memorials, History &amp; Remembrance</h3>
+        <div class="links-grid">
+
+          <a href="http://www.thewall-usa.com" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+            <div class="link-info">
+              <div class="link-title">The Wall-USA Memorial</div>
+              <div class="link-desc">Searchable Vietnam Veterans Memorial Wall database[cite: 10]</div>
+            </div>
+          </a>
+
+          <a href="http://go.footnote.com/thewall?xid=238" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+            <div class="link-info">
+              <div class="link-title">Interactive Vietnam Veterans Memorial</div>
+              <div class="link-desc">Historical photos, wall rubbings, and soldier tributes[cite: 10]</div>
+            </div>
+          </a>
+
+          <a href="http://www-static.cc.gatech.edu/fac/Thomas.Pilsch/Vietnam.html" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+            <div class="link-info">
+              <div class="link-title">Vietnam War Resources (Georgia Tech)</div>
+              <div class="link-desc">Comprehensive academic collection of maps, orders &amp; essays[cite: 10]</div>
+            </div>
+          </a>
+
+          <a href="http://www.neverforgotteninc.org" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+            <div class="link-info">
+              <div class="link-title">Never Forgotten Inc. &mdash; POW/MIA Tribute</div>
+              <div class="link-desc">1955 Chevy Gas Dragster POW/MIA awareness project[cite: 10]</div>
+            </div>
+          </a>
+
+          <a href="http://militarysignatures.com/index.php" class="link-card" target="_blank" rel="noopener">
+            <svg class="link-icon" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+            <div class="link-info">
+              <div class="link-title">Military Signatures Generator</div>
+              <div class="link-desc">Custom military ribbon and emblem email graphics[cite: 10]</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="footer-meta">
+      Delta Co., 2nd Bn, 8th Cavalry (Airborne) &bull; 1st Cavalry Division (Airmobile)
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="legal_disclaimer.htm">Legal Disclaimer</a>
+      <a href="Privacy%20Statement.html">Privacy Statement</a>
+    </div>
+  </footer>
+
+  <!-- Board Palette Preference Sync -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('asa_board_theme');
+      const savedFont = localStorage.getItem('asa_board_font');
+      if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+      if (savedFont) document.body.setAttribute('data-font', savedFont);
+    })();
+  </script>
+
+</body>
+</html>

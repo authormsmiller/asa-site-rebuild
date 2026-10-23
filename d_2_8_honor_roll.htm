@@ -1,1457 +1,1116 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Language" content="en-us">
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Honor Roll</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delta Company Honor Roll | Angry Skipper Association, Inc.</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* Memorial Header Elements */
+    .memorial-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .memorial-hero img.unit-guidon {
+      max-width: 180px;
+      height: auto;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+      margin-bottom: 16px;
+    }
+
+    /* Action Links Bar */
+    .memorial-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .memorial-action-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--cav-gold);
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--charcoal);
+      transition: all 0.15s ease-in-out;
+      min-height: 48px;
+    }
+
+    .memorial-action-card:hover {
+      background: var(--bg-surface);
+      border-color: var(--cav-gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .action-icon {
+      width: 20px;
+      height: 20px;
+      fill: var(--field-olive-dark);
+      flex-shrink: 0;
+    }
+
+    .memorial-action-card:hover .action-icon {
+      fill: var(--cav-gold-hover);
+    }
+
+    .action-text {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      line-height: 1.3;
+    }
+
+    /* Interactive Filter Panel */
+    .filter-panel {
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card, 10px);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .filter-grid {
+        grid-template-columns: 2fr 1fr auto;
+        align-items: flex-end;
+      }
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .filter-group label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .filter-input, .filter-select {
+      height: 44px;
+      padding: 8px 12px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      background: #FFFFFF;
+      color: var(--charcoal);
+    }
+
+    .filter-input:focus, .filter-select:focus {
+      outline: none;
+      border-color: var(--cav-gold);
+      box-shadow: 0 0 0 3px rgba(229, 168, 35, 0.2);
+    }
+
+    .btn-reset {
+      height: 44px;
+      padding: 0 16px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease-in-out;
+    }
+
+    .btn-reset:hover {
+      background: #E8ECE2;
+      color: var(--charcoal);
+      border-color: var(--field-olive);
+    }
+
+    .results-count {
+      margin-top: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .memorial-legend {
+      margin-top: 8px;
+      font-size: 0.82rem;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    /* Table Typography & Details */
+    .soldier-link {
+      color: var(--field-olive-dark);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .soldier-link:hover {
+      color: var(--cav-gold-hover);
+    }
+
+    .hometown-text {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: normal;
+    }
+
+    .wall-loc-badge {
+      display: inline-block;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700;
+      background: #ECEEEA;
+      color: var(--charcoal);
+      border: 1px solid var(--border-subtle);
+      padding: 2px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+  </style>
 </head>
+<body>
 
-<body background="images/cotton.bmp">
+  <!-- Regimental Global Header -->
+  <header class="site-header">
+    <a href="index.html">
+      <div class="unit-sub">1st Cavalry Division (Airmobile)</div>
+      <h1>Delta Co., 2nd Bn, 8th Cavalry (Airborne)</h1>
+      <div class="association-title">Angry Skipper Association, Inc.</div>
+    </a>
+  </header>
 
-<p align="center"><b><a href="index.html">Back</a></b></p>
-<p align="center"><b><a href="pdf_documents/Honor%20Roll.pdf">Honor Roll pdf 
-document for download</a></b></p>
-<p align="center"><b><a href="skull_71_72_honor_roll.htm">Skull 71-72 Chopper 
-Crash</a></b></p>
-<p align="center">
-<img border="0" src="images/d_2_8_guidon200X136.gif" width="200" height="136"></p>
-<p align="center">
-<a href="http://www.virtualwall.org/index.html">
-			<img src="http://www.virtualwall.org/pics/vwtop3.gif"></a></p>
-<p align="center">
-* after the name denotes this soldier was attached to D 2-8th when KIA</p>
-<div align="center">
-	<table border="0" width="690">
-		<tr>
-			<td>
-			<table FRAME="HSIDES" CELLSPACING="0" COLS="5" RULES="GROUPS" BORDER="1" style="font-family: Arial; font-size: x-small">
-				<colgroup>
-					<col WIDTH="74"><col WIDTH="338"><col WIDTH="95">
-					<col WIDTH="86"><col WIDTH="74">
-				</colgroup>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td COLSPAN="5" WIDTH="667" HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						<b>Delta Company, 2/8th Cav, 1st Cavalry Division 
-						(airmobile)</b></td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td COLSPAN="5" HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						<b>Honor Roll</b></td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" VALIGN="MIDDLE" style="font-family: Arial; font-size: x-small">
-						<b><u>rank</u></b></td>
-						<td ALIGN="CENTER" VALIGN="MIDDLE" style="font-family: Arial; font-size: x-small">
-						<b><u>Name/Hometown</u></b></td>
-						<td ALIGN="CENTER" VALIGN="MIDDLE" style="font-family: Arial; font-size: x-small">
-						<b><u>DOB</u></b></td>
-						<td ALIGN="CENTER" VALIGN="MIDDLE" style="font-family: Arial; font-size: x-small">
-						<b><u>DOD</u></b></td>
-						<td ALIGN="CENTER" VALIGN="MIDDLE" style="font-family: Arial; font-size: x-small">
-						<b><u>Wall loc</u></b></td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sgt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Richard Arthur Coffey, Los Angles, CA</td>
-						<td ALIGN="CENTER" SDVAL="15270" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						21-Oct-41</td>
-						<td ALIGN="CENTER" SDVAL="24050" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						4-Nov-65</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						3E/17</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Wright Bartwyn Hamill, Albany, OR</td>
-						<td ALIGN="CENTER" SDVAL="17040" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						26-Aug-46</td>
-						<td ALIGN="CENTER" SDVAL="24050" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						4-Nov-65</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						3E/17</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Eddie Lee Hill Jr., Mobile, AL</td>
-						<td ALIGN="CENTER" SDVAL="14799" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						7-Jul-40</td>
-						<td ALIGN="CENTER" SDVAL="24050" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						4-Nov-65</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						3E/18</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_Terry_Allen_Rippy_1966.htm">Terry Allen Rippy</a>, Hammond, OR</td>
-						<td ALIGN="CENTER" SDVAL="15614" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						30-Sep-42</td>
-						<td ALIGN="CENTER" SDVAL="24219" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						22-Apr-66</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						6E/128</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sgt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_SGT_Paul_William_Malec_1966.htm">Paul William Malec</a>, Summerdale, Al</td>
-						<td ALIGN="CENTER" SDVAL="13539" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						24-Jan-37</td>
-						<td ALIGN="CENTER" SDVAL="24241" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						14-May-66</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						7E/59</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_FerminRSaldana_Jr_1966.htm">Fermin Saldana Jr.</a>, San Antonio, TX</td>
-						<td ALIGN="CENTER" SDVAL="16843" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-Feb-46</td>
-						<td ALIGN="CENTER" SDVAL="24250" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						23-May-66</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						7E/106</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						2Lt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Michael Douglas Derosier, Ft. Walton Beach, FL</td>
-						<td ALIGN="CENTER" SDVAL="15812" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						16-Apr-43</td>
-						<td ALIGN="CENTER" SDVAL="24369" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						19-Sep-66</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						10E/117</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Ssg</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Paul Edward Floyd, Jr., Clinton, MA</td>
-						<td ALIGN="CENTER" SDVAL="12547" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						8-May-34</td>
-						<td ALIGN="CENTER" SDVAL="24394" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						14-Oct-66</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						11E/73</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Donald Francis Yates, Round Lake, NY</td>
-						<td ALIGN="CENTER" SDVAL="17057" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						12-Sep-46</td>
-						<td ALIGN="CENTER" SDVAL="24500" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						28-Jan-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						14E/94</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_Pete_Keller_kia_1967.htm">Peter Joseph Keller Jr.</a>, Detroit, MI</td>
-						<td ALIGN="CENTER" SDVAL="16468" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						31-Jan-45</td>
-						<td ALIGN="CENTER" SDVAL="24500" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						28-Jan-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						14E/91</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sgt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						William Burton Jr., Hopkins, SC</td>
-						<td ALIGN="CENTER" SDVAL="16439" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						2-Jan-45</td>
-						<td ALIGN="CENTER" SDVAL="24532" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						1-Mar-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						15E/125</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Robert Edward Johnson, Highland, NY</td>
-						<td ALIGN="CENTER" SDVAL="17120" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						14-Nov-46</td>
-						<td ALIGN="CENTER" SDVAL="24532" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						1-Mar-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						15E/128</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Robert Lester Van Gieson, Van Nuys, CA</td>
-						<td ALIGN="CENTER" SDVAL="17308" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						21-May-47</td>
-						<td ALIGN="CENTER" SDVAL="24543" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						12-Mar-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						16E/71</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Michael Neal Johnson, Brentwood, MD</td>
-						<td ALIGN="CENTER" SDVAL="17490" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						19-Nov-47</td>
-						<td ALIGN="CENTER" SDVAL="24549" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						18-Mar-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						16E/105</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Ssg</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						John Henry Willis, Philadelphia, PA*</td>
-						<td ALIGN="CENTER" SDVAL="16176" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						2-Nov-42</td>
-						<td ALIGN="CENTER" SDVAL="24549" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						18-Mar-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						16E/105</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-					  <a href="Honor_roll RalphTWoodall.htm">Ralph Traylor Woodall, Jr.</a>, Jesup, GA</td>
-						<td ALIGN="CENTER" SDVAL="16176" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						14-Apr-44</td>
-						<td ALIGN="CENTER" SDVAL="24549" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						18-Mar-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						16E/108</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Clayton Middleton, Cincinnati, OH*</td>
-						<td ALIGN="CENTER" SDVAL="17127" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						26-Sep-45</td>
-						<td ALIGN="CENTER" SDVAL="24564" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						18-Mar-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						16E/103</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Vance George Williams. Dallas, TX</td>
-						<td ALIGN="CENTER" SDVAL="17127" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						21-Nov-46</td>
-						<td ALIGN="CENTER" SDVAL="24564" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						2-Apr-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						17E/94</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-		        <a href="Honor_Roll_Daniel Nelson.html">Daniel Ivan Nelson,</a> Rutledge, MN</td>
-						<td ALIGN="CENTER" SDVAL="17459" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						19-Oct-47</td>
-						<td ALIGN="CENTER" SDVAL="24622" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						30-May-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						21E/18</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_Terry_McComb_kia_1967.htm">Terry Russell McComb</a>, Lapeer, MI</td>
-						<td ALIGN="CENTER" SDVAL="17107" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						1-Nov-46</td>
-						<td ALIGN="CENTER" SDVAL="24628" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						5-Jun-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						21E/59</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Robert James Bohmer, Milwaukee, WI</td>
-						<td ALIGN="CENTER" SDVAL="17383" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						9-Mar-46</td>
-						<td ALIGN="CENTER" SDVAL="24622" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						23-May-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						20E/089</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						George Steven Sutt, Indianapolis, IN</td>
-						<td ALIGN="CENTER" SDVAL="17383" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						4-Aug-47</td>
-						<td ALIGN="CENTER" SDVAL="24622" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						30-May-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						21E/19</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Charles William Krueger, Menasha, WI</td>
-						<td ALIGN="CENTER" SDVAL="17361" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						13-Jul-47</td>
-						<td ALIGN="CENTER" SDVAL="24623" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						31-May-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						21E/23</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Lonney Lewis Ehlers, Rhodes, MI</td>
-						<td ALIGN="CENTER" SDVAL="17327" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						9-Jun-47</td>
-						<td ALIGN="CENTER" SDVAL="24624" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						1-Jun-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						21E/27</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Clyde Richard Houser, Jr, Trexiertown, PA</td>
-						<td ALIGN="CENTER" SDVAL="16906" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						15-Mar-49</td>
-						<td ALIGN="CENTER" SDVAL="24777" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						13-Jun-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						21E/98</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Michael Paul Santoroski</td>
-						<td ALIGN="CENTER" SDVAL="16906" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						25-Jan-47</td>
-						<td ALIGN="CENTER" SDVAL="24777" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						26-Sept-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						27E/16</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						2Lt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						*Michael E. Bennett, Brentwood, NH</td>
-						<td ALIGN="CENTER" SDVAL="16906" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						14-Apr-46</td>
-						<td ALIGN="CENTER" SDVAL="24777" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						1-Nov-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						28E/107</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Allen Eugene Follett, Independence, MO</td>
-						<td ALIGN="CENTER" SDVAL="16389" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						13-Nov-44</td>
-						<td ALIGN="CENTER" SDVAL="24817" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						11-Dec-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						31E/79</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						John Paul Paulson Jr, Neenah, WI</td>
-						<td ALIGN="CENTER" SDVAL="17394" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						15-Aug-47</td>
-						<td ALIGN="CENTER" SDVAL="24817" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						11-Dec-67</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						31E/82</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sgt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Wyatt Cecil Gordon, Lawrence, IN</td>
-						<td ALIGN="CENTER" SDVAL="17626" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						3-Apr-48</td>
-						<td ALIGN="CENTER" SDVAL="24868" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						31-Jan-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						36E/4</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Robert Eugene Gardner, Sylacauga, AL</td>
-						<td ALIGN="CENTER" SDVAL="15606" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						22-Sep-42</td>
-						<td ALIGN="CENTER" SDVAL="24947" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						19-Apr-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						50E/46</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_richard_carlson_kia_1968.htm">Richard Allen Carlson</a>, San Francisco, CA</td>
-						<td ALIGN="CENTER" SDVAL="17622" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						30-Mar-48</td>
-						<td ALIGN="CENTER" SDVAL="24982" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						24-May-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						67E/5</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Larry Dean Novak, Platte Center, NE</td>
-						<td ALIGN="CENTER" SDVAL="17609" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						17-Mar-48</td>
-						<td ALIGN="CENTER" SDVAL="24982" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						24-May-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						68E/5</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sgt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Jacob Robinson Weldin, Wilmington, DE</td>
-						<td ALIGN="CENTER" SDVAL="17032" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						18-Aug-46</td>
-						<td ALIGN="CENTER" SDVAL="24995" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						6-Jun-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						59W/17</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Brian Carl Winner, Detroit, MI</td>
-						<td ALIGN="CENTER" SDVAL="17418" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						8-Sep-47</td>
-						<td ALIGN="CENTER" SDVAL="24996" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						7-Jun-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						58W/1</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						John Clark Wheeler, Eugene, OR</td>
-						<td ALIGN="CENTER" SDVAL="17349" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						6-Mar-47</td>
-						<td ALIGN="CENTER" SDVAL="25020" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						12-June-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						W57/e</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sgt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Robert James Ross, Charlotte, NC</td>
-						<td ALIGN="CENTER" SDVAL="17349" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						1-Jul-47</td>
-						<td ALIGN="CENTER" SDVAL="25020" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						1-Jul-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						54W/32</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1Lt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Harrison E. Woehnker, Jr., Minneapolis, MN*</td>
-						<td ALIGN="CENTER" SDVAL="17546" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						7-Jul-43</td>
-						<td ALIGN="CENTER" SDVAL="25069" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						18-Jul-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						51W/9</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Stanley Lloyd Grunstad, Everett, WA*</td>
-						<td ALIGN="CENTER" SDVAL="17546" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						21-Apr-47</td>
-						<td ALIGN="CENTER" SDVAL="25069" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						19-Jul-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						51W/10</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Roger Theodore Fast, Butterfield, MN</td>
-						<td ALIGN="CENTER" SDVAL="17546" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						14-Jan-48</td>
-						<td ALIGN="CENTER" SDVAL="25069" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						19-Aug-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						48W/54</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Ronald Duane Golden, Superior, WI</td>
-						<td ALIGN="CENTER" SDVAL="16275" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						22-Jul-44</td>
-						<td ALIGN="CENTER" SDVAL="25070" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						20-Aug-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						47W/7</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						John Robin Wiest, Billings, MT*</td>
-						<td ALIGN="CENTER" SDVAL="17629" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						11-May-40</td>
-						<td ALIGN="CENTER" SDVAL="25160" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						12-Oct-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						41W/055</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Michael John Cromie, Harperwoods, MI</td>
-						<td ALIGN="CENTER" SDVAL="17629" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						6-Apr-48</td>
-						<td ALIGN="CENTER" SDVAL="25160" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						18-Nov-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						38W/6</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Raymond Joseph Ahern, Jr., Philadelphia, PA*</td>
-						<td ALIGN="CENTER" SDVAL="17486" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						14-Jan-48</td>
-						<td ALIGN="CENTER" SDVAL="25176" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						26-Nov-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						38W/63</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Willie Gerald Jones, Fort Lauderdale, FL</td>
-						<td ALIGN="CENTER" SDVAL="17486" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						15-Nov-47</td>
-						<td ALIGN="CENTER" SDVAL="25176" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						4-Dec-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						37W/40</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_Donald_Stoltz_kia_1968.htm">Donald Robert Stoltz</a>, Milwaukee, WI</td>
-						<td ALIGN="CENTER" SDVAL="17549" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						17-Jan-48</td>
-						<td ALIGN="CENTER" SDVAL="25176" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						4-Dec-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						37W/42</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Ssg</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						William Charles Williams, Horton, MS</td>
-						<td ALIGN="CENTER" SDVAL="17090" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						15-Oct-46</td>
-						<td ALIGN="CENTER" SDVAL="25176" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						4-Dec-68</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						37W/44</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Elliot Velez-Rodriguez, Vega Baja, PR*</td>
-						<td ALIGN="CENTER" SDVAL="17419" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						29-May-47</td>
-						<td ALIGN="CENTER" SDVAL="25231" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						21-Jan-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						34W/54</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Warren Reed Eskridge, Tangier Island, VA</td>
-						<td ALIGN="CENTER" SDVAL="17419" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						9-Sep-47</td>
-						<td ALIGN="CENTER" SDVAL="25231" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						28-Jan-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						33W/7</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Carl Dale Pipher, Canton, OH</td>
-						<td ALIGN="CENTER" SDVAL="17988" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						31-Mar-49</td>
-						<td ALIGN="CENTER" SDVAL="25231" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						28-Jan-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						33W/11</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						James Edmonds, Burlington, NC</td>
-						<td ALIGN="CENTER" SDVAL="17726" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						12-Jul-48</td>
-						<td ALIGN="CENTER" SDVAL="25239" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						5-Feb-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						33W/62</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Chester Jon Kmit, Williamsburg, MA</td>
-						<td ALIGN="CENTER" SDVAL="16538" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						11-Apr-45</td>
-						<td ALIGN="CENTER" SDVAL="25239" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						5-Feb-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						33W/65</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Neil Shipp Brown, Salt Lake City, UT</td>
-						<td ALIGN="CENTER" SDVAL="16291" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						7-Aug-44</td>
-						<td ALIGN="CENTER" SDVAL="25325" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						2-May-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						26W/97</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						George Arthur Brown, Whaleyville, VA</td>
-						<td ALIGN="CENTER" SDVAL="17551" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						19-Jan-48</td>
-						<td ALIGN="CENTER" SDVAL="25335" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						12-May-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						25W/62</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						James Robert Dunkle</td>
-						<td ALIGN="CENTER" SDVAL="17181" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						12-Oct-48</td>
-						<td ALIGN="CENTER" SDVAL="25348" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						13-May-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						25W/98</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1Lt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						John Preston Karr, Kenner, LA</td>
-						<td ALIGN="CENTER" SDVAL="17181" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						14-Jan-47</td>
-						<td ALIGN="CENTER" SDVAL="25348" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						25-May-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						24W/104</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Wayne Eric Garven, Mt. Vernon, OH</td>
-						<td ALIGN="CENTER" SDVAL="17567" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						4-Feb-48</td>
-						<td ALIGN="CENTER" SDVAL="25348" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						25-May-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						24W/102</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Richard Neal White, Golden Valley, NM</td>
-						<td ALIGN="CENTER" SDVAL="17013" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						30-Jul-46</td>
-						<td ALIGN="CENTER" SDVAL="25348" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						25-May-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						24W109</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Thomas Michael Merchand, West Chester, MA</td>
-						<td ALIGN="CENTER" SDVAL="17539" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						19-Nov-47</td>
-						<td ALIGN="CENTER" SDVAL="25431" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						12-June-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						W22/34</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">Pfc
-						</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-			      <a href="Honor_roll Zuniga.html">Daniel Moran Zuniga</a>, San Antonio, TX</td>
-						<td ALIGN="CENTER" SDVAL="17539" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						2-June-48</td>
-						<td ALIGN="CENTER" SDVAL="25431" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						11-Aug-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						W19/06</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Michael Dennis Muse, Garland, TX</td>
-						<td ALIGN="CENTER" SDVAL="17539" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						7-Jan-48</td>
-						<td ALIGN="CENTER" SDVAL="25431" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						16-Aug-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						19W/51</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						William John Anderson, Jr.,Lorain, OH</td>
-						<td ALIGN="CENTER" SDVAL="17689" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						5-Jun-48</td>
-						<td ALIGN="CENTER" SDVAL="25439" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						24-Aug-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						19W/105</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Hugh Henry Sarah, Plymouth, MI</td>
-						<td ALIGN="CENTER" SDVAL="16654" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						5-Aug-45</td>
-						<td ALIGN="CENTER" SDVAL="25469" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						23-Sep-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						17W/1</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Albert Harold Altizer, Squire, WV</td>
-						<td ALIGN="CENTER" SDVAL="17999" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						11-Apr-49</td>
-						<td ALIGN="CENTER" SDVAL="25484" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						8-Oct-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						17W/49</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Joseph Henning Benson, Coram, MT</td>
-						<td ALIGN="CENTER" SDVAL="17945" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						16-Feb-49</td>
-						<td ALIGN="CENTER" SDVAL="25484" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						8-Oct-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						17W/49</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Jerome Milton Taylor, Battle Creek, MI</td>
-						<td ALIGN="CENTER" SDVAL="17485" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						14-Nov-47</td>
-						<td ALIGN="CENTER" SDVAL="25484" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						8-Oct-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						17W/49</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Anthony Jack Carlucci, New York, NY</td>
-						<td ALIGN="CENTER" SDVAL="18040" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						22-May-49</td>
-						<td ALIGN="CENTER" SDVAL="25527" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						20-Nov-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						16W/98</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Peter Karl Matthei, St. Louis, MO</td>
-						<td ALIGN="CENTER" SDVAL="16686" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						6-Sep-45</td>
-						<td ALIGN="CENTER" SDVAL="25527" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						20-Nov-69</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						16W/101</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Kenneth Frierson, Alcolu, SC</td>
-						<td ALIGN="CENTER" SDVAL="18211" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						9-Nov-49</td>
-						<td ALIGN="CENTER" SDVAL="25593" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						25-Jan-70</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						14W/64</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Tony Rava, Mt. Angel, OR</td>
-						<td ALIGN="CENTER" SDVAL="18140" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						30-Aug-49</td>
-						<td ALIGN="CENTER" SDVAL="25617" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						18-Feb-70</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						13W/31</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_kenneth_flashner_kia_1970.htm">Kenneth Michael Flashner</a>, New Orleans, LA</td>
-						<td ALIGN="CENTER" SDVAL="17127" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						21-Nov-46</td>
-						<td ALIGN="CENTER" SDVAL="25627" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						28-Feb-70</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						13W/68</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_Francis_Ware.htm">Francis Louis Ware III,</a> Youngstown, OH</td>
-						<td ALIGN="CENTER" SDVAL="18151" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-Sep-49</td>
-						<td ALIGN="CENTER" SDVAL="25633" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						6-Mar-70</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						13W/89</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Thomas Michael Brockmeier, Marietta, OH</td>
-						<td ALIGN="CENTER" SDVAL="18151" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						20-Aug-49</td>
-						<td ALIGN="CENTER" SDVAL="25644" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						7-Mar-70</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						W13/91</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Michael Charles Jackson, Simi, CA</td>
-						<td ALIGN="CENTER" SDVAL="18151" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-Sep-49</td>
-						<td ALIGN="CENTER" SDVAL="25644" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						17-Mar-70</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						12W013</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Stephen John Alsup, Rumford, RI</td>
-						<td ALIGN="CENTER" SDVAL="17290" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						19-Aug-49</td>
-						<td ALIGN="CENTER" SDVAL="25707" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						18-Mar-70</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						W12/99</td>
-					</tr>
-					<tr>
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sgt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_Richard_Wiseman.htm">Richard Lee Wiseman</a>, Elkhart, Indiana*</td>
-						<td ALIGN="CENTER" SDVAL="18151" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						31-Aug-48</td>
-						<td ALIGN="CENTER" SDVAL="25633" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						18-Mar-70</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						12W/019</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Ssg</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						James Cooney, New York, NY</td>
-						<td ALIGN="CENTER" SDVAL="17290" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						3-May-47</td>
-						<td ALIGN="CENTER" SDVAL="25707" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						19-May-70</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						10W/64</td>
-					</tr>
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_kenneth_gondor_kia_19.htm">Kenneth Walter Gonder</a>, New Brunswick, NJ</td>
-						<td ALIGN="CENTER" SDVAL="17290" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						3-May-47</td>
-						<td ALIGN="CENTER" SDVAL="25707" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						19-May-70</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						10W/64</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_Craig_Waterman.htm">Craig Thomas Waterman</a>, Rockwell City, IA</td>
-						<td ALIGN="CENTER" SDVAL="18171" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						30-Sep-49</td>
-						<td ALIGN="CENTER" SDVAL="25814" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						3-Sep-70</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						7W/37</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pvt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						James Lee Getter, West Helena, AR</td>
-						<td ALIGN="CENTER" SDVAL="18858" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						18-Aug-51</td>
-						<td ALIGN="CENTER" SDVAL="26008" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						16-Mar-71</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						4W/52</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						James Melvin Cardwell, Castro Valley, CA</td>
-						<td ALIGN="CENTER" SDVAL="18439" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						25-Jun-50</td>
-						<td ALIGN="CENTER" SDVAL="26043" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						20-Apr-71</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						4W/135</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Danny George Drinkard, Ferndale, MI</td>
-						<td ALIGN="CENTER" SDVAL="18551" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						15-Oct-50</td>
-						<td ALIGN="CENTER" SDVAL="26043" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						20-Apr-71</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						4W/135</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Joseph Lindsey Hall, Little Rock, AR</td>
-						<td ALIGN="CENTER" SDVAL="18723" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						5-Apr-51</td>
-						<td ALIGN="CENTER" SDVAL="26043" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						20-Apr-71</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						4W/136</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpl</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Stanton Gerald Sargent, Grenada, MS</td>
-						<td ALIGN="CENTER" SDVAL="18278" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						15-Jan-50</td>
-						<td ALIGN="CENTER" SDVAL="26044" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						21-Apr-71</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						3W/1</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Charles W. Roberts, Jr., Atlanta, GA</td>
-						<td ALIGN="CENTER" SDVAL="18215" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						13-Nov-49</td>
-						<td ALIGN="CENTER" SDVAL="26132" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						18-Jul-71</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						3W/110</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_WilliamJohnMakowski_kia_1971.htm">William John MaKowski</a>, Buffalo, NY</td>
-						<td ALIGN="CENTER" SDVAL="18917" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						16-Oct-51</td>
-						<td ALIGN="CENTER" SDVAL="26227" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						21-Oct-71</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						2W/46</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Oscar Aguilar, Fairfield, CA</td>
-						<td ALIGN="CENTER" SDVAL="18723" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						5-Apr-51</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/15</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sgt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						William Arvel Boatright, Abbott, AR</td>
-						<td ALIGN="CENTER" SDVAL="18260" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						28-Dec-49</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/16</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_StevenBowersock_kia_1972.htm">Steven Edward Bowersock</a>, Lima, OH</td>
-						<td ALIGN="CENTER" SDVAL="18896" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						25-Sep-51</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/16</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sgt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-				    <a href="images/Edward Denzel Burnett KIA 10May72.jpg">Edward Denzel Burnett</a>, Jay, OK</td>
-						<td ALIGN="CENTER" SDVAL="18968" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						6-Dec-51</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/16</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						David Cruz Flores, Agana, GM</td>
-						<td ALIGN="CENTER" SDVAL="19226" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						20-Aug-52</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/17</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sgt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Dieter Kuno Freitag, Ft. Dix, NJ</td>
-						<td ALIGN="CENTER" SDVAL="17055" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-Sep-46</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/17</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pvt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_JamesGroves_kia_1972.htm">James Douglas Groves</a>, Maysville, KY</td>
-						<td ALIGN="CENTER" SDVAL="19546" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						6-Jul-53</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/17</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_FrankHenson_RayShiko_kia_1972.htm">Frank Theodore Henson</a>, Massapequa, NY</td>
-						<td ALIGN="CENTER" SDVAL="18907" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						6-Oct-51</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/18</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Donald Edward Howell, Los Angeles, CA</td>
-						<td ALIGN="CENTER" SDVAL="17485" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						14-Nov-47</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/19</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Freddie Jackson, Cocoa, FL</td>
-						<td ALIGN="CENTER" SDVAL="16116" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						14-Feb-44</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/19</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Cpt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_Kenneth_Rosenberg_kia_1972.htm">Kenneth Rosenberg</a>, New York, NY</td>
-						<td ALIGN="CENTER" SDVAL="15639" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						25-Oct-42</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/19</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Gary Robert Monteleone, Saugus, CA</td>
-						<td ALIGN="CENTER" SDVAL="19202" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						27-Jul-52</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/20</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Dean Anthony Phillips, Tiro, OH</td>
-						<td ALIGN="CENTER" SDVAL="18946" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						14-Nov-51</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/20</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sgt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						James Christian Jensen, Elsinore, UT</td>
-						<td ALIGN="CENTER" SDVAL="18800" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						21-Jun-51</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/21</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pvt</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_Jackie_Ray_kia_1972.htm">Jackie Ray</a>, Jackson, MI</td>
-						<td ALIGN="CENTER" SDVAL="18007" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						19-Apr-49</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/21</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Richard Ridgeway, Bloomington, IL</td>
-						<td ALIGN="CENTER" SDVAL="18853" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						13-Aug-51</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/21</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						John Tenerio Sablan, Agana, GM</td>
-						<td ALIGN="CENTER" SDVAL="19513" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						3-Jun-53</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/21</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor%20roll%20Saulsberry.htm">Clarence L. Saulsberry, Jr</a>., Chicago, IL</td>
-						<td ALIGN="CENTER" SDVAL="18993" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						31-Dec-51</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/22</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						<a href="honor_roll_RayShiko_kia_1972.htm">Raymond Joseph Shiko</a>, Kingston, PA</td>
-						<td ALIGN="CENTER" SDVAL="19573" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						2-Aug-53</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/22</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Sp4</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						David Wesley Sulser, Galion, OH</td>
-						<td ALIGN="CENTER" SDVAL="18929" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						28-Oct-51</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/22</td>
-					</tr>
-				<tbody style="font-family: Arial; font-size: x-small">
-					<tr style="font-family: Arial; font-size: x-small">
-						<td HEIGHT="24" ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						Pfc</td>
-						<td ALIGN="LEFT" style="font-family: Arial; font-size: x-small">
-						Thomas Eugene Wood, Tacoma, WA</td>
-						<td ALIGN="CENTER" SDVAL="19587" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						16-Aug-53</td>
-						<td ALIGN="CENTER" SDVAL="26429" SDNUM="1033;1033;D-MMM-YY" style="font-family: Arial; font-size: x-small">
-						10-May-72</td>
-						<td ALIGN="CENTER" style="font-family: Arial; font-size: x-small">
-						1W/22</td>
-					</tr>
-			</table>
-			</td>
-		</tr>
-	</table>
-</div>
+  <!-- Subpage Breadcrumb Navigation -->
+  <nav class="sub-nav" aria-label="Breadcrumb">
+    <div class="container-nav">
+      <a href="index.html" class="back-home">&larr; Return to Association Home</a>
+      <span class="crumb-current">Honor Roll</span>
+    </div>
+  </nav>
 
-<p align="center"><b><a href="index.html">Back</a></b></p>
+  <!-- Main Content Container -->
+  <main class="container">
+
+    <section class="page-title-card">
+      <h2>Delta Company Honor Roll</h2>
+      <p>Dedicated to the memory of the men of Delta Company, 2nd Battalion, 8th Cavalry Regiment (Airmobile) who gave the ultimate sacrifice in the Republic of Vietnam.</p>
+    </section>
+
+    <!-- Memorial Hero Badge & Fast Portals -->
+    <div class="memorial-hero">
+      <img src="images/d_2_8_guidon200X136.gif" alt="Delta 2/8 Guidon" class="unit-guidon">
+    </div>
+
+    <div class="memorial-actions-grid">
+      <a href="pdf_documents/Honor%20Roll.pdf" class="memorial-action-card" target="_blank" rel="noopener">
+        <svg class="action-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        <span class="action-text">Download Official Honor Roll (PDF)</span>
+      </a>
+
+      <a href="skull_71_72_honor_roll.htm" class="memorial-action-card">
+        <svg class="action-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        <span class="action-text">Skull 71&ndash;72 Chopper Crash Memorial</span>
+      </a>
+
+      <a href="https://www.virtualwall.org/index.html" class="memorial-action-card" target="_blank" rel="noopener">
+        <svg class="action-icon" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+        <span class="action-text">The Virtual Wall&reg; Companion Registry</span>
+      </a>
+    </div>
+
+    <!-- Live Search & Casualty Year Filter -->
+    <section class="filter-panel">
+      <div class="filter-grid">
+        <div class="filter-group">
+          <label for="soldierFilter">Search Fallen Troopers</label>
+          <input type="text" id="soldierFilter" class="filter-input" placeholder="Type soldier name, hometown, state, or wall panel..." autocomplete="off">
+        </div>
+
+        <div class="filter-group">
+          <label for="yearDODFilter">Year of Casualty (DOD)</label>
+          <select id="yearDODFilter" class="filter-select">
+            <option value="">All Casualty Years</option>
+            <option value="1965">1965</option>
+            <option value="1966">1966</option>
+            <option value="1967">1967</option>
+            <option value="1968">1968</option>
+            <option value="1969">1969</option>
+            <option value="1970">1970</option>
+            <option value="1971">1971</option>
+            <option value="1972">1972</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <button type="button" id="btnReset" class="btn-reset">Reset</button>
+        </div>
+      </div>
+      <div id="resultsCount" class="results-count"></div>
+      <div class="memorial-legend">
+        * Asterisk indicates the soldier was attached to Delta Company, 2nd Battalion, 8th Cavalry when killed in action[cite: 11].
+      </div>
+    </section>
+
+    <!-- Honor Roll Table -->
+    <section class="content-card">
+      <div class="table-responsive">
+        <table class="styled-table" id="honorRollTable">
+          <thead>
+            <tr>
+              <th style="width: 10%;">Rank[cite: 11]</th>
+              <th style="width: 44%;">Name &amp; Hometown[cite: 11]</th>
+              <th style="width: 15%;">Date of Birth[cite: 11]</th>
+              <th style="width: 15%;">Date of Casualty (DOD)[cite: 11]</th>
+              <th style="width: 16%;">Wall Panel[cite: 11]</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-dod-year="1965">
+              <td>Sgt[cite: 11]</td>
+              <td>Richard Arthur Coffey, <span class="hometown-text">Los Angeles, CA</span>[cite: 11]</td>
+              <td>21-Oct-41[cite: 11]</td>
+              <td>04-Nov-65[cite: 11]</td>
+              <td><span class="wall-loc-badge">3E/17</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1965">
+              <td>Pfc[cite: 11]</td>
+              <td>Wright Bartwyn Hamill, <span class="hometown-text">Albany, OR</span>[cite: 11]</td>
+              <td>26-Aug-46[cite: 11]</td>
+              <td>04-Nov-65[cite: 11]</td>
+              <td><span class="wall-loc-badge">3E/17</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1965">
+              <td>Cpl[cite: 11]</td>
+              <td>Eddie Lee Hill Jr., <span class="hometown-text">Mobile, AL</span>[cite: 11]</td>
+              <td>07-Jul-40[cite: 11]</td>
+              <td>04-Nov-65[cite: 11]</td>
+              <td><span class="wall-loc-badge">3E/18</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1966">
+              <td>Sp4[cite: 11]</td>
+              <td><a href="honor_roll_Terry_Allen_Rippy_1966.htm" class="soldier-link">Terry Allen Rippy</a>, <span class="hometown-text">Hammond, OR</span>[cite: 11]</td>
+              <td>30-Sep-42[cite: 11]</td>
+              <td>22-Apr-66[cite: 11]</td>
+              <td><span class="wall-loc-badge">6E/128</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1966">
+              <td>Sgt[cite: 11]</td>
+              <td><a href="honor_roll_SGT_Paul_William_Malec_1966.htm" class="soldier-link">Paul William Malec</a>, <span class="hometown-text">Summerdale, AL</span>[cite: 11]</td>
+              <td>24-Jan-37[cite: 11]</td>
+              <td>14-May-66[cite: 11]</td>
+              <td><span class="wall-loc-badge">7E/59</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1966">
+              <td>Pfc[cite: 11]</td>
+              <td><a href="honor_roll_FerminRSaldana_Jr_1966.htm" class="soldier-link">Fermin Saldana Jr.</a>, <span class="hometown-text">San Antonio, TX</span>[cite: 11]</td>
+              <td>10-Feb-46[cite: 11]</td>
+              <td>23-May-66[cite: 11]</td>
+              <td><span class="wall-loc-badge">7E/106</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1966">
+              <td>2Lt[cite: 11]</td>
+              <td>Michael Douglas Derosier, <span class="hometown-text">Ft. Walton Beach, FL</span>[cite: 11]</td>
+              <td>16-Apr-43[cite: 11]</td>
+              <td>19-Sep-66[cite: 11]</td>
+              <td><span class="wall-loc-badge">10E/117</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1966">
+              <td>Ssg[cite: 11]</td>
+              <td>Paul Edward Floyd, Jr., <span class="hometown-text">Clinton, MA</span>[cite: 11]</td>
+              <td>08-May-34[cite: 11]</td>
+              <td>14-Oct-66[cite: 11]</td>
+              <td><span class="wall-loc-badge">11E/73</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Cpl[cite: 11]</td>
+              <td>Donald Francis Yates, <span class="hometown-text">Round Lake, NY</span>[cite: 11]</td>
+              <td>12-Sep-46[cite: 11]</td>
+              <td>28-Jan-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">14E/94</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Cpl[cite: 11]</td>
+              <td><a href="honor_roll_Pete_Keller_kia_1967.htm" class="soldier-link">Peter Joseph Keller Jr.</a>, <span class="hometown-text">Detroit, MI</span>[cite: 11]</td>
+              <td>31-Jan-45[cite: 11]</td>
+              <td>28-Jan-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">14E/91</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Sgt[cite: 11]</td>
+              <td>William Burton Jr., <span class="hometown-text">Hopkins, SC</span>[cite: 11]</td>
+              <td>02-Jan-45[cite: 11]</td>
+              <td>01-Mar-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">15E/125</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Cpl[cite: 11]</td>
+              <td>Robert Edward Johnson, <span class="hometown-text">Highland, NY</span>[cite: 11]</td>
+              <td>14-Nov-46[cite: 11]</td>
+              <td>01-Mar-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">15E/128</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Pfc[cite: 11]</td>
+              <td>Robert Lester Van Gieson, <span class="hometown-text">Van Nuys, CA</span>[cite: 11]</td>
+              <td>21-May-47[cite: 11]</td>
+              <td>12-Mar-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">16E/71</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Pfc[cite: 11]</td>
+              <td>Michael Neal Johnson, <span class="hometown-text">Brentwood, MD</span>[cite: 11]</td>
+              <td>19-Nov-47[cite: 11]</td>
+              <td>18-Mar-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">16E/105</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Ssg[cite: 11]</td>
+              <td>John Henry Willis, <span class="hometown-text">Philadelphia, PA*</span>[cite: 11]</td>
+              <td>02-Nov-42[cite: 11]</td>
+              <td>18-Mar-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">16E/105</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Pfc[cite: 11]</td>
+              <td><a href="Honor_roll%20RalphTWoodall.htm" class="soldier-link">Ralph Traylor Woodall, Jr.</a>, <span class="hometown-text">Jesup, GA</span>[cite: 11]</td>
+              <td>14-Apr-44[cite: 11]</td>
+              <td>18-Mar-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">16E/108</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Sp4[cite: 11]</td>
+              <td>Clayton Middleton, <span class="hometown-text">Cincinnati, OH*</span>[cite: 11]</td>
+              <td>26-Sep-45[cite: 11]</td>
+              <td>18-Mar-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">16E/103</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Pfc[cite: 11]</td>
+              <td>Vance George Williams, <span class="hometown-text">Dallas, TX</span>[cite: 11]</td>
+              <td>21-Nov-46[cite: 11]</td>
+              <td>02-Apr-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">17E/94</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Sp4[cite: 11]</td>
+              <td>Robert James Bohmer, <span class="hometown-text">Milwaukee, WI</span>[cite: 11]</td>
+              <td>09-Mar-46[cite: 11]</td>
+              <td>23-May-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">20E/089</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Pfc[cite: 11]</td>
+              <td><a href="Honor_Roll_Daniel%20Nelson.html" class="soldier-link">Daniel Ivan Nelson</a>, <span class="hometown-text">Rutledge, MN</span>[cite: 11]</td>
+              <td>19-Oct-47[cite: 11]</td>
+              <td>30-May-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">21E/18</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Pfc[cite: 11]</td>
+              <td>George Steven Sutt, <span class="hometown-text">Indianapolis, IN</span>[cite: 11]</td>
+              <td>04-Aug-47[cite: 11]</td>
+              <td>30-May-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">21E/19</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Pfc[cite: 11]</td>
+              <td>Charles William Krueger, <span class="hometown-text">Menasha, WI</span>[cite: 11]</td>
+              <td>13-Jul-47[cite: 11]</td>
+              <td>31-May-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">21E/23</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Cpl[cite: 11]</td>
+              <td>Lonney Lewis Ehlers, <span class="hometown-text">Rhodes, MI</span>[cite: 11]</td>
+              <td>09-Jun-47[cite: 11]</td>
+              <td>01-Jun-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">21E/27</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Sp4[cite: 11]</td>
+              <td><a href="honor_roll_Terry_McComb_kia_1967.htm" class="soldier-link">Terry Russell McComb</a>, <span class="hometown-text">Lapeer, MI</span>[cite: 11]</td>
+              <td>01-Nov-46[cite: 11]</td>
+              <td>05-Jun-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">21E/59</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Pfc[cite: 11]</td>
+              <td>Clyde Richard Houser, Jr., <span class="hometown-text">Trexlertown, PA</span>[cite: 11]</td>
+              <td>15-Mar-49[cite: 11]</td>
+              <td>13-Jun-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">21E/98</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Pfc[cite: 11]</td>
+              <td>Michael Paul Santoroski[cite: 11]</td>
+              <td>25-Jan-47[cite: 11]</td>
+              <td>26-Sep-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">27E/16</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>2Lt[cite: 11]</td>
+              <td>Michael E. Bennett, <span class="hometown-text">Brentwood, NH*</span>[cite: 11]</td>
+              <td>14-Apr-46[cite: 11]</td>
+              <td>01-Nov-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">28E/107</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Sp4[cite: 11]</td>
+              <td>Allen Eugene Follett, <span class="hometown-text">Independence, MO</span>[cite: 11]</td>
+              <td>13-Nov-44[cite: 11]</td>
+              <td>11-Dec-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">31E/79</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1967">
+              <td>Sp4[cite: 11]</td>
+              <td>John Paul Paulson Jr., <span class="hometown-text">Neenah, WI</span>[cite: 11]</td>
+              <td>15-Aug-47[cite: 11]</td>
+              <td>11-Dec-67[cite: 11]</td>
+              <td><span class="wall-loc-badge">31E/82</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Sgt[cite: 11]</td>
+              <td>Wyatt Cecil Gordon, <span class="hometown-text">Lawrence, IN</span>[cite: 11]</td>
+              <td>03-Apr-48[cite: 11]</td>
+              <td>31-Jan-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">36E/4</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Sp4[cite: 11]</td>
+              <td>Robert Eugene Gardner, <span class="hometown-text">Sylacauga, AL</span>[cite: 11]</td>
+              <td>22-Sep-42[cite: 11]</td>
+              <td>19-Apr-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">50E/46</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Cpl[cite: 11]</td>
+              <td><a href="honor_roll_richard_carlson_kia_1968.htm" class="soldier-link">Richard Allen Carlson</a>, <span class="hometown-text">San Francisco, CA</span>[cite: 11]</td>
+              <td>30-Mar-48[cite: 11]</td>
+              <td>24-May-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">67E/5</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Sp4[cite: 11]</td>
+              <td>Larry Dean Novak, <span class="hometown-text">Platte Center, NE</span>[cite: 11]</td>
+              <td>17-Mar-48[cite: 11]</td>
+              <td>24-May-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">68E/5</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Sgt[cite: 11]</td>
+              <td>Jacob Robinson Weldin, <span class="hometown-text">Wilmington, DE</span>[cite: 11]</td>
+              <td>18-Aug-46[cite: 11]</td>
+              <td>06-Jun-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">59W/17</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Pfc[cite: 11]</td>
+              <td>Brian Carl Winner, <span class="hometown-text">Detroit, MI</span>[cite: 11]</td>
+              <td>08-Sep-47[cite: 11]</td>
+              <td>07-Jun-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">58W/1</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Pfc[cite: 11]</td>
+              <td>John Clark Wheeler, <span class="hometown-text">Eugene, OR</span>[cite: 11]</td>
+              <td>06-Mar-47[cite: 11]</td>
+              <td>12-Jun-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">W57/e</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Sgt[cite: 11]</td>
+              <td>Robert James Ross, <span class="hometown-text">Charlotte, NC</span>[cite: 11]</td>
+              <td>01-Jul-47[cite: 11]</td>
+              <td>01-Jul-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">54W/32</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>1Lt[cite: 11]</td>
+              <td>Harrison E. Woehnker, Jr., <span class="hometown-text">Minneapolis, MN*</span>[cite: 11]</td>
+              <td>07-Jul-43[cite: 11]</td>
+              <td>18-Jul-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">51W/9</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Cpl[cite: 11]</td>
+              <td>Stanley Lloyd Grunstad, <span class="hometown-text">Everett, WA*</span>[cite: 11]</td>
+              <td>21-Apr-47[cite: 11]</td>
+              <td>19-Jul-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">51W/10</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Pfc[cite: 11]</td>
+              <td>Roger Theodore Fast, <span class="hometown-text">Butterfield, MN</span>[cite: 11]</td>
+              <td>14-Jan-48[cite: 11]</td>
+              <td>19-Aug-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">48W/54</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Sp4[cite: 11]</td>
+              <td>Ronald Duane Golden, <span class="hometown-text">Superior, WI</span>[cite: 11]</td>
+              <td>22-Jul-44[cite: 11]</td>
+              <td>20-Aug-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">47W/7</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Cpt[cite: 11]</td>
+              <td>John Robin Wiest, <span class="hometown-text">Billings, MT*</span>[cite: 11]</td>
+              <td>11-May-40[cite: 11]</td>
+              <td>12-Oct-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">41W/055</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Pfc[cite: 11]</td>
+              <td>Michael John Cromie, <span class="hometown-text">Harper Woods, MI</span>[cite: 11]</td>
+              <td>06-Apr-48[cite: 11]</td>
+              <td>18-Nov-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">38W/6</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Sp4[cite: 11]</td>
+              <td>Raymond Joseph Ahern, Jr., <span class="hometown-text">Philadelphia, PA*</span>[cite: 11]</td>
+              <td>14-Jan-48[cite: 11]</td>
+              <td>26-Nov-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">38W/63</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Sp4[cite: 11]</td>
+              <td>Willie Gerald Jones, <span class="hometown-text">Fort Lauderdale, FL</span>[cite: 11]</td>
+              <td>15-Nov-47[cite: 11]</td>
+              <td>04-Dec-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">37W/40</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Sp4[cite: 11]</td>
+              <td><a href="honor_roll_Donald_Stoltz_kia_1968.htm" class="soldier-link">Donald Robert Stoltz</a>, <span class="hometown-text">Milwaukee, WI</span>[cite: 11]</td>
+              <td>17-Jan-48[cite: 11]</td>
+              <td>04-Dec-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">37W/42</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1968">
+              <td>Ssg[cite: 11]</td>
+              <td>William Charles Williams, <span class="hometown-text">Horton, MS</span>[cite: 11]</td>
+              <td>15-Oct-46[cite: 11]</td>
+              <td>04-Dec-68[cite: 11]</td>
+              <td><span class="wall-loc-badge">37W/44</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Sp4[cite: 11]</td>
+              <td>Elliot Velez-Rodriguez, <span class="hometown-text">Vega Baja, PR*</span>[cite: 11]</td>
+              <td>29-May-47[cite: 11]</td>
+              <td>21-Jan-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">34W/54</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Cpl[cite: 11]</td>
+              <td>Warren Reed Eskridge, <span class="hometown-text">Tangier Island, VA</span>[cite: 11]</td>
+              <td>09-Sep-47[cite: 11]</td>
+              <td>28-Jan-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">33W/7</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Sp4[cite: 11]</td>
+              <td>Carl Dale Pipher, <span class="hometown-text">Canton, OH</span>[cite: 11]</td>
+              <td>31-Mar-49[cite: 11]</td>
+              <td>28-Jan-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">33W/11</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Cpl[cite: 11]</td>
+              <td>James Edmonds, <span class="hometown-text">Burlington, NC</span>[cite: 11]</td>
+              <td>12-Jul-48[cite: 11]</td>
+              <td>05-Feb-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">33W/62</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Sp4[cite: 11]</td>
+              <td>Chester Jon Kmit, <span class="hometown-text">Williamsburg, MA</span>[cite: 11]</td>
+              <td>11-Apr-45[cite: 11]</td>
+              <td>05-Feb-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">33W/65</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Pfc[cite: 11]</td>
+              <td>Neil Shipp Brown, <span class="hometown-text">Salt Lake City, UT</span>[cite: 11]</td>
+              <td>07-Aug-44[cite: 11]</td>
+              <td>02-May-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">26W/97</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Cpl[cite: 11]</td>
+              <td>George Arthur Brown, <span class="hometown-text">Whaleyville, VA</span>[cite: 11]</td>
+              <td>19-Jan-48[cite: 11]</td>
+              <td>12-May-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">25W/62</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Cpl[cite: 11]</td>
+              <td>James Robert Dunkle[cite: 11]</td>
+              <td>12-Oct-48[cite: 11]</td>
+              <td>13-May-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">25W/98</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>1Lt[cite: 11]</td>
+              <td>John Preston Karr, <span class="hometown-text">Kenner, LA</span>[cite: 11]</td>
+              <td>14-Jan-47[cite: 11]</td>
+              <td>25-May-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">24W/104</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Pfc[cite: 11]</td>
+              <td>Wayne Eric Garven, <span class="hometown-text">Mt. Vernon, OH</span>[cite: 11]</td>
+              <td>04-Feb-48[cite: 11]</td>
+              <td>25-May-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">24W/102</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Cpl[cite: 11]</td>
+              <td>Richard Neal White, <span class="hometown-text">Golden Valley, NM</span>[cite: 11]</td>
+              <td>30-Jul-46[cite: 11]</td>
+              <td>25-May-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">24W/109</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Pfc[cite: 11]</td>
+              <td>Thomas Michael Merchand, <span class="hometown-text">West Chester, MA</span>[cite: 11]</td>
+              <td>19-Nov-47[cite: 11]</td>
+              <td>12-Jun-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">W22/34</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Pfc[cite: 11]</td>
+              <td><a href="Honor_roll%20Zuniga.html" class="soldier-link">Daniel Moran Zuniga</a>, <span class="hometown-text">San Antonio, TX</span>[cite: 11]</td>
+              <td>02-Jun-48[cite: 11]</td>
+              <td>11-Aug-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">W19/06</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Cpl[cite: 11]</td>
+              <td>Michael Dennis Muse, <span class="hometown-text">Garland, TX</span>[cite: 11]</td>
+              <td>07-Jan-48[cite: 11]</td>
+              <td>16-Aug-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">19W/51</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Cpl[cite: 11]</td>
+              <td>William John Anderson, Jr., <span class="hometown-text">Lorain, OH</span>[cite: 11]</td>
+              <td>05-Jun-48[cite: 11]</td>
+              <td>24-Aug-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">19W/105</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Sp4[cite: 11]</td>
+              <td>Hugh Henry Sarah, <span class="hometown-text">Plymouth, MI</span>[cite: 11]</td>
+              <td>05-Aug-45[cite: 11]</td>
+              <td>23-Sep-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">17W/1</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Cpl[cite: 11]</td>
+              <td>Albert Harold Altizer, <span class="hometown-text">Squire, WV</span>[cite: 11]</td>
+              <td>11-Apr-49[cite: 11]</td>
+              <td>08-Oct-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">17W/49</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Pfc[cite: 11]</td>
+              <td>Joseph Henning Benson, <span class="hometown-text">Coram, MT</span>[cite: 11]</td>
+              <td>16-Feb-49[cite: 11]</td>
+              <td>08-Oct-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">17W/49</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Pfc[cite: 11]</td>
+              <td>Jerome Milton Taylor, <span class="hometown-text">Battle Creek, MI</span>[cite: 11]</td>
+              <td>14-Nov-47[cite: 11]</td>
+              <td>08-Oct-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">17W/49</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Sp4[cite: 11]</td>
+              <td>Anthony Jack Carlucci, <span class="hometown-text">New York, NY</span>[cite: 11]</td>
+              <td>22-May-49[cite: 11]</td>
+              <td>20-Nov-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">16W/98</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1969">
+              <td>Cpl[cite: 11]</td>
+              <td>Peter Karl Matthei, <span class="hometown-text">St. Louis, MO</span>[cite: 11]</td>
+              <td>06-Sep-45[cite: 11]</td>
+              <td>20-Nov-69[cite: 11]</td>
+              <td><span class="wall-loc-badge">16W/101</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1970">
+              <td>Pfc[cite: 11]</td>
+              <td>Kenneth Frierson, <span class="hometown-text">Alcolu, SC</span>[cite: 11]</td>
+              <td>09-Nov-49[cite: 11]</td>
+              <td>25-Jan-70[cite: 11]</td>
+              <td><span class="wall-loc-badge">14W/64</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1970">
+              <td>Pfc[cite: 11]</td>
+              <td>Tony Rava, <span class="hometown-text">Mt. Angel, OR</span>[cite: 11]</td>
+              <td>30-Aug-49[cite: 11]</td>
+              <td>18-Feb-70[cite: 11]</td>
+              <td><span class="wall-loc-badge">13W/31</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1970">
+              <td>Cpl[cite: 11]</td>
+              <td><a href="honor_roll_kenneth_flashner_kia_1970.htm" class="soldier-link">Kenneth Michael Flashner</a>, <span class="hometown-text">New Orleans, LA</span>[cite: 11]</td>
+              <td>21-Nov-46[cite: 11]</td>
+              <td>28-Feb-70[cite: 11]</td>
+              <td><span class="wall-loc-badge">13W/68</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1970">
+              <td>Cpl[cite: 11]</td>
+              <td><a href="honor_roll_Francis_Ware.htm" class="soldier-link">Francis Louis Ware III</a>, <span class="hometown-text">Youngstown, OH</span>[cite: 11]</td>
+              <td>10-Sep-49[cite: 11]</td>
+              <td>06-Mar-70[cite: 11]</td>
+              <td><span class="wall-loc-badge">13W/89</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1970">
+              <td>Pfc[cite: 11]</td>
+              <td>Thomas Michael Brockmeier, <span class="hometown-text">Marietta, OH</span>[cite: 11]</td>
+              <td>20-Aug-49[cite: 11]</td>
+              <td>07-Mar-70[cite: 11]</td>
+              <td><span class="wall-loc-badge">W13/91</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1970">
+              <td>Cpl[cite: 11]</td>
+              <td>Michael Charles Jackson, <span class="hometown-text">Simi, CA</span>[cite: 11]</td>
+              <td>10-Sep-49[cite: 11]</td>
+              <td>17-Mar-70[cite: 11]</td>
+              <td><span class="wall-loc-badge">12W/013</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1970">
+              <td>Sp4[cite: 11]</td>
+              <td>Stephen John Alsup, <span class="hometown-text">Rumford, RI</span>[cite: 11]</td>
+              <td>19-Aug-49[cite: 11]</td>
+              <td>18-Mar-70[cite: 11]</td>
+              <td><span class="wall-loc-badge">W12/99</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1970">
+              <td>Sgt[cite: 11]</td>
+              <td><a href="honor_roll_Richard_Wiseman.htm" class="soldier-link">Richard Lee Wiseman</a>, <span class="hometown-text">Elkhart, IN*</span>[cite: 11]</td>
+              <td>31-Aug-48[cite: 11]</td>
+              <td>18-Mar-70[cite: 11]</td>
+              <td><span class="wall-loc-badge">12W/019</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1970">
+              <td>Ssg[cite: 11]</td>
+              <td>James Cooney, <span class="hometown-text">New York, NY</span>[cite: 11]</td>
+              <td>03-May-47[cite: 11]</td>
+              <td>19-May-70[cite: 11]</td>
+              <td><span class="wall-loc-badge">10W/64</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1970">
+              <td>Cpl[cite: 11]</td>
+              <td><a href="honor_roll_kenneth_gondor_kia_19.htm" class="soldier-link">Kenneth Walter Gonder</a>, <span class="hometown-text">New Brunswick, NJ</span>[cite: 11]</td>
+              <td>03-May-47[cite: 11]</td>
+              <td>19-May-70[cite: 11]</td>
+              <td><span class="wall-loc-badge">10W/64</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1970">
+              <td>Cpl[cite: 11]</td>
+              <td><a href="honor_roll_Craig_Waterman.htm" class="soldier-link">Craig Thomas Waterman</a>, <span class="hometown-text">Rockwell City, IA</span>[cite: 11]</td>
+              <td>30-Sep-49[cite: 11]</td>
+              <td>03-Sep-70[cite: 11]</td>
+              <td><span class="wall-loc-badge">7W/37</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1971">
+              <td>Pvt[cite: 11]</td>
+              <td>James Lee Getter, <span class="hometown-text">West Helena, AR</span>[cite: 11]</td>
+              <td>18-Aug-51[cite: 11]</td>
+              <td>16-Mar-71[cite: 11]</td>
+              <td><span class="wall-loc-badge">4W/52</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1971">
+              <td>Cpl[cite: 11]</td>
+              <td>James Melvin Cardwell, <span class="hometown-text">Castro Valley, CA</span>[cite: 11]</td>
+              <td>25-Jun-50[cite: 11]</td>
+              <td>20-Apr-71[cite: 11]</td>
+              <td><span class="wall-loc-badge">4W/135</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1971">
+              <td>Cpl[cite: 11]</td>
+              <td>Danny George Drinkard, <span class="hometown-text">Ferndale, MI</span>[cite: 11]</td>
+              <td>15-Oct-50[cite: 11]</td>
+              <td>20-Apr-71[cite: 11]</td>
+              <td><span class="wall-loc-badge">4W/135</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1971">
+              <td>Cpl[cite: 11]</td>
+              <td>Joseph Lindsey Hall, <span class="hometown-text">Little Rock, AR</span>[cite: 11]</td>
+              <td>05-Apr-51[cite: 11]</td>
+              <td>20-Apr-71[cite: 11]</td>
+              <td><span class="wall-loc-badge">4W/136</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1971">
+              <td>Cpl[cite: 11]</td>
+              <td>Stanton Gerald Sargent, <span class="hometown-text">Grenada, MS</span>[cite: 11]</td>
+              <td>15-Jan-50[cite: 11]</td>
+              <td>21-Apr-71[cite: 11]</td>
+              <td><span class="wall-loc-badge">3W/1</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1971">
+              <td>Sp4[cite: 11]</td>
+              <td>Charles W. Roberts, Jr., <span class="hometown-text">Atlanta, GA</span>[cite: 11]</td>
+              <td>13-Nov-49[cite: 11]</td>
+              <td>18-Jul-71[cite: 11]</td>
+              <td><span class="wall-loc-badge">3W/110</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1971">
+              <td>Pfc[cite: 11]</td>
+              <td><a href="honor_roll_WilliamJohnMakowski_kia_1971.htm" class="soldier-link">William John Makowski</a>, <span class="hometown-text">Buffalo, NY</span>[cite: 11]</td>
+              <td>16-Oct-51[cite: 11]</td>
+              <td>21-Oct-71[cite: 11]</td>
+              <td><span class="wall-loc-badge">2W/46</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Sp4[cite: 11]</td>
+              <td>Oscar Aguilar, <span class="hometown-text">Fairfield, CA</span>[cite: 11]</td>
+              <td>05-Apr-51[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/15</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Sgt[cite: 11]</td>
+              <td>William Arvel Boatright, <span class="hometown-text">Abbott, AR</span>[cite: 11]</td>
+              <td>28-Dec-49[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/16</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Pfc[cite: 11]</td>
+              <td><a href="honor_roll_StevenBowersock_kia_1972.htm" class="soldier-link">Steven Edward Bowersock</a>, <span class="hometown-text">Lima, OH</span>[cite: 11]</td>
+              <td>25-Sep-51[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/16</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Sgt[cite: 11]</td>
+              <td><a href="images/Edward%20Denzel%20Burnett%20KIA%2010May72.jpg" class="soldier-link" target="_blank" rel="noopener">Edward Denzel Burnett</a>, <span class="hometown-text">Jay, OK</span>[cite: 11]</td>
+              <td>06-Dec-51[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/16</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Sp4[cite: 11]</td>
+              <td>David Cruz Flores, <span class="hometown-text">Agana, GM</span>[cite: 11]</td>
+              <td>20-Aug-52[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/17</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Sgt[cite: 11]</td>
+              <td>Dieter Kuno Freitag, <span class="hometown-text">Ft. Dix, NJ</span>[cite: 11]</td>
+              <td>10-Sep-46[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/17</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Pvt[cite: 11]</td>
+              <td><a href="honor_roll_JamesGroves_kia_1972.htm" class="soldier-link">James Douglas Groves</a>, <span class="hometown-text">Maysville, KY</span>[cite: 11]</td>
+              <td>06-Jul-53[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/17</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Sp4[cite: 11]</td>
+              <td><a href="honor_roll_FrankHenson_RayShiko_kia_1972.htm" class="soldier-link">Frank Theodore Henson</a>, <span class="hometown-text">Massapequa, NY</span>[cite: 11]</td>
+              <td>06-Oct-51[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/18</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Sp4[cite: 11]</td>
+              <td>Donald Edward Howell, <span class="hometown-text">Los Angeles, CA</span>[cite: 11]</td>
+              <td>14-Nov-47[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/19</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Sp4[cite: 11]</td>
+              <td>Freddie Jackson, <span class="hometown-text">Cocoa, FL</span>[cite: 11]</td>
+              <td>14-Feb-44[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/19</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Cpt[cite: 11]</td>
+              <td><a href="honor_roll_Kenneth_Rosenberg_kia_1972.htm" class="soldier-link">Kenneth Rosenberg</a>, <span class="hometown-text">New York, NY</span>[cite: 11]</td>
+              <td>25-Oct-42[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/19</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Sp4[cite: 11]</td>
+              <td>Gary Robert Monteleone, <span class="hometown-text">Saugus, CA</span>[cite: 11]</td>
+              <td>27-Jul-52[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/20</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Pfc[cite: 11]</td>
+              <td>Dean Anthony Phillips, <span class="hometown-text">Tiro, OH</span>[cite: 11]</td>
+              <td>14-Nov-51[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/20</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Sgt[cite: 11]</td>
+              <td>James Christian Jensen, <span class="hometown-text">Elsinore, UT</span>[cite: 11]</td>
+              <td>21-Jun-51[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/21</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Pvt[cite: 11]</td>
+              <td><a href="honor_roll_Jackie_Ray_kia_1972.htm" class="soldier-link">Jackie Ray</a>, <span class="hometown-text">Jackson, MI</span>[cite: 11]</td>
+              <td>19-Apr-49[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/21</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Sp4[cite: 11]</td>
+              <td>Richard Ridgeway, <span class="hometown-text">Bloomington, IL</span>[cite: 11]</td>
+              <td>13-Aug-51[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/21</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Pfc[cite: 11]</td>
+              <td>John Tenerio Sablan, <span class="hometown-text">Agana, GM</span>[cite: 11]</td>
+              <td>03-Jun-53[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/21</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Sp4[cite: 11]</td>
+              <td><a href="honor%20roll%20Saulsberry.htm" class="soldier-link">Clarence L. Saulsberry, Jr.</a>, <span class="hometown-text">Chicago, IL</span>[cite: 11]</td>
+              <td>31-Dec-51[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/22</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Sp4[cite: 11]</td>
+              <td><a href="honor_roll_RayShiko_kia_1972.htm" class="soldier-link">Raymond Joseph Shiko</a>, <span class="hometown-text">Kingston, PA</span>[cite: 11]</td>
+              <td>02-Aug-53[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/22</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Sp4[cite: 11]</td>
+              <td>David Wesley Sulser, <span class="hometown-text">Galion, OH</span>[cite: 11]</td>
+              <td>28-Oct-51[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/22</span>[cite: 11]</td>
+            </tr>
+            <tr data-dod-year="1972">
+              <td>Pfc[cite: 11]</td>
+              <td>Thomas Eugene Wood, <span class="hometown-text">Tacoma, WA</span>[cite: 11]</td>
+              <td>16-Aug-53[cite: 11]</td>
+              <td>10-May-72[cite: 11]</td>
+              <td><span class="wall-loc-badge">1W/22</span>[cite: 11]</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Global Regimental Footer -->
+  <footer class="site-footer">
+    <div class="footer-meta">
+      Delta Co., 2nd Bn, 8th Cavalry (Airborne) &bull; 1st Cavalry Division (Airmobile)
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="legal_disclaimer.htm">Legal Disclaimer</a>
+      <a href="Privacy%20Statement.html">Privacy Statement</a>
+    </div>
+  </footer>
+
+  <!-- Real-time Filter & Search Logic -->
+  <script>
+    const searchInput = document.getElementById('soldierFilter');
+    const yearSelect = document.getElementById('yearDODFilter');
+    const resetBtn = document.getElementById('btnReset');
+    const countDisplay = document.getElementById('resultsCount');
+    const rows = Array.from(document.querySelectorAll('#honorRollTable tbody tr'));
+    const totalCount = rows.length;
+
+    function filterHonorRoll() {
+      const q = searchInput.value.toLowerCase().trim();
+      const y = yearSelect.value;
+      let visible = 0;
+
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        const rowYear = row.getAttribute('data-dod-year');
+
+        const matchesQuery = !q || text.includes(q);
+        const matchesYear = !y || rowYear === y;
+
+        if (matchesQuery && matchesYear) {
+          row.style.display = '';
+          visible++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      countDisplay.textContent = 'Showing ' + visible + ' of ' + totalCount + ' fallen troopers';
+    }
+
+    searchInput.addEventListener('input', filterHonorRoll);
+    yearSelect.addEventListener('change', filterHonorRoll);
+
+    resetBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      yearSelect.value = '';
+      filterHonorRoll();
+    });
+
+    filterHonorRoll();
+  </script>
+
+  <!-- Board Palette Preference Sync -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('asa_board_theme');
+      const savedFont = localStorage.getItem('asa_board_font');
+      if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+      if (savedFont) document.body.setAttribute('data-font', savedFont);
+    })();
+  </script>
 
 </body>
-
 </html>

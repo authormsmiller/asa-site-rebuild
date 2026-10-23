@@ -1,106 +1,402 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Language" content="en-us">
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Medals Request</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medals Request | Angry Skipper Association, Inc.</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .medals-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    @media (min-width: 992px) {
+      .medals-layout {
+        grid-template-columns: 1fr 280px;
+        align-items: start;
+      }
+    }
+
+    .guide-prose {
+      line-height: 1.65;
+      color: var(--charcoal);
+    }
+
+    .guide-prose p {
+      margin-bottom: 1.15rem;
+      font-size: 1rem;
+    }
+
+    /* Notice & Timeline Alert */
+    .timeline-notice {
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--cav-gold);
+      border-radius: var(--radius-card, 8px);
+      padding: 14px 18px;
+      margin: 18px 0;
+      font-size: 0.95rem;
+    }
+
+    .timeline-notice strong {
+      color: var(--field-olive-dark);
+    }
+
+    /* Step-by-Step Instructions */
+    .instruction-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .step-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .step-heading {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      background-color: var(--field-olive);
+      color: #FFFFFF;
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .mailing-box {
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-top: 10px;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.95rem;
+      color: var(--field-olive-dark);
+      line-height: 1.45;
+    }
+
+    /* Downloadable Forms Grid */
+    .downloads-title {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      margin: 24px 0 12px;
+      border-bottom: 2px solid var(--border-subtle);
+      padding-bottom: 6px;
+    }
+
+    .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .doc-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--field-olive);
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--charcoal);
+      transition: all 0.15s ease-in-out;
+      min-height: 48px;
+    }
+
+    .doc-card:hover {
+      background: var(--bg-surface);
+      border-color: var(--cav-gold);
+      border-left-color: var(--cav-gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .doc-icon {
+      width: 22px;
+      height: 22px;
+      fill: var(--field-olive);
+      flex-shrink: 0;
+    }
+
+    .doc-card:hover .doc-icon {
+      fill: var(--cav-gold-hover);
+    }
+
+    .doc-name {
+      font-size: 0.92rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    /* Medals Display Showcase */
+    .medals-sidebar {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card, 8px);
+      padding: 18px 14px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .medals-sidebar-title {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+      border-bottom: 2px solid var(--border-subtle);
+      padding-bottom: 8px;
+    }
+
+    .medals-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .medal-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .medal-item img {
+      max-width: 90px;
+      height: auto;
+      filter: drop-shadow(0 3px 5px rgba(0,0,0,0.15));
+      transition: transform 0.15s ease;
+    }
+
+    .medal-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .medal-caption {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .credit-tag {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 10px;
+    }
+  </style>
 </head>
+<body>
 
-<body background="images/sand.jpg" link="#663300" vlink="#000000" alink="#993300">
+  <!-- Regimental Global Header -->
+  <header class="site-header">
+    <a href="index.html">
+      <div class="unit-sub">1st Cavalry Division (Airmobile)</div>
+      <h1>Delta Co., 2nd Bn, 8th Cavalry (Airborne)</h1>
+      <div class="association-title">Angry Skipper Association, Inc.</div>
+    </a>
+  </header>
 
-<p align="center"><b><a href="index.html">Homepage</a></b></p>
-<div align="center">
-	<table border="0" width="70%">
-		<tr>
-			<td>
-			<img border="0" src="images/silverstar_200x115.gif" width="115" height="200"></td>
-			<td rowspan="4">
-			<p STYLE="margin-bottom: 0in" align="center"><b>
-			<font FACE="Helvetica, sans-serif" color="#800000">MEDAL(S) REQUEST</font></b></p>
-			<p STYLE="margin-bottom: 0in"><b>
-			<font FACE="Helvetica, sans-serif" color="#800000">If you were never 
-			issued your medals (as was the case of a friend of mine), or if they 
-			were lost in a fire, storm, flood, hurricane, or for some other 
-			reason - you may request replacements from the government at no 
-			expense to you.</font></b></p>
-			<p STYLE="margin-bottom: 0in"><b>
-			<font FACE="Helvetica, sans-serif" color="#800000">It took 2 months 
-			for the government to reply to my initial request, so be prepared 
-			for an extended process. It took an additional 5-6 months for the 
-			medals to actually be sent.</font></b></p>
-			<p STYLE="margin-bottom: 0in"><b>
-			<font FACE="Helvetica, sans-serif" color="#800000">You must fill out 
-			the �Standard Form SF-180� and send all documentation requested 
-			(plus additional material if you have any) to help speed the 
-			process. Go to the website listed below and follow the instructions.</font></b></p>
-			<p STYLE="margin-bottom: 0in"><b>
-			<font FACE="Helvetica, sans-serif" color="#800000">1. Go to the 
-			following website for info on �Requesting Replacement Medals, 
-			Awards, and Decorations�:<br>
-			the web address is: </font></b></p>
-			<p STYLE="margin-bottom: 0in"><b>
-			<font FACE="Helvetica, sans-serif" color="#800000">
-			<a href="http://www.archives.gov/veterans/military-service-records/replacement-medals.html">
-			http://www.archives.gov/veterans/military-service-records/replacement-medals.html</a></font></b></p>
-			<p STYLE="margin-bottom: 0in"><b>
-			<font FACE="Helvetica, sans-serif" color="#800000">2. Then, download 
-			�Standard Form SF-180� - print it out , fill it out, and mail it to 
-			the St. Louis address listed on the website along with your cover 
-			letter and all the other necessary documentation. Here is the 
-			address:</font></b></p>
-			<p STYLE="margin-bottom: 0in"><b>
-			<font FACE="Helvetica, sans-serif" color="#800000">National 
-			Personnel Records Center<br>
-			Medals Section (NRPMA-M)<br>
-			9700 Page Avenue<br>
-			St. Louis, MO 63132-5100</font></b></p>
-			<p STYLE="margin-bottom: 0in"><b>
-			<font face="Helvetica, sans-serif" color="#663300">
-			<a href="Medals_Request/Medals%20request-cover%20letter.pdf">Medals 
-			Request Cover Letter</a> (pdf document)</font></b></p>
-			<p STYLE="margin-bottom: 0in"><b>
-			<font face="Helvetica, sans-serif" color="#663300">
-			<a href="Medals_Request/Medals%20request-Info.pdf">Medals Request 
-			Information</a> (pdf document)</font></b></p>
-			<p STYLE="margin-bottom: 0in"><b>
-			<font face="Helvetica, sans-serif" color="#663300">
-			<a href="Medals_Request/standard-form-180.pdf">Standard Form-180</a> 
-			(pdf document)</font></b></p>
-			<p STYLE="margin-bottom: 0in"><b>
-			<font face="Helvetica, sans-serif" color="#663300">
-			<a href="pdf_documents/Rec%20for%20Award.pdf">Recommendation for 
-			Award</a></font></b></p>
-			<p><font color="#800000"><b>Thank you to Kirk Davis for passing on 
-			the information about how to request medals</b></font><p>
-			<font color="#800000"><b>Note: This only applies to any medals 
-			specifically issued by the U.S. Military. Medals such as the Vietnam 
-			Campaign Medal can be replaced by purchasing from some businesses 
-			online or possibly a military surplus store.</b></font><p align="center"><b><a href="index.html">Homepage</a></b></td>
-			<td>
-			<img border="0" src="images/bronzestar_200x108.gif" width="108" height="200"></td>
-		</tr>
-		<tr>
-			<td>
-			<img border="0" src="images/airmedal_200x105.gif" width="105" height="200"></td>
-			<td>
-			<img border="0" src="images/armcommed200x256.gif" width="99" height="200"></td>
-		</tr>
-		<tr>
-			<td>
-			<img border="0" src="images/purpleheart_200x106.gif" width="106" height="200"></td>
-			<td>
-			<img border="0" src="images/natdef_200x111.gif" width="111" height="200"></td>
-		</tr>
-		<tr>
-			<td>
-			<img border="0" src="images/vietnamservicemedal_200x103.gif" width="103" height="200"></td>
-			<td>
-			<img border="0" src="images/vncampaignmedal_200x85.gif" width="85" height="200"></td>
-		</tr>
-	</table>
-</div>
-<p align="center">&nbsp;</p>
+  <!-- Subpage Breadcrumb Navigation -->
+  <nav class="sub-nav" aria-label="Breadcrumb">
+    <div class="container-nav">
+      <a href="index.html" class="back-home">&larr; Return to Association Home</a>
+      <span class="crumb-current">Medals Request</span>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="container">
+
+    <section class="page-title-card">
+      <h2>U.S. Military Replacement Medals &amp; Awards</h2>
+      <p>Instructions, National Archives procedures, and required standard forms for requesting replacement military decorations at no expense.</p>
+    </section>
+
+    <div class="medals-layout">
+      
+      <!-- Main Content Guide -->
+      <section class="content-card">
+        <article class="guide-prose">
+          <p>
+            If you were never issued your military decorations, or if they were lost or destroyed in a fire, storm, flood, or hurricane, you may request official replacements from the U.S. government at no personal expense.
+          </p>
+
+          <aside class="timeline-notice">
+            <strong>Expected Timeline:</strong> Initial government confirmation typically takes around 2 months, followed by 5 to 6 additional months for medal processing and delivery. Please be prepared for an extended review window.
+          </aside>
+
+          <p>
+            Applicants must complete <strong>Standard Form SF-180</strong> and supply supporting military personnel documentation (along with any citations or orders in your possession) to expedite verification.
+          </p>
+
+          <div class="instruction-steps">
+            
+            <div class="step-card">
+              <div class="step-heading">
+                <span class="step-num">1</span>
+                Review Official National Archives Guidelines
+              </div>
+              <p>
+                Visit the National Archives site for current instructions regarding replacement medals, awards, and military records[cite: 9]:
+              </p>
+              <a href="https://www.archives.gov/veterans/military-service-records/replacement-medals.html" class="doc-card" target="_blank" rel="noopener">
+                <svg class="doc-icon" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+                <span class="doc-label">National Archives: Replacement Medals &amp; Awards Portal</span>
+              </a>
+            </div>
+
+            <div class="step-card">
+              <div class="step-heading">
+                <span class="step-num">2</span>
+                Complete and Mail Standard Form SF-180
+              </div>
+              <p>
+                Print and fill out <strong>Standard Form SF-180</strong>[cite: 9]. Mail your completed form, custom cover letter, and supporting documents to the Military Personnel Records Center in St. Louis[cite: 9]:
+              </p>
+              <div class="mailing-box">
+                National Personnel Records Center<br>
+                Medals Section (NRPMA-M)<br>
+                9700 Page Avenue<br>
+                St. Louis, MO 63132-5100[cite: 9]
+              </div>
+            </div>
+
+          </div>
+
+          <h3 class="downloads-title">Application Forms &amp; Templates</h3>
+          <div class="doc-grid">
+            <a href="Medals_Request/standard-form-180.pdf" class="doc-card" target="_blank" rel="noopener">
+              <svg class="doc-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              <span class="doc-label">Standard Form SF-180 (PDF)</span>
+            </a>
+            <a href="Medals_Request/Medals%20request-cover%20letter.pdf" class="doc-card" target="_blank" rel="noopener">
+              <svg class="doc-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              <span class="doc-label">Sample Cover Letter (PDF)</span>
+            </a>
+            <a href="Medals_Request/Medals%20request-Info.pdf" class="doc-card" target="_blank" rel="noopener">
+              <svg class="doc-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              <span class="doc-label">Medals Request Overview (PDF)</span>
+            </a>
+            <a href="pdf_documents/Rec%20for%20Award.pdf" class="doc-card" target="_blank" rel="noopener">
+              <svg class="doc-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              <span class="doc-label">Recommendation for Award (PDF)</span>
+            </a>
+          </div>
+
+          <aside class="timeline-notice" style="border-left-color: var(--field-olive);">
+            <strong>Foreign Awards Notice:</strong> Federal replacement requests apply solely to decorations authorized and issued directly by the U.S. Armed Forces[cite: 9]. Foreign decorations—such as the Republic of Vietnam Campaign Medal—are not distributed by the NPRC and must be acquired through authorized military surplus distributors or specialty ribbon providers[cite: 9].
+          </aside>
+
+          <div class="credit-tag">
+            Special thanks to Kirk Davis for compiling and providing this procedure for our association veterans[cite: 9].
+          </div>
+        </article>
+      </section>
+
+      <!-- Sidebar Medals Showcase -->
+      <aside class="medals-sidebar">
+        <div class="medals-sidebar-title">Decorations Showcase</div>
+        <div class="medals-grid">
+          <div class="medal-item">
+            <img src="images/silverstar_200x115.gif" alt="Silver Star Medal" loading="lazy">
+            <span class="medal-caption">Silver Star</span>
+          </div>
+          <div class="medal-item">
+            <img src="images/bronzestar_200x108.gif" alt="Bronze Star Medal" loading="lazy">
+            <span class="medal-caption">Bronze Star</span>
+          </div>
+          <div class="medal-item">
+            <img src="images/purpleheart_200x106.gif" alt="Purple Heart Medal" loading="lazy">
+            <span class="medal-caption">Purple Heart</span>
+          </div>
+          <div class="medal-item">
+            <img src="images/airmedal_200x105.gif" alt="Air Medal" loading="lazy">
+            <span class="medal-caption">Air Medal</span>
+          </div>
+          <div class="medal-item">
+            <img src="images/armcommed200x256.gif" alt="Army Commendation Medal" loading="lazy">
+            <span class="medal-caption">Army Commendation</span>
+          </div>
+          <div class="medal-item">
+            <img src="images/natdef_200x111.gif" alt="National Defense Service Medal" loading="lazy">
+            <span class="medal-caption">National Defense</span>
+          </div>
+          <div class="medal-item">
+            <img src="images/vietnamservicemedal_200x103.gif" alt="Vietnam Service Medal" loading="lazy">
+            <span class="medal-caption">Vietnam Service</span>
+          </div>
+          <div class="medal-item">
+            <img src="images/vncampaignmedal_200x85.gif" alt="Republic of Vietnam Campaign Medal" loading="lazy">
+            <span class="medal-caption">RVN Campaign</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="footer-meta">
+      Delta Co., 2nd Bn, 8th Cavalry (Airborne) &bull; 1st Cavalry Division (Airmobile)
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="legal_disclaimer.htm">Legal Disclaimer</a>
+      <a href="Privacy%20Statement.html">Privacy Statement</a>
+    </div>
+  </footer>
+
+  <!-- Board Palette Preference Sync -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('asa_board_theme');
+      const savedFont = localStorage.getItem('asa_board_font');
+      if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+      if (savedFont) document.body.setAttribute('data-font', savedFont);
+    })();
+  </script>
 
 </body>
-
 </html>

@@ -1,529 +1,1199 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Language" content="en-us">
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Angry Skipper Association Newsletters</title>
-<style>
-<!--
-div.Section1
-	{page:Section1;}
--->
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newsletters Archive | Angry Skipper Association, Inc.</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* Filter & Search Header Panel */
+    .filter-panel {
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card, 10px);
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .filter-grid {
+        grid-template-columns: 2fr 1fr auto;
+        align-items: flex-end;
+      }
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .filter-group label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .filter-input, .filter-select {
+      height: 44px;
+      padding: 8px 12px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      background: #FFFFFF;
+      color: var(--charcoal);
+    }
+
+    .filter-input:focus, .filter-select:focus {
+      outline: none;
+      border-color: var(--cav-gold);
+      box-shadow: 0 0 0 3px rgba(229, 168, 35, 0.2);
+    }
+
+    .btn-reset {
+      height: 44px;
+      padding: 0 18px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease-in-out;
+    }
+
+    .btn-reset:hover {
+      background: #E8ECE2;
+      color: var(--charcoal);
+      border-color: var(--field-olive);
+    }
+
+    .results-count {
+      margin-top: 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* Newsletter Card Grid */
+    .newsletters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 18px;
+    }
+
+    .newsletter-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .newsletter-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--cav-gold);
+      box-shadow: var(--shadow-md);
+    }
+
+    .newsletter-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      border-bottom: 2px solid var(--border-subtle);
+      padding-bottom: 6px;
+    }
+
+    .newsletter-date {
+      font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+      line-height: 1.25;
+    }
+
+    .newsletter-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: var(--bg-page);
+      color: var(--field-olive);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 2px 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+    }
+
+    .newsletter-summary {
+      font-size: 0.92rem;
+      color: var(--charcoal);
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .newsletter-summary em {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: all 0.15s ease-in-out;
+      min-height: 38px;
+    }
+
+    .btn-pdf {
+      background-color: #FAF4E6;
+      color: #7A5200;
+      border: 1px solid #E6D2A8;
+    }
+
+    .btn-pdf:hover {
+      background-color: #EEDBAA;
+      color: var(--charcoal);
+      border-color: var(--cav-gold);
+    }
+
+    .btn-audio {
+      background-color: var(--bg-page);
+      color: var(--field-olive-dark);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-audio:hover {
+      background-color: var(--field-olive);
+      color: #FFFFFF;
+      border-color: var(--field-olive);
+    }
+
+    .action-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .header-graphic {
+      text-align: center;
+      margin: 10px 0 20px;
+    }
+
+    .header-graphic img {
+      max-width: 260px;
+      height: auto;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.12));
+    }
+  </style>
 </head>
+<body>
 
-<body background="images/cotton.bmp">
+  <!-- Regimental Global Header -->
+  <header class="site-header">
+    <a href="index.html">
+      <div class="unit-sub">1st Cavalry Division (Airmobile)</div>
+      <h1>Delta Co., 2nd Bn, 8th Cavalry (Airborne)</h1>
+      <div class="association-title">Angry Skipper Association, Inc.</div>
+    </a>
+  </header>
 
-<p align="center"><font face="Arial" style="font-size: 10pt"><b><a href="index.html">Home</a></b></font></p>
-<p align="center"><font face="Arial" style="font-size: 10pt"><img border="0" src="images/unloadchoppertrns.gif" width="305" height="150"></font></p>
-<p align="center">
-<font face="Arial" size="4">
-<b>NEWSLETTERS</b></font></p>
-<hr>
-<p align="center">
-  <font face="Arial">Adobe Acrobat required to read these files.<br>
-Get reader here:<br>
-</font><font face="Arial" size="2">&nbsp;</font><a href="http://get.adobe.com/reader/"><img border="0" src="images/reader_128.jpg" width="44" height="46"></a></p>
-<div align="center">
-  <table width="66%" border="1" bordercolor="#000080">
-    <tr>
-      <td height="63"><div align="center">
-        <p><font face="Arial"><b><a href="../2026 Angry Skipper News Letter.pdf">Jan, 
-          2026</a></b></font><br>
-          <font face="Arial">How an Army Tank almost sank a Navy Destroyer; What is your Story; 2026 San Diego Registration Information; Registration form; The Dump; Burn pits; The rest of the story; ASA Y/E 2025 Operatin Statement; Our Roster is a Mess</font>    </p>
-      </div></td>
-    </tr>
-  </table>
-</div>
-<div align="center">
-  <table width="66%" border="1" bordercolor="#000080">
-    <tr>
-      <td height="63"><div align="center">
-        <p><font face="Arial"><b><a href="../2025 ASA Newsletter.pdf">Jan, 
-          2025</a></b></font><br>
-          <font face="Arial">In the Beginning, by David &quot;Doc&quot; Wilson</font><font face="Arial">; Jacksonville, FL Reunion Info &amp; Registration; 
-            ASA Financial Statements; Deceased Members</font>    </p>
-      </div></td>
-    </tr>
-  </table>
-</div>
-<div align="center"><br>
-</div>
-<blockquote>
-  <blockquote>
-    <div align="center">
-      <div align="center">
-        <table width="66%" border="1" bordercolor="#000080">
-          <tr>
-            <td height="63"><div align="center"><font face="Arial"><b><a href="../ASA Newsletter 2024.pdf">Jan, 
-              2024</a></b></font><br>
-              <font face="Arial">In the Beginning, by David &quot;Doc&quot; Wilson</font><font face="Arial">; Jacksonville, FL Reunion Info &amp; Registration; 
-            ASA Financial Statements; Deceased Members</font></div></td>
-          </tr>
-        </table>
-      </div>
+  <!-- Subpage Breadcrumb Navigation -->
+  <nav class="sub-nav" aria-label="Breadcrumb">
+    <div class="container-nav">
+      <a href="index.html" class="back-home">&larr; Return to Association Home</a>
+      <span class="crumb-current">Newsletters Archive</span>
     </div>
-  </blockquote>
-</blockquote>
-<div align="center">
-  <div align="center">
-    <table border="1" width="63%" bordercolor="#000080">
-      <tr>
-        <td><div align="center">
-          <p><font face="Arial"><b><a href="pdf_documents/ASA Newsletter Jan2023.pdf">Jan, 
-            2023</a></b></font> <br>
-            <font face="Arial">Never Forgotten 34 After Action Report; Phoenix/Mesa Reunion Info &amp; Registration<br>
-            ASA Financial Statements; Deceased Members</font></p>
-        </div></td>
-      </tr>
-    </table>
-  </div>
-  <table border="1" width="63%" bordercolor="#000080">
-    <tr>
-		  <td><div align="center">
-		    <p><font face="Arial"><b><a href="pdf_documents/ASA Newsletter 2022 Jan.pdf">Jan, 
-		      2022</a></b></font> <br>
-		      <font face="Arial">Special Issue.<strong> Never Forgotten</strong><br>
-		      Cover by COL Wolf Kutter, Narrative by Jim Garvin, Range 70-71
-		      </font></p>
-		  </div></td>
-    </tr>
-	</table>
-	<table border="1" width="63%" bordercolor="#000080">
-	  <tr>
-	    <td><div align="center">
-	      <p><font face="Arial"><b><a href="pdf_documents/ASA Newsletter Jan2020.pdf">Jan, 
-	        2020</a></b></font> <br>
-          <font face="Arial">Irving, TX After Action Report; We've Got a Bug for That ...; Phoenix, AZ reunion info and registration (insert); The Not So Angry Sisters; Welcome Home 2019; ASA Financials, Minutes, Members.</font>		  </p>
-        </div></td>
-      </tr>
-	  <tr>
-	    <td><div align="center">
-	      <p><font face="Arial"><b><a href="pdf_documents/ASA Newsletter 2019 Jan.pdf">Jan, 
-	        2019</a><br>
-	        </b>Going to Vietnam to Face my Father's Ghost by Hugh Wilson; 2019 Dallas, Tx. 
-	        Reunion info; ASA Financial Statements; New &amp; Deceased Members.
-          </font> </p>
-  </div></td>
-      </tr>
-	  <tr>
-	    <td><div align="center">
-	      <p><font face="Arial"><b><a href="pdf_documents/ASA Newsletter 2018 Jan.pdf">Jan, 
-	        2018</a><br>
-	        </b>After Action Report, D.C. 2017; Ceremony at the Wall; Orlando Information and 
-	        Registration; ASA Financial Statements; Deceased Members
-          </font>		  </p>
-        </div></td>
-      </tr>
-	  <tr>
-	    <td><div align="center">
-	      <p><font face="Arial"><b><a href="pdf_documents/ASA Newsletter 2017 Jan.pdf">Jan, 
-	        2017</a><br>
-          </b>Seattle After Action Report; DC 2017 Reunion Information and Registration. Cancer Discovery by Bob Babas (Range 6, 68-69); ASA Year End Financial Statements; Minutes held 12May16 in 2016; New and Deceased Members, Getting Old by Kirk Davis (Range, 1971) </font>		  </p>
-        </div></td>
-      </tr>
-	  <tr>
-	    <td><div align="center"><font face="Arial"><b><a href="pdf_documents/ASA Newsletter 2016 Jan.pdf">Jan, 
-	      2016</a><br>
-	      </b>President's Message; 2017 Washington D.C. reunion; PTSD by Wayne Robinson;<br>
-	      Seattle Info and Registration; &quot;Company Grade&quot; by Rocky Colavita;<br>
-	      ASA Financial Stateements; D 2/8th Cav Decals.
-        </font></div></td>
-      </tr>
-	  <tr>
-	    <td><div align="center">
-	      <p><font face="Arial"><b><a href="pdf_documents/ASA Newsletter 2015 July.pdf">July, 
-	        2015</a><br>
-	        </b>I remember Nov 4, 165, Ia Drang Valley, LZ Cavalier; Register with Ease 10-years; New/Deceased Members; San Antonio Reunion After-Action Report; Financial Statements 
-	        and Minutes of the Business meeting held 16May15; Red Lion Hotel in Seattle 2016
-          </font>		  </p>
-        </div></td>
-      </tr>
-	  <tr>
-	    <td><div align="center"><font face="Arial"><b><a href="pdf_documents/ASA Newsletter 2015_Jan2.pdf">Jan, 
-	      2015</a><br>
-        </b>Open Letter to Anyone Who Served in Vietnam; President's Message; Kentucky Kampout; Our First Day Out; Reunion Info &amp; Registration Form; Financial Statements. New/Deceased Memebers.</font></div></td>
-      </tr>
-	  <tr>
-	    <td><div align="center">
-	      <p><font face="Arial"><b><a href="../pdf_documents/ASA Newsletter 2014_July.pdf">July, 
-	        2014</a><br>
-	        </b>Terry Garlock speech; President's Message; Kentucky Kampout; Dominic Byers 
-	        School Essay; New Members/Deceased; The Odyssey Years Book, Myrtle Beach 
-	        Group Photo; Vietnam Memorial Essay, ASA Treasurer's Report, Business 
-          Meeting; San Antonio Reunion in 2014</font></p>
-        </div></td>
-      </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><b>
-          <a href="pdf_documents/ASA%20Newsletter%202014_Jan.pdf">January, 
-          2014</a><br>
-          </b>Vietnam: Feb 2-4, 1970; President's Message; Terry Garlock, 
-	        Speaker;<br>
-          Kentucky Kampout; Reunion Info &amp; Registration Form;
-          Financial Statements</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><b>
-          <a href="pdf_documents/ASA%20Newsletter%202013%20July.pdf">July, 
-          2013</a><br>
-          </b>Women's View of Reunions; President's Message; San Diego Group 
-	        Photo; Badge of Glory Banner;
-	        Stacey Smith Comes Through; KY Kampout/Cav Patch; New Members; San 
-	        Diego Golf; Financial Statement and Minutes of the Business meeting 
-	        held 22June13.<br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><b><font face="Arial">
-          <a href="pdf_documents/ASA%20Newsletter%202013%20January.pdf">
-          February, 2013</a> </font></b><font face="Arial"><br>
-          30 Minutes Later, by Kirk Davis (Skull 71); San Diego reunion 2013 
-          Info and registration; Your Tour in Vietnam Poster; ASA Financial 
-          Statements; Myrtle Beach May 14th - 18th.</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><b>
-          <a href="pdf_documents/ASA%20Newsletter%202012%20July.pdf">July, 
-          2012</a><br>
-          </b>Heroes of the Vietnam Generation by James Webb; Boonie Hats in 
-	        Denver; Financial Statements and Minutes of the Business Meeting 
-	        held in Denver; Message from the President &amp; Secretary; Group 
-          Photographs</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial">
-          <b><a href="pdf_documents/ASA%20Newsletter%202012%20January.pdf">
-          February, 2012</a><br>
-          </b>Vietnam Vet Story by William Harrington (Range, 70-71); Denver 
-	        2012 Reunion<br>
-          registration; ASA Financials; Veterans Day Surprise Reunion; San 
-          Diego in 2013</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><b>
-          <a href="pdf_documents/Grunt%20Melody.pdf">Grunt Melody</a></b>, by 
-	        Norm McDonald (Range, 71)<br>
-          an excerpt from &quot;Strength and Honor, America's Best in Vietnam by 
-	        Terry Garlock<br>
-          <a href="http://www.garlock1.com">http://www.garlock1.com</a><br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial">
-          <b>
-          <a href="pdf_documents/ASA%20Newsletter%202011%20June.pdf">June, 
-          2011</a><br>
-          </b>&quot;I'm the One&quot; by Dave Gough (Range/Skull, 70-71), ASA 
-	        Financials, Business meeting minutes held 13May 11 in D.C., Annual 
-          KY Kampout Reunion Announcement</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial">
-          <b>
-          <a href="pdf_documents/ASA%20Newsletter%202011%20January.pdf">
-          January, 2011</a><br>
-          </b>&quot;Tea Time&quot; by Michael Parmeley (Skull 6, 1968); VA Begins Paying for 
-	        New Agent Orange Claims; D.C. Reunion Registration; ASA Financial 
-	        Statements; Denver, Colorado in 2012<br>
-          <a href="pdf_documents/tea_time.mp3">&quot;Tea Time&quot; audio</a></font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial">
-          <b>
-          <a href="pdf_documents/ASA%20Newsletter%202010_June.pdf">June, 2010</a><br>
-          </b>Once Upon a Vietnam, The Republic of, by D Rumppe (65-66);&nbsp; 
-          WOW, by Tom Vollmar (Skull, 70-71); Vietnam Battle, by Dan Beese 
-	        (Skull, 71-72); Vietnam Trips, by Jim Taylor (66-67); President's 
-	        Message to All Angry Skipper Members; ASA Financial Statements ended 
-          June 7, 2010; Minutes of Business meeting held May, 2010</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><b>
-          <a href="pdf_documents/ASA%20Newsletter%202010_January.pdf">January, 
-          2010</a><br>
-          </b>Misplaced Viet Lessons, by William Lloyd Stearman, D 2/8th CAV 
-	        Honor Roll, Letter from Cpt. Mingles, Cdr, D 2/8th CAV in Iraq, ASA 
-	        Financial Statements, D.C. in 2011, St Pete Beach Reunion 
-          Registration</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><b>
-          <a href="pdf_documents/ASA%20Newsletter%202009_June.pdf">June 2009</a><br>
-          </b>Reminder about the war in Vietnam, by Bill Neal (Skipper 6, 71), 
-	        Membership info, Financial Statements, Business Meeting Minutes, San 
-	        Antonio After Action Report, St. Pete Beach in 2010.<br>
-          &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td height="85">
-	      <p align="center"><font face="Arial"><b>
-          <a href="pdf_documents/ASA%20Newsletter%202009_January.pdf">Jan 2009</a></b><br>
-          Ghost Mountain by Ed Regan (Range 68-69); 2009 D 2/8CAV;
-	        St. Pete Beach, FL set for 2010; ASA Financial Statements
-          Ended Dec 31, 2008;&nbsp; San Antonio Registration.</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/ASA%20Newsletter%202008_June.pdf">June 2008</a></b></font></p>
-	      <p align="center">
-	        <span style="font-family: Arial; color: black">Funeral of MSG Clint Marshall; Salt Lake City After 
-	          Action Report; Neil Shipp Brown, KIA 2May69; Last 4 Demon 
-	          Commanders; ASA Financial Statements; Minutes of Business Meeting 
-          held 16May08.</span></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/ASA%20Newsletter%202008_January.pdf">January 2008</a></b><br>
-          <br>
-          The First Week on the Bong Son Coast � 
-          Oct, 1966 by R. Lee Livingston; D Company (Demon), 2/8<sup>th</sup> 
-          CAV return home after 15 month tour; &nbsp;VA Aid and Attendance General 
-	        Information; New &amp; Deceased Members; ASA, Inc. Year Ended 2007 
-	        Financial Statements; Vets can salute the Flag in civvies; Salt Lake 
-	        City Reunion Registration and Information; $300 SS Benefits For 
-          Those Who Served.</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/ASA%20Newsletter%202007_June.pdf">June 2007</a></b></font></p>
-	      <p align="center"><font face="Arial">
-          <span class="171311215-29052007">The Bob Hope Show, Dec 26, 1967 by 
-	          Michael Parmeley (Skull 6, 1968); Ltr from Frank Trapnell (Recon 6, 
-	          1965); Veterans Survival Guide by John D. Roche; Freedom Team 
-	          Salute; Introduction and update of the Demon's (D 2-8th CAV in 
-	          Iraq); 2007 D.C. Reunion Attendee's List; Ltr from our new 
-	          President, 1SG (ret) Chuck Kline (Recon/Weapons, 65-66); Washington 
-	          D.C. &quot;after action&quot; report; ASA, Inc. Financial Statements ending 
-	          May 22, 2007; Business Meeting minutes, held 18May07 at the Crowne 
-          Plaza Dulles Hotel; Salt Lake City 2008 Hotel Site Plan.</span></font></p>
-	      <p align="center">&nbsp;</td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center">
-	        <font face="Arial">
-            <br>
-            <span class="171213114-10022007"><b>
-            <a href="pdf_documents/ASA%20Newsletter%202007_Feb.pdf">Feb 2007</a></b></span><br>
-            <br>
-            Company D 2/8 in Iraq<br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <div align="center">
-	        <font face="Arial">
-            <br>
-            </font>
-	        <b><font face="Arial"><span class="343070017-02012007">
-            <a href="pdf_documents/ASA%20Newsletter%202007_Jan.pdf">
-            January, 2007</a></span></font></b><font face="Arial"><br>
-  &nbsp;</font></div>
-	      <div align="center">
-	        <font face="Arial"><span class="343070017-02012007">
-            Full Circle; Made a Difference; Original D 2/8 Guidon;
-	          Col. Thomas Blagg (Stone Mountain, 71-72) Silver Star;Vietnam Veterans Memorial stats; Dropshot Dispatch
-	          Chronicle; PTSD &amp; ME by Chuck Hustedt;
-	          Message from President, ASA, Inc.; Portion of MG 
-	          James Guest (retired) Orlando speech;
-	          Stolen Valor Act; New &amp; Deceased Members; ASA, 
-	          Inc. Year End Financial Statements;
-	          Board of Governors Election to be held in D.C.;&nbsp;
-            Washington, D.C. Reunion Registration and information;
-            Extraordinary Heroism Pay.</span><span class="171213114-10022007"><br>&nbsp;</span></font></div>
-	      </td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b>
-          <a href="pdf_documents/ASA%20Newsletter%202006_June.pdf">June 2006</a></b><br>
-          <br>
-          </font><span style="font-family: Arial">�Angry Skipper 
-	          Association, Inc. Articles &amp; Bylaws ratified; ASA owns its own 
-	          website; 11<sup>th</sup> Airborne Assault to Airmobile; Message from 
-	          the secretary; ASA obtains Liability Insurance; Medals requests; New 
-	          Members since Jan, 2006; Financial statements ending May 25, 2006; 
-	          Summary of Business meeting minutes;&nbsp;<span class="875550417-14032007"><a href="http://www.vietnam6bn31inf.com/frozen.htm">FROZEN 
-	            IN TIME</a>, by Col. George Mauldin (ret); </span>Article by Silver 
-	          Wings/SABER; Letter from Robert Johnson, President, 1<sup>st</sup> 
-          Cav Division Association; Purple Heart Hall of Honor; Angry Skipper 
-          lives today; 229<sup>th</sup> Aviation Company; Veterans Honor 
-	          POW/MIA, Where to get Help.�<br>
-  &nbsp;</span></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b>
-          <a href="pdf_documents/ASA_Newsletter_Jan2006.pdf">Jan. 2006</a></b><br>
-          <br>
-          <span class="515465817-20022006"><u>Jan, 2006</u>: President's 
-	          Message, Tax-Exempt Status Granted, Membership Cards, Demographics 
-	          of Membership, Names of New Members, , Veterans gather in Calloway 
-	          for &quot;homecoming,&quot; Treasurer's Report as of December 31, 2005.&nbsp; 
-          Orlando, Florida May, 2006 Reunion Registration and Details.<br>
-  &nbsp;</span></font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b>
-          <a href="pdf_documents/ASA_Newsletter_Sept_2005.pdf">Sept. 2005</a></b><br>
-          <br>
-          <span class="515465817-20022006"><u>Sept, 2005</u>: Better Lucky 
-	          Thank Good? by Ed Regan, ASA, Inc. Articles of Incorporation &amp; 
-          Bylaws, Treasurer's Report as of September 6, 2005. Announce 
-          Orlando, FL for May, 2006.&nbsp; Report of Las Vegas, 2005 reunion with 
-	          business meeting minutes<br>
-  &nbsp;</span></font></p>
-	      </td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/ASA_Newsletter_Vet_Day_2001.pdf">
-          Nov. 11, 2001</a></b><br>
-          <br>
-          Introducing the Newsletter; ASA reunion D.C. 2002;
-	        Presidents Corner; Memoir Moment - Firefight on the Mountain; PTSD; 
-	        Reunion 2000 recap - San Antonio; on the Net for Vets;Book Review; 
-	        Editorial; Vietnam related VA News.<br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/2000_November16.pdf">
-          Nov. 16, 2000</a></b><br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/1998_November22.pdf">
-          Nov. 22, 1998</a></b><br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/1997_November17.pdf">Nov. 17, 
-          1997</a></b><br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/1996_August19.pdf">Aug 19, 1996</a></b><br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b>
-          <a href="pdf_documents/April2_1996_newsletter.pdf">April 2, 1996</a></b><br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/1994_January17.pdf">Jan. 17, 
-          1994</a></b><br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/1992_February26.pdf">Feb. 26, 
-          1992</a></b><br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b>
-          <a href="pdf_documents/8Jan92%20AS%20Search%20Ltr%20from%20Ed%20Regan.pdf">
-          Angry Skipper Search, 8Jan92</a></b><br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/1991_September9.pdf">Sept. 9, 
-          1991</a></b><br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/1989_May14.pdf">
-          May 14, 1989</a></b><br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/1989_March5.pdf">
-          Mar. 5, 1989</a></b><br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/1989_Jan23.pdf">
-          Jan. 23, 1989</a></b><br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/1988_October10.pdf">Oct. 10, 
-          1988</a></b><br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/1988_March25.pdf">Mar. 25, 1988</a></b><br>
-  &nbsp;</font></td>
-	    </tr>
-	  <tr>
-	    <td>
-	      <p align="center"><font face="Arial"><br>
-          <b><a href="pdf_documents/1988_Feb11.pdf">Feb. 11, 1988</a></b><br>
-  &nbsp;</font></td>
-	    </tr>
-  </table>
-</div>
-<blockquote>
-  <blockquote>
-    <p align="center"><font face="Arial" style="font-size: 10pt"><b><a href="index.html">Home</a></b></font></p>
-  </blockquote>
-</blockquote>
-<div align="center">
-  <blockquote>
-    <blockquote>
-      <p>&nbsp;</p>
-    </blockquote>
-  </blockquote>
-</div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="container">
+
+    <section class="page-title-card">
+      <h2>Angry Skipper Association Newsletters</h2>
+      <p>Official dispatch archive preserving reunion reports, unit histories, personal recollections, financial statements, and member updates from 1988 to the present.</p>
+    </section>
+
+    <!-- Historical Banner Graphic -->
+    <div class="header-graphic">
+      <img src="images/unloadchoppertrns.gif" alt="Cavalry Troops Unloading Helicopter" loading="lazy">
+    </div>
+
+    <!-- Live Search & Decade Filter Panel -->
+    <section class="filter-panel">
+      <div class="filter-grid">
+        <div class="filter-group">
+          <label for="newsletterSearch">Search Dispatches</label>
+          <input type="text" id="newsletterSearch" class="filter-input" placeholder="Search keywords, authors, battles, or reunions..." autocomplete="off">
+        </div>
+
+        <div class="filter-group">
+          <label for="decadeFilter">Decade</label>
+          <select id="decadeFilter" class="filter-select">
+            <option value="">All Eras (1988 &ndash; Present)</option>
+            <option value="2020s">2020s</option>
+            <option value="2010s">2010s</option>
+            <option value="2000s">2000s</option>
+            <option value="1990s">1990s</option>
+            <option value="1980s">1980s</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <button type="button" id="btnReset" class="btn-reset">Reset</button>
+        </div>
+      </div>
+      <div id="resultsCount" class="results-count"></div>
+    </section>
+
+    <!-- Newsletters Card Grid -->
+    <section class="content-card">
+      <div class="newsletters-grid" id="newslettersGrid">
+
+        <!-- 2026 Jan -->
+        <article class="newsletter-card" data-year="2026" data-decade="2020s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2026</div>
+            <span class="newsletter-badge">2026</span>
+          </div>
+          <p class="newsletter-summary">
+            How an Army Tank almost sank a Navy Destroyer; What is your Story; 2026 San Diego Registration Information; Registration form; The Dump; Burn pits; The rest of the story; ASA Y/E 2025 Operating Statement; Our Roster is a Mess.
+          </p>
+          <div class="card-actions">
+            <a href="2026%20Angry%20Skipper%20News%20Letter.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF
+            </a>
+          </div>
+        </article>
+
+        <!-- 2025 Jan -->
+        <article class="newsletter-card" data-year="2025" data-decade="2020s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2025</div>
+            <span class="newsletter-badge">2025</span>
+          </div>
+          <p class="newsletter-summary">
+            &ldquo;In the Beginning&rdquo; by David &ldquo;Doc&rdquo; Wilson; Jacksonville, FL Reunion Info &amp; Registration; ASA Financial Statements; Deceased Members.
+          </p>
+          <div class="card-actions">
+            <a href="2025%20ASA%20Newsletter.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2024 Jan -->
+        <article class="newsletter-card" data-year="2024" data-decade="2020s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2024</div>[cite: 9]
+            <span class="newsletter-badge">2024</span>
+          </div>
+          <p class="newsletter-summary">
+            &ldquo;In the Beginning&rdquo; by David &ldquo;Doc&rdquo; Wilson; Jacksonville, FL Reunion Info &amp; Registration; ASA Financial Statements; Deceased Members.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="ASA%20Newsletter%202024.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2023 Jan -->
+        <article class="newsletter-card" data-year="2023" data-decade="2020s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2023</div>[cite: 9]
+            <span class="newsletter-badge">2023</span>
+          </div>
+          <p class="newsletter-summary">
+            Never Forgotten 34 After Action Report; Phoenix/Mesa Reunion Info &amp; Registration; ASA Financial Statements; Deceased Members.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%20Jan2023.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2022 Jan -->
+        <article class="newsletter-card" data-year="2022" data-decade="2020s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2022</div>[cite: 9]
+            <span class="newsletter-badge">2022</span>
+          </div>
+          <p class="newsletter-summary">
+            Special Issue: <strong>Never Forgotten</strong>. Cover by COL Wolf Kutter; Narrative by Jim Garvin (Range 70&ndash;71).[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202022%20Jan.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2020 Jan -->
+        <article class="newsletter-card" data-year="2020" data-decade="2020s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2020</div>[cite: 9]
+            <span class="newsletter-badge">2020</span>
+          </div>
+          <p class="newsletter-summary">
+            Irving, TX After Action Report; We've Got a Bug for That...; Phoenix, AZ reunion info and registration insert; The Not So Angry Sisters; Welcome Home 2019; ASA Financials, Minutes, Members.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%20Jan2020.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2019 Jan -->
+        <article class="newsletter-card" data-year="2019" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2019</div>[cite: 9]
+            <span class="newsletter-badge">2019</span>
+          </div>
+          <p class="newsletter-summary">
+            &ldquo;Going to Vietnam to Face my Father's Ghost&rdquo; by Hugh Wilson; 2019 Dallas, TX Reunion info; ASA Financial Statements; New &amp; Deceased Members.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202019%20Jan.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2018 Jan -->
+        <article class="newsletter-card" data-year="2018" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2018</div>[cite: 9]
+            <span class="newsletter-badge">2018</span>
+          </div>
+          <p class="newsletter-summary">
+            After Action Report, D.C. 2017; Ceremony at the Wall; Orlando Information and Registration; ASA Financial Statements; Deceased Members.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202018%20Jan.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2017 Jan -->
+        <article class="newsletter-card" data-year="2017" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2017</div>[cite: 9]
+            <span class="newsletter-badge">2017</span>
+          </div>
+          <p class="newsletter-summary">
+            Seattle After Action Report; DC 2017 Reunion Registration; Cancer Discovery by Bob Babas (Range 6, 68&ndash;69); ASA Year End Financials; Business meeting minutes; &ldquo;Getting Old&rdquo; by Kirk Davis (Range, 1971).[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202017%20Jan.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2016 Jan -->
+        <article class="newsletter-card" data-year="2016" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2016</div>[cite: 9]
+            <span class="newsletter-badge">2016</span>
+          </div>
+          <p class="newsletter-summary">
+            President's Message; 2017 Washington D.C. reunion; PTSD by Wayne Robinson; Seattle Info and Registration; &ldquo;Company Grade&rdquo; by Rocky Colavita; ASA Financial Statements; D 2/8th Cav Decals.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202016%20Jan.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2015 July -->
+        <article class="newsletter-card" data-year="2015" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">July 2015</div>[cite: 9]
+            <span class="newsletter-badge">2015</span>
+          </div>
+          <p class="newsletter-summary">
+            I remember Nov 4, 1965, Ia Drang Valley, LZ Cavalier; Register with Ease 10-years; New/Deceased Members; San Antonio Reunion After-Action Report; Financial Statements and Minutes; Red Lion Hotel in Seattle 2016.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202015%20July.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2015 Jan -->
+        <article class="newsletter-card" data-year="2015" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2015</div>[cite: 9]
+            <span class="newsletter-badge">2015</span>
+          </div>
+          <p class="newsletter-summary">
+            Open Letter to Anyone Who Served in Vietnam; President's Message; Kentucky Kampout; Our First Day Out; Reunion Info &amp; Registration Form; Financial Statements; New/Deceased Members.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202015_Jan2.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2014 July -->
+        <article class="newsletter-card" data-year="2014" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">July 2014</div>[cite: 9]
+            <span class="newsletter-badge">2014</span>
+          </div>
+          <p class="newsletter-summary">
+            Terry Garlock speech; President's Message; Kentucky Kampout; Dominic Byers School Essay; The Odyssey Years Book; Myrtle Beach Group Photo; Vietnam Memorial Essay; Treasurer's Report; San Antonio in 2015.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202014_July.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2014 Jan -->
+        <article class="newsletter-card" data-year="2014" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2014</div>[cite: 9]
+            <span class="newsletter-badge">2014</span>
+          </div>
+          <p class="newsletter-summary">
+            Vietnam: Feb 2&ndash;4, 1970; President's Message; Terry Garlock, Speaker; Kentucky Kampout; Reunion Info &amp; Registration Form; Financial Statements.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202014_Jan.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2013 July -->
+        <article class="newsletter-card" data-year="2013" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">July 2013</div>[cite: 9]
+            <span class="newsletter-badge">2013</span>
+          </div>
+          <p class="newsletter-summary">
+            Women's View of Reunions; President's Message; San Diego Group Photo; Badge of Glory Banner; Stacey Smith; KY Kampout/Cav Patch; San Diego Golf; Financials &amp; Minutes.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202013%20July.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2013 Feb -->
+        <article class="newsletter-card" data-year="2013" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">February 2013</div>[cite: 9]
+            <span class="newsletter-badge">2013</span>
+          </div>
+          <p class="newsletter-summary">
+            &ldquo;30 Minutes Later&rdquo; by Kirk Davis (Skull 71); San Diego reunion 2013 Info and registration; Your Tour in Vietnam Poster; ASA Financial Statements; Myrtle Beach preview.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202013%20January.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2012 July -->
+        <article class="newsletter-card" data-year="2012" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">July 2012</div>[cite: 9]
+            <span class="newsletter-badge">2012</span>
+          </div>
+          <p class="newsletter-summary">
+            &ldquo;Heroes of the Vietnam Generation&rdquo; by James Webb; Boonie Hats in Denver; Financial Statements and Minutes; Message from President &amp; Secretary; Group Photographs.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202012%20July.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2012 Feb -->
+        <article class="newsletter-card" data-year="2012" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">February 2012</div>[cite: 9]
+            <span class="newsletter-badge">2012</span>
+          </div>
+          <p class="newsletter-summary">
+            Vietnam Vet Story by William Harrington (Range, 70&ndash;71); Denver 2012 Reunion Registration; ASA Financials; Veterans Day Surprise Reunion; San Diego 2013 preview.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202012%20January.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- Special Feature: Grunt Melody -->
+        <article class="newsletter-card" data-year="2012" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">Special Dispatch</div>[cite: 9]
+            <span class="newsletter-badge">Excerpt</span>
+          </div>
+          <p class="newsletter-summary">
+            <strong>Grunt Melody</strong> by Norm McDonald (Range, 71). Excerpt from &ldquo;Strength and Honor: America's Best in Vietnam&rdquo; by Terry Garlock.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/Grunt%20Melody.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2011 June -->
+        <article class="newsletter-card" data-year="2011" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">June 2011</div>[cite: 9]
+            <span class="newsletter-badge">2011</span>
+          </div>
+          <p class="newsletter-summary">
+            &ldquo;I'm the One&rdquo; by Dave Gough (Range/Skull, 70&ndash;71); ASA Financials; Business meeting minutes held in D.C.; Annual KY Kampout Reunion Announcement.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202011%20June.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2011 Jan -->
+        <article class="newsletter-card" data-year="2011" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2011</div>[cite: 9]
+            <span class="newsletter-badge">2011</span>
+          </div>
+          <p class="newsletter-summary">
+            &ldquo;Tea Time&rdquo; by Michael Parmeley (Skull 6, 1968); VA Begins Paying for New Agent Orange Claims; D.C. Reunion Registration; Denver 2012 preview; includes audio companion.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202011%20January.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+            <a href="pdf_documents/tea_time.mp3" class="action-btn btn-audio" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+              Play Audio[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2010 June -->
+        <article class="newsletter-card" data-year="2010" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">June 2010</div>[cite: 9]
+            <span class="newsletter-badge">2010</span>
+          </div>
+          <p class="newsletter-summary">
+            Once Upon a Vietnam by D. Rumppe (65&ndash;66); WOW by Tom Vollmar (Skull, 70&ndash;71); Vietnam Battle by Dan Beese (Skull, 71&ndash;72); Vietnam Trips by Jim Taylor (66&ndash;67); President's Message; Financials &amp; Minutes.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202010_June.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2010 Jan -->
+        <article class="newsletter-card" data-year="2010" data-decade="2010s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2010</div>[cite: 9]
+            <span class="newsletter-badge">2010</span>
+          </div>
+          <p class="newsletter-summary">
+            Misplaced Viet Lessons by William Lloyd Stearman; D 2/8th CAV Honor Roll; Letter from Cpt. Mingles, Commander, D 2/8th CAV in Iraq; ASA Financials; St. Pete Beach Reunion.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202010_January.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2009 June -->
+        <article class="newsletter-card" data-year="2009" data-decade="2000s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">June 2009</div>[cite: 9]
+            <span class="newsletter-badge">2009</span>
+          </div>
+          <p class="newsletter-summary">
+            Reminder about the war in Vietnam by Bill Neal (Skipper 6, 71); Membership roster updates; Financials; Minutes; San Antonio After Action Report; St. Pete Beach preview.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202009_June.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2009 Jan -->
+        <article class="newsletter-card" data-year="2009" data-decade="2000s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2009</div>[cite: 9]
+            <span class="newsletter-badge">2009</span>
+          </div>
+          <p class="newsletter-summary">
+            Ghost Mountain by Ed Regan (Range 68&ndash;69); 2009 D 2/8CAV; St. Pete Beach 2010 announcement; ASA Year-End Financials; San Antonio Registration.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202009_January.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2008 June -->
+        <article class="newsletter-card" data-year="2008" data-decade="2000s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">June 2008</div>[cite: 9]
+            <span class="newsletter-badge">2008</span>
+          </div>
+          <p class="newsletter-summary">
+            Funeral of MSG Clint Marshall; Salt Lake City After Action Report; Neil Shipp Brown, KIA 2May69; Last 4 Demon Commanders; ASA Financial Statements; Minutes.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202008_June.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2008 Jan -->
+        <article class="newsletter-card" data-year="2008" data-decade="2000s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2008</div>[cite: 9]
+            <span class="newsletter-badge">2008</span>
+          </div>
+          <p class="newsletter-summary">
+            The First Week on the Bong Son Coast (Oct 1966) by R. Lee Livingston; D Company (Demon) 2/8th CAV returns home after 15-month tour; VA Aid &amp; Attendance; Salt Lake City Registration.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202008_January.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2007 June -->
+        <article class="newsletter-card" data-year="2007" data-decade="2000s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">June 2007</div>[cite: 9]
+            <span class="newsletter-badge">2007</span>
+          </div>
+          <p class="newsletter-summary">
+            The Bob Hope Show (Dec 26, 1967) by Michael Parmeley; Ltr from Frank Trapnell (Recon 6, 1965); Veterans Survival Guide; Introduction of the Demons in Iraq; D.C. After Action Report; Ltr from President Chuck Kline.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202007_June.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2007 Feb -->
+        <article class="newsletter-card" data-year="2007" data-decade="2000s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">February 2007</div>[cite: 9]
+            <span class="newsletter-badge">2007</span>
+          </div>
+          <p class="newsletter-summary">
+            Special Operational Dispatch: Company D, 2nd Battalion, 8th Cavalry in Iraq.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202007_Feb.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2007 Jan -->
+        <article class="newsletter-card" data-year="2007" data-decade="2000s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2007</div>[cite: 9]
+            <span class="newsletter-badge">2007</span>
+          </div>
+          <p class="newsletter-summary">
+            Full Circle; Original D 2/8 Guidon; Col. Thomas Blagg (Stone Mountain 71&ndash;72) Silver Star; PTSD &amp; ME by Chuck Hustedt; MG James Guest speech excerpt; Stolen Valor Act; D.C. Reunion details.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202007_Jan.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2006 June -->
+        <article class="newsletter-card" data-year="2006" data-decade="2000s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">June 2006</div>[cite: 9]
+            <span class="newsletter-badge">2006</span>
+          </div>
+          <p class="newsletter-summary">
+            Articles &amp; Bylaws ratified; 11th Airborne to Airmobile; Medals requests; &ldquo;Frozen in Time&rdquo; by Col. George Mauldin; Ltr from Robert Johnson (1st Cav Assn President); Purple Heart Hall of Honor; 229th Aviation.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA%20Newsletter%202006_June.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2006 Jan -->
+        <article class="newsletter-card" data-year="2006" data-decade="2000s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 2006</div>[cite: 9]
+            <span class="newsletter-badge">2006</span>
+          </div>
+          <p class="newsletter-summary">
+            Tax-Exempt Status Granted; Demographics of Membership; Veterans homecoming in Calloway; Treasurer's Report; Orlando May 2006 Reunion Details.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA_Newsletter_Jan2006.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2005 Sept -->
+        <article class="newsletter-card" data-year="2005" data-decade="2000s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">September 2005</div>[cite: 9]
+            <span class="newsletter-badge">2005</span>
+          </div>
+          <p class="newsletter-summary">
+            &ldquo;Better Lucky Than Good?&rdquo; by Ed Regan; ASA, Inc. Articles of Incorporation &amp; Bylaws; Orlando 2006 announcement; Las Vegas 2005 reunion minutes.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA_Newsletter_Sept_2005.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2001 Nov -->
+        <article class="newsletter-card" data-year="2001" data-decade="2000s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">November 11, 2001</div>[cite: 9]
+            <span class="newsletter-badge">2001</span>
+          </div>
+          <p class="newsletter-summary">
+            Inaugural association printed newsletter; D.C. 2002 announcement; Memoir Moment &mdash; Firefight on the Mountain; PTSD; San Antonio 2000 recap; On the Net for Vets; Book Review.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/ASA_Newsletter_Vet_Day_2001.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 2000 Nov -->
+        <article class="newsletter-card" data-year="2000" data-decade="2000s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">November 16, 2000</div>[cite: 9]
+            <span class="newsletter-badge">2000</span>
+          </div>
+          <p class="newsletter-summary">
+            <em>Archival association dispatch &amp; reunion planning correspondence.</em>
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/2000_November16.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 1998 Nov -->
+        <article class="newsletter-card" data-year="1998" data-decade="1990s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">November 22, 1998</div>[cite: 9]
+            <span class="newsletter-badge">1998</span>
+          </div>
+          <p class="newsletter-summary">
+            <em>Archival unit communication &amp; veteran locator updates.</em>
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/1998_November22.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 1997 Nov -->
+        <article class="newsletter-card" data-year="1997" data-decade="1990s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">November 17, 1997</div>[cite: 9]
+            <span class="newsletter-badge">1997</span>
+          </div>
+          <p class="newsletter-summary">
+            <em>Annual association correspondence &amp; member directory notices.</em>
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/1997_November17.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 1996 Aug -->
+        <article class="newsletter-card" data-year="1996" data-decade="1990s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">August 19, 1996</div>[cite: 9]
+            <span class="newsletter-badge">1996</span>
+          </div>
+          <p class="newsletter-summary">
+            <em>Summer gathering dispatch and company reunion summary.</em>
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/1996_August19.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 1996 Apr -->
+        <article class="newsletter-card" data-year="1996" data-decade="1990s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">April 2, 1996</div>[cite: 9]
+            <span class="newsletter-badge">1996</span>
+          </div>
+          <p class="newsletter-summary">
+            <em>Spring newsletter and roster search reports.</em>
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/April2_1996_newsletter.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 1994 Jan -->
+        <article class="newsletter-card" data-year="1994" data-decade="1990s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 17, 1994</div>[cite: 9]
+            <span class="newsletter-badge">1994</span>
+          </div>
+          <p class="newsletter-summary">
+            <em>Early association bulletin and San Francisco post-reunion follow-up.</em>
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/1994_January17.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 1992 Feb -->
+        <article class="newsletter-card" data-year="1992" data-decade="1990s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">February 26, 1992</div>[cite: 9]
+            <span class="newsletter-badge">1992</span>
+          </div>
+          <p class="newsletter-summary">
+            <em>Early reunion announcements for the 1st Annual Gathering in Houston, TX.</em>
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/1992_February26.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 1992 Jan (Special Search Letter) -->
+        <article class="newsletter-card" data-year="1992" data-decade="1990s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 8, 1992</div>[cite: 9]
+            <span class="newsletter-badge">Historical Letter</span>
+          </div>
+          <p class="newsletter-summary">
+            <strong>Angry Skipper Search Letter</strong> from Ed Regan &mdash; Foundation efforts to locate and reunite Delta Company 2/8th Cavalry troopers.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/8Jan92%20AS%20Search%20Ltr%20from%20Ed%20Regan.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 1991 Sept -->
+        <article class="newsletter-card" data-year="1991" data-decade="1990s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">September 9, 1991</div>[cite: 9]
+            <span class="newsletter-badge">1991</span>
+          </div>
+          <p class="newsletter-summary">
+            <em>Early foundation dispatch following the Nashville gathering.</em>
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/1991_September9.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 1989 May -->
+        <article class="newsletter-card" data-year="1989" data-decade="1980s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">May 14, 1989</div>[cite: 9]
+            <span class="newsletter-badge">1989</span>
+          </div>
+          <p class="newsletter-summary">
+            <em>Spring 1989 newsletter bulletin &amp; Myrtle Beach inaugural recap.</em>
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/1989_May14.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 1989 Mar -->
+        <article class="newsletter-card" data-year="1989" data-decade="1980s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">March 5, 1989</div>[cite: 9]
+            <span class="newsletter-badge">1989</span>
+          </div>
+          <p class="newsletter-summary">
+            <em>Early association member bulletin and contact notes.</em>
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/1989_March5.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 1989 Jan -->
+        <article class="newsletter-card" data-year="1989" data-decade="1980s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">January 23, 1989</div>[cite: 9]
+            <span class="newsletter-badge">1989</span>
+          </div>
+          <p class="newsletter-summary">
+            <em>Inaugural year winter newsletter and roster communication.</em>
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/1989_Jan23.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 1988 Oct -->
+        <article class="newsletter-card" data-year="1988" data-decade="1980s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">October 10, 1988</div>[cite: 9]
+            <span class="newsletter-badge">1988</span>
+          </div>
+          <p class="newsletter-summary">
+            <em>Autumn foundational bulletin connecting founding members.</em>
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/1988_October10.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 1988 Mar -->
+        <article class="newsletter-card" data-year="1988" data-decade="1980s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">March 25, 1988</div>[cite: 9]
+            <span class="newsletter-badge">1988</span>
+          </div>
+          <p class="newsletter-summary">
+            <em>Spring foundational correspondence and initial trooper rosters.</em>
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/1988_March25.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+        <!-- 1988 Feb -->
+        <article class="newsletter-card" data-year="1988" data-decade="1980s">
+          <div class="newsletter-header">
+            <div class="newsletter-date">February 11, 1988</div>[cite: 9]
+            <span class="newsletter-badge">First Dispatch</span>
+          </div>
+          <p class="newsletter-summary">
+            <strong>Foundational Dispatch</strong> &mdash; The earliest surviving recorded Angry Skipper Association newsletter correspondence.[cite: 9]
+          </p>
+          <div class="card-actions">
+            <a href="pdf_documents/1988_Feb11.pdf" class="action-btn btn-pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              Open PDF[cite: 9]
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="footer-meta">
+      Delta Co., 2nd Bn, 8th Cavalry (Airborne) &bull; 1st Cavalry Division (Airmobile)
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="legal_disclaimer.htm">Legal Disclaimer</a>
+      <a href="Privacy%20Statement.html">Privacy Statement</a>
+    </div>
+  </footer>
+
+  <!-- Instant Search & Decade Filter Engine -->
+  <script>
+    const searchInput = document.getElementById('newsletterSearch');
+    const decadeSelect = document.getElementById('decadeFilter');
+    const resetBtn = document.getElementById('btnReset');
+    const countDisplay = document.getElementById('resultsCount');
+    const cards = Array.from(document.querySelectorAll('.newsletter-card'));
+    const totalCount = cards.length;
+
+    function filterNewsletters() {
+      const query = searchInput.value.toLowerCase().trim();
+      const decade = decadeSelect.value;
+      let visible = 0;
+
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        const cardDecade = card.getAttribute('data-decade');
+
+        const matchesQuery = !query || text.includes(query);
+        const matchesDecade = !decade || cardDecade === decade;
+
+        if (matchesQuery && matchesDecade) {
+          card.style.display = '';
+          visible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      countDisplay.textContent = 'Showing ' + visible + ' of ' + totalCount + ' newsletters';
+    }
+
+    searchInput.addEventListener('input', filterNewsletters);
+    decadeSelect.addEventListener('change', filterNewsletters);
+
+    resetBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      decadeSelect.value = '';
+      filterNewsletters();
+    });
+
+    filterNewsletters();
+  </script>
+
+  <!-- Board Palette Preference Sync -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('asa_board_theme');
+      const savedFont = localStorage.getItem('asa_board_font');
+      if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+      if (savedFont) document.body.setAttribute('data-font', savedFont);
+    })();
+  </script>
 
 </body>
-
 </html>

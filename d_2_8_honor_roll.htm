@@ -1140,19 +1140,6 @@
 
   </main>
 
-  <!-- Interactive Tribute Lightbox Modal -->
-  <div id="tributeModal" class="tribute-modal" role="dialog" aria-modal="true" aria-labelledby="modalSoldierName">
-    <div class="tribute-modal-box">
-      <div class="tribute-modal-header">
-        <h3 class="tribute-modal-title" id="modalSoldierName">Trooper Memorial</h3>
-        <button type="button" class="tribute-modal-close" id="modalCloseBtn" aria-label="Close memorial dialog">&times;</button>
-      </div>
-      <div class="tribute-modal-body" id="modalBody">
-        <!-- Dynamic iframe or img loaded via script -->
-      </div>
-    </div>
-  </div>
-
   <!-- Global Regimental Footer -->
   <footer class="site-footer">
     <div class="footer-meta">
@@ -1165,9 +1152,8 @@
     </div>
   </footer>
 
-  <!-- Real-time Filter & Lightbox Logic -->
+ <!-- Real-time Filter Logic (Specific to Honor Roll table) -->
   <script>
-    // 1. Table Filtering Logic
     const searchInput = document.getElementById('soldierFilter');
     const yearSelect = document.getElementById('yearDODFilter');
     const resetBtn = document.getElementById('btnReset');
@@ -1208,61 +1194,10 @@
     });
 
     filterHonorRoll();
-
-    // 2. Lightbox Modal Interception
-    const modal = document.getElementById('tributeModal');
-    const modalClose = document.getElementById('modalCloseBtn');
-    const modalBody = document.getElementById('modalBody');
-    const modalTitle = document.getElementById('modalSoldierName');
-
-    document.querySelectorAll('.soldier-link').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const url = link.getAttribute('href');
-        const soldier = link.getAttribute('data-soldier') || 'Trooper Tribute';
-
-        modalTitle.textContent = soldier + ' \u2014 Memorial Record';
-        modalBody.innerHTML = '';
-
-        const isImage = /\.(jpg|jpeg|png|gif)$/i.test(url);
-
-        if (isImage) {
-          const img = document.createElement('img');
-          img.src = url;
-          img.alt = soldier;
-          modalBody.appendChild(img);
-        } else {
-          const iframe = document.createElement('iframe');
-          iframe.src = url;
-          iframe.title = soldier;
-          modalBody.appendChild(iframe);
-        }
-
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      });
-    });
-
-    function closeModal() {
-      modal.classList.remove('active');
-      modalBody.innerHTML = '';
-      document.body.style.overflow = '';
-    }
-
-    modalClose.addEventListener('click', closeModal);
-
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        closeModal();
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('active')) {
-        closeModal();
-      }
-    });
   </script>
+
+  <!-- Universal Modal Script (Handles tribute popups site-wide) -->
+  <script src="js/modal.js"></script>
 
   <!-- Board Palette Preference Sync -->
   <script>
@@ -1274,5 +1209,7 @@
     })();
   </script>
 
+</body>
+</html>
 </body>
 </html>

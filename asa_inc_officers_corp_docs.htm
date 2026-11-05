@@ -1,11 +1,283 @@
-<!-- Leadership & Governance Rosters -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Officers &amp; Corporate Documents | Angry Skipper Association, Inc.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 10px;
+    }
+
+    .doc-group {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card, 8px);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .doc-group h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.15rem;
+      color: var(--field-olive-dark);
+      margin: 0 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--cav-gold);
+    }
+
+    .doc-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .doc-link-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--charcoal);
+      font-weight: 500;
+      font-size: 0.92rem;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .doc-link-item:hover {
+      border-color: var(--cav-gold);
+      transform: translateX(3px);
+    }
+
+    .pdf-badge {
+      background: #8B1E1E;
+      color: #FFFFFF;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+    }
+
+    .roster-group {
+      margin-bottom: 28px;
+    }
+
+    .roster-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .roster-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.25rem;
+      color: var(--field-olive-dark);
+      margin: 0 0 16px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--border-subtle);
+    }
+
+    .officers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .officer-card {
+      background: var(--bg-page);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--cav-gold);
+      border-radius: 6px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .officer-role {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+    }
+
+    .officer-name {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--field-olive-dark);
+    }
+
+    .officer-sub {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .officer-contact {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      font-size: 0.88rem;
+    }
+
+    .officer-contact a {
+      color: var(--field-olive-dark);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      word-break: break-all;
+    }
+
+    .officer-contact a:hover {
+      color: var(--cav-gold-hover);
+    }
+
+    .officer-status {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-style: italic;
+    }
+
+    .mail-icon {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .guidon-divider {
+      text-align: center;
+      margin: 32px 0 24px;
+    }
+
+    .guidon-divider img {
+      width: 160px;
+      height: auto;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Regimental Global Header -->
+  <header class="site-header">
+    <a href="index.html">
+      <div class="unit-sub">1st Cavalry Division (Airmobile)</div>
+      <h1>Delta Co., 2nd Bn, 8th Cavalry (Airborne)</h1>
+      <div class="association-title">Angry Skipper Association, Inc.</div>
+    </a>
+  </header>
+
+  <!-- Subpage Breadcrumb Navigation -->
+  <nav class="sub-nav" aria-label="Breadcrumb">
+    <div class="container-nav">
+      <a href="index.html" class="back-home">&larr; Return to Association Home</a>
+      <span class="crumb-current">Officers &amp; Corporate Docs</span>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="container">
+
+    <section class="page-title-card">
+      <h2>Angry Skipper Association, Inc.</h2>
+      <p>A tax-exempt, non-profit veterans corporation organized under Section 501(c)(19) of the Internal Revenue Code.</p>
+    </section>
+
+    <!-- Corporate Documents Section -->
+    <section class="docs-grid">
+
+      <!-- Column 1: Governance & Trademarks -->
+      <div class="doc-group">
+        <h3>Governance &amp; Trademark Records</h3>
+        <div class="doc-links-list">
+          <a href="pdf_documents/ASA%20Service%20Mark.pdf" class="doc-link-item" target="_blank" rel="noopener">
+            <span class="pdf-badge">PDF</span>
+            <span>USPTO Certificate of Registration (Principal Register)</span>
+          </a>
+          <a href="pdf_documents/ASA%20Articles%20of%20Incorporation_Ratified.pdf" class="doc-link-item" target="_blank" rel="noopener">
+            <span class="pdf-badge">PDF</span>
+            <span>Articles of Incorporation (Ratified)</span>
+          </a>
+          <a href="pdf_documents/BYLAWS%20of%20the%20ANGRY%20SKIPPER%20ASSOCIATION_RATIFIED.pdf" class="doc-link-item" target="_blank" rel="noopener">
+            <span class="pdf-badge">PDF</span>
+            <span>Corporate Bylaws (Ratified)</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: Tax Exemption Certificates -->
+      <div class="doc-group">
+        <h3>Federal &amp; State Tax Exemption Certificates</h3>
+        <div class="doc-links-list">
+          <a href="pdf_documents/ASA_IRS_tax_exempt_ruling_ltr.pdf" class="doc-link-item" target="_blank" rel="noopener">
+            <span class="pdf-badge">PDF</span>
+            <span>IRS 501(c)(19) Tax-Exempt Ruling Letter</span>
+          </a>
+          <a href="pdf_documents/k1024_appl_complete.pdf" class="doc-link-item" target="_blank" rel="noopener">
+            <span class="pdf-badge">PDF</span>
+            <span>IRS Form 1024 Application (Complete)</span>
+          </a>
+          <a href="pdf_documents/AZ%20Tax%20Exemption%20Letter%20-%20Angry%20Skippers%20Association.pdf" class="doc-link-item" target="_blank" rel="noopener">
+            <span class="pdf-badge">PDF</span>
+            <span>Arizona Tax Exemption Letter</span>
+          </a>
+          <a href="pdf_documents/Calif%20Tax%20Exempt%20Certificate.pdf" class="doc-link-item" target="_blank" rel="noopener">
+            <span class="pdf-badge">PDF</span>
+            <span>California Tax Exemption Certificate</span>
+          </a>
+          <a href="images/Florida%20Cert%20of%20Exemption.jpg" class="doc-link-item" target="_blank" rel="noopener">
+            <span class="pdf-badge">IMG</span>
+            <span>Florida Certificate of Exemption</span>
+          </a>
+          <a href="pdf_documents/ASA_New_Jersey_tax_exempt_ltr.pdf" class="doc-link-item" target="_blank" rel="noopener">
+            <span class="pdf-badge">PDF</span>
+            <span>New Jersey Tax Exemption Certificate</span>
+          </a>
+          <a href="pdf_documents/ASA%20Texas%20Tax%20Exemption%20Ltr.pdf" class="doc-link-item" target="_blank" rel="noopener">
+            <span class="pdf-badge">PDF</span>
+            <span>Texas Tax Exemption Ruling Letter</span>
+          </a>
+          <a href="pdf_documents/Commonwealth%20of%20Virginia.html" class="doc-link-item" target="_blank" rel="noopener">
+            <span class="pdf-badge">HTML</span>
+            <span>Virginia Retail Sales &amp; Use Tax Exemption</span>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Guidon Emblem Divider -->
+    <div class="guidon-divider">
+      <img src="images/d_2_8_guidon200X136.gif" alt="Delta 2/8 Cavalry Company Guidon">
+    </div>
+
+    <!-- Leadership Rosters Section -->
     <section class="content-card">
-      
+
       <!-- Board of Governors -->
       <div class="roster-group">
         <h3 class="roster-title">Board of Governors (2024 &ndash; 2026)</h3>
         <div class="officers-grid">
-          
+
           <div class="officer-card">
             <div class="officer-role">President</div>
             <div class="officer-name">John Dullahan</div>
@@ -51,10 +323,10 @@
       </div>
 
       <!-- Board of Directors -->
-      <div class="roster-group" style="margin-top: 28px;">
+      <div class="roster-group">
         <h3 class="roster-title">Board of Directors (2023 &ndash; 2027)</h3>
         <div class="officers-grid">
-          
+
           <div class="officer-card">
             <div class="officer-role">Chairman of the Board</div>
             <div class="officer-name">Doug Hilts</div>
@@ -83,3 +355,33 @@
       </div>
 
     </section>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="footer-meta">
+      Delta Co., 2nd Bn, 8th Cavalry (Airborne) &bull; 1st Cavalry Division (Airmobile)
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="legal_disclaimer.htm">Legal Disclaimer</a>
+      <a href="Privacy%20Statement.html">Privacy Statement</a>
+    </div>
+  </footer>
+
+  <!-- Universal Modal Script -->
+  <script src="js/modal.js"></script>
+
+  <!-- Board Palette Preference Sync -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('asa_board_theme');
+      const savedFont = localStorage.getItem('asa_board_font');
+      if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+      if (savedFont) document.body.setAttribute('data-font', savedFont);
+    })();
+  </script>
+
+</body>
+</html>

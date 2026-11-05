@@ -1,208 +1,295 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Angry Skipper Association, Inc. | Delta Co., 2nd Bn, 8th Cavalry (Airborne)</title>
-  <meta name="keywords" content="1st Cavalry Division, 1st Cav, Army, Airmobile, Vietnam, Grunt, infantry, M16, Angry Skipper Association, 2/8th Cavalry">
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  
+
+  <style>
+    /* Two-column hero: compacts the logo footprint while keeping heraldry above the fold */
+    .hero-strip {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 24px;
+      padding: 16px 20px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card, 8px);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 20px;
+    }
+
+    .hero-insignia {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-insignia img {
+      max-width: 140px;
+      height: auto;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    }
+
+    .hero-text h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.35rem;
+      color: var(--field-olive-dark);
+      margin: 0 0 6px;
+      line-height: 1.25;
+    }
+
+    .hero-text p {
+      font-size: 0.94rem;
+      color: var(--charcoal);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* High-contrast Featured Link callout card */
+    .featured-dispatch-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--cav-gold);
+      border-left: 6px solid var(--cav-gold);
+      border-radius: var(--radius-card, 8px);
+      padding: 14px 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    }
+
+    .dispatch-badge {
+      display: inline-block;
+      background: var(--field-olive-dark);
+      color: var(--cav-gold);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+
+    .dispatch-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .dispatch-text h3 {
+      margin: 0 0 4px;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.12rem;
+      color: var(--field-olive-dark);
+    }
+
+    .dispatch-text p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--charcoal);
+      line-height: 1.4;
+    }
+
+    .btn-dispatch {
+      background: var(--field-olive-dark);
+      color: #FFFFFF !important;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 10px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      white-space: nowrap;
+      border: 1px solid var(--cav-gold);
+      transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .btn-dispatch:hover {
+      background: var(--cav-gold);
+      color: #1E252B !important;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Core navigation portal grid */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .portal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card, 8px);
+      padding: 18px 20px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .portal-card:hover {
+      border-color: var(--cav-gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .portal-card h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.15rem;
+      color: var(--field-olive-dark);
+      margin: 0 0 6px;
+    }
+
+    .portal-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin: 0 0 12px;
+      line-height: 1.45;
+      flex-grow: 1;
+    }
+
+    .portal-arrow {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--cav-gold-hover, #B8810E);
+      align-self: flex-start;
+    }
+
+    @media (max-width: 680px) {
+      .hero-strip {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 14px;
+      }
+      .hero-insignia img {
+        max-width: 110px;
+      }
+      .dispatch-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .btn-dispatch {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
-<!-- Board Interactive Preview Toolbar -->
-<aside class="board-preview-bar" aria-label="Theme Preview Controls">
-  <span style="color: var(--cav-gold); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Board Review Tool:</span>
-  
-  <label for="themeChooser">
-    Palette:
-    <select id="themeChooser" class="board-preview-select">
-      <option value="original-navy">Original Navy &amp; Gold (Classic ASA)</option>
-      <option value="original-parchment">Original Parchment &amp; Blue (Cotton/Paper)</option>
-      <option value="field-gold">1st Cav Field &amp; Gold</option>
-      <option value="woodland">Woodland OD &amp; Bronze</option>
-      <option value="navy-gold">Regimental Navy &amp; Gold</option>
-    </select>
-  </label>
 
-  <label for="fontChooser">
-    Typography:
-    <select id="fontChooser" class="board-preview-select">
-      <option value="roboto">Roboto (Clean / Modern Workhorse)</option>
-      <option value="poppins">Poppins (Geometric / Contemporary)</option>
-      <option value="modern">Source Serif / Sans (Editorial)</option>
-      <option value="classic">Traditional Times / Georgia</option>
-    </select>
-  </label>
-</aside>
-
-<script>
-  (function() {
-    const themeSelect = document.getElementById('themeChooser');
-    const fontSelect = document.getElementById('fontChooser');
-
-    // Default to the original legacy colors if nothing selected yet
-    const savedTheme = localStorage.getItem('asa_board_theme') || 'original-navy';
-    const savedFont = localStorage.getItem('asa_board_font') || 'roboto';
-
-    document.body.setAttribute('data-theme', savedTheme);
-    document.body.setAttribute('data-font', savedFont);
-    themeSelect.value = savedTheme;
-    fontSelect.value = savedFont;
-
-    themeSelect.addEventListener('change', (e) => {
-      document.body.setAttribute('data-theme', e.target.value);
-      localStorage.setItem('asa_board_theme', e.target.value);
-    });
-
-    fontSelect.addEventListener('change', (e) => {
-      document.body.setAttribute('data-font', e.target.value);
-      localStorage.setItem('asa_board_font', e.target.value);
-    });
-  })();
-</script>
-  <!-- Regimental Banner -->
+  <!-- Regimental Global Header -->
   <header class="site-header">
-    <div class="unit-sub">1st Cavalry Division (Airmobile)</div>
-    <h1>Delta Co., 2nd Bn, 8th Cavalry (Airborne)</h1>
-    <div class="era-badge">Vietnam War 1965 &ndash; 1972</div>
-    <div class="association-title">Angry Skipper Association, Inc.</div>
+    <a href="index.html">
+      <div class="unit-sub">1st Cavalry Division (Airmobile)</div>
+      <h1>Delta Co., 2nd Bn, 8th Cavalry (Airborne)</h1>
+      <div class="association-title">Angry Skipper Association, Inc.</div>
+    </a>
   </header>
 
+  <!-- Main Content Container -->
   <main class="container">
-    
-    <!-- Reunion Recap Card -->
-    <section class="hero-card">
-      <span class="hero-badge">Recent Event</span>
-      <h2>2026 ASA Reunion &mdash; San Diego, CA</h2>
-      <div class="hero-date-venue">
-        <strong>April 27 &ndash; May 3, 2026</strong><br>
-        DoubleTree San Diego Bayside
-      </div>
 
-      <p>
-        Thank you to all veterans, families, and guests who attended our San Diego gathering. Photographs and dispatches from the reunion are being collected for the archive.
-      </p>
-
-      <div class="hero-actions">
-        <a href="reunions.htm" class="btn btn-primary">
-          View Reunion Photo Galleries
-        </a>
+    <!-- Compact Hero Header & Insignia -->
+    <section class="hero-strip">
+      <div class="hero-insignia">
+        <img src="images/ASA%20Logo%20Transparent_web.gif" alt="Angry Skipper Association Insignia">
       </div>
-      
-      <div class="hero-meta">
-        Announcements regarding the 2027 reunion site and schedule will be published in upcoming newsletters.
+      <div class="hero-text">
+        <h2>Welcome, Troopers, Veterans &amp; Families</h2>
+        <p>
+          Official historical archives, company records, and veteran communications for Delta Company, 2nd Battalion, 8th Cavalry Regiment (Airborne), 1st Cavalry Division (Airmobile) &mdash; honoring service in the Republic of Vietnam from 1965 to 1972.
+        </p>
       </div>
     </section>
 
-    <!-- Categorized Hub Section -->
-    <section class="archive-categories">
-      
-      <!-- Group 1: Combat History & Archives -->
-      <div class="category-block">
-        <h3 class="category-title">Unit History &amp; Combat Records</h3>
-        <div class="category-grid">
-          <a href="after_action_reports.htm" class="cat-card">
-            <h4>After Action Reports</h4>
-            <p>Operational combat accounts and declassified records</p>
-          </a>
-          <a href="vietnam_photos_main_page.htm" class="cat-card">
-            <h4>Vietnam Photos</h4>
-            <p>Field photography archives (1965&ndash;1972)</p>
-          </a>
-          <a href="d_company_2_8th_cav_in_iraq.htm" class="cat-card">
-            <h4>D 2/8 in Iraq (OIF)</h4>
-            <p>Deployments (2006&ndash;2008) and updates (2009&ndash;2010)</p>
-          </a>
+    <!-- High-Visibility Featured Link: Jim Garvin's Archives -->
+    <section class="featured-dispatch-card">
+      <div class="dispatch-badge">Featured Sister Archive</div>
+      <div class="dispatch-content">
+        <div class="dispatch-text">
+          <h3>Jim Garvin&rsquo;s Delta 2/8 Cavalry Combat History</h3>
+          <p>Extensive historical research, operational maps, unit journals, and company field documentation.</p>
         </div>
-      </div>
-
-      <!-- Group 2: Roster & Memorial -->
-      <div class="category-block">
-        <h3 class="category-title">Roster &amp; Association Records</h3>
-        <div class="category-grid">
-          <a href="d_2_8_honor_roll.htm" class="cat-card highlight-card">
-            <h4>D 2/8 Honor Roll</h4>
-            <p>In memoriam: our fallen brothers and tributes</p>
-          </a>
-          <a href="asa_active_members.htm" class="cat-card">
-            <h4>Active Members</h4>
-            <p>Current roster and contact directory</p>
-          </a>
-          <a href="asa_inc_officers_corp_docs.htm" class="cat-card">
-            <h4>Corporate Documents</h4>
-            <p>Association officers, bylaws, and filings</p>
-          </a>
-        </div>
-      </div>
-
-      <!-- Group 3: Publications & Reunions -->
-      <div class="category-block">
-        <h3 class="category-title">Media &amp; Dispatches</h3>
-        <div class="category-grid">
-          <a href="angry_skipper_association_newsletters.htm" class="cat-card">
-            <h4>Newsletters</h4>
-            <p>Archived association dispatches and issues (PDF)</p>
-          </a>
-          <a href="reunions.htm" class="cat-card">
-            <h4>Reunion Galleries</h4>
-            <p>Photographs from past annual gatherings</p>
-          </a>
-          <a href="video_media.htm" class="cat-card">
-            <h4>Video &amp; Media</h4>
-            <p>Archived footage, sound clips, and interviews</p>
-          </a>
-        </div>
-      </div>
-
-      <!-- Group 4: Service & Support -->
-      <div class="category-block">
-        <h3 class="category-title">Veteran Resources &amp; Support</h3>
-        <div class="category-grid">
-          <a href="medals_request.htm" class="cat-card">
-            <h4>Medals Request</h4>
-            <p>Guidance for replacement awards and DD-214 records</p>
-          </a>
-          <a href="PTSD_Information.htm" class="cat-card">
-            <h4>PTSD Resources</h4>
-            <p>Veteran mental health support and counseling links</p>
-          </a>
-          <a href="links_to_vet_related_website.htm" class="cat-card">
-            <h4>Veteran Links</h4>
-            <p>1st Cavalry Division and military community links</p>
-          </a>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- Crest / Insignia Grounding -->
-    <section class="insignia-section">
-      <img src="images/ASA%20Logo%20Transparent_web.gif" alt="Angry Skipper Association Insignia">
-      <div class="featured-link-box">
-        <a href="https://www.jimgarvin.org/then--now.html" class="featured-link" target="_blank" rel="noopener">
-          &ldquo;Then and Now&rdquo; by James Garvin
+        <a href="http://garvin70.tripod.com/" class="btn-dispatch" target="_blank" rel="noopener">
+          Visit Jim Garvin&rsquo;s Site &rarr;
         </a>
       </div>
+    </section>
+
+    <!-- Primary Navigation & Site Directory -->
+    <section class="portal-grid">
+
+      <a href="d_2_8_honor_roll.htm" class="portal-card">
+        <div>
+          <h3>Honor Roll &amp; Memorial</h3>
+          <p>Remembering our fallen brothers in arms from Delta 2/8 Cavalry who gave the ultimate sacrifice.</p>
+        </div>
+        <span class="portal-arrow">View Memorial &rarr;</span>
+      </a>
+
+      <a href="vietnam_photos.htm" class="portal-card">
+        <div>
+          <h3>Vietnam Photo Galleries</h3>
+          <p>Chronological field photographs, patrols, combat bases, and candid trooper portraits (1965&ndash;1972).</p>
+        </div>
+        <span class="portal-arrow">Browse Galleries &rarr;</span>
+      </a>
+
+      <a href="asa_inc_officers_corp_docs.htm" class="portal-card">
+        <div>
+          <h3>Officers &amp; Corporate Docs</h3>
+          <p>Board of Governors, Board of Directors, tax-exempt 501(c)(19) rulings, and bylaws.</p>
+        </div>
+        <span class="portal-arrow">View Governance &rarr;</span>
+      </a>
+
+      <a href="reunions.htm" class="portal-card">
+        <div>
+          <h3>Association Reunions</h3>
+          <p>Annual gathering announcements, hotel details, registration forms, and banquet schedules.</p>
+        </div>
+        <span class="portal-arrow">Reunion Information &rarr;</span>
+      </a>
+
+      <a href="newsletters.htm" class="portal-card">
+        <div>
+          <h3>Unit Newsletters</h3>
+          <p>Quarterly association dispatches, president&rsquo;s messages, and printable PDF archive editions.</p>
+        </div>
+        <span class="portal-arrow">Read Dispatches &rarr;</span>
+      </a>
+
+      <a href="taps.htm" class="portal-card">
+        <div>
+          <h3>Post-Vietnam Taps</h3>
+          <p>Honoring Delta Company troopers and comrades who have passed away since returning home.</p>
+        </div>
+        <span class="portal-arrow">View Taps Record &rarr;</span>
+      </a>
+
     </section>
 
   </main>
 
-  <!-- Site Footer -->
+  <!-- Global Footer -->
   <footer class="site-footer">
     <div class="footer-meta">
       Delta Co., 2nd Bn, 8th Cavalry (Airborne) &bull; 1st Cavalry Division (Airmobile)
     </div>
-    <div style="font-size: 0.82rem; margin-bottom: 8px;">
-      Angry Skipper Association, Inc. &bull; Original Webmaster: Robin Woo (<a href="mailto:rwoo@surewest.net">rwoo@surewest.net</a>)
-    </div>
     <div class="footer-links">
+      <a href="index.html">Home</a>
       <a href="legal_disclaimer.htm">Legal Disclaimer</a>
       <a href="Privacy%20Statement.html">Privacy Statement</a>
     </div>
@@ -210,6 +297,16 @@
 
   <!-- Universal Modal Script -->
   <script src="js/modal.js"></script>
+
+  <!-- Board Palette Preference Sync -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('asa_board_theme');
+      const savedFont = localStorage.getItem('asa_board_font');
+      if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+      if (savedFont) document.body.setAttribute('data-font', savedFont);
+    })();
+  </script>
 
 </body>
 </html>

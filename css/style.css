@@ -706,3 +706,20 @@ body[data-font="poppins"] .category-title {
   text-align: left;
   word-break: break-word;
 }
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+}
+.header-text { text-align: center; flex: 0 1 auto; }
+.header-emblem { flex: none; height: auto; }
+.header-emblem--patch  { width: clamp(70px, 9vw, 105px); }
+.header-emblem--badges { width: clamp(100px, 13vw, 150px); }
+
+@media (max-width: 640px) {
+  .header-inner { flex-wrap: wrap; }
+  .header-text { order: 3; flex-basis: 100%; }
+  .header-emblem--patch  { order: 1; width: 60px; }
+  .header-emblem--badges { order: 2; width: 90px; }
+}

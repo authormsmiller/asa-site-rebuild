@@ -418,7 +418,18 @@ body {
    BOARD THEME & TYPOGRAPHY SELECTOR
    ========================================================================== */
 
-/* Theme 1: Default First Cav "Field & Gold" (Active in :root) */
+/* Theme: 1st Cav Field & Gold (explicit, no longer relies on :root) */
+body[data-theme="field-gold"] {
+  --cav-gold: #E5A823;
+  --cav-gold-hover: #C98F15;
+  --field-olive: #394220;
+  --field-olive-dark: #222814;
+  --charcoal: #161A1D;
+  --text-muted: #535B62;
+  --bg-page: #F5F6F3;
+  --bg-surface: #FFFFFF;
+  --border-subtle: #D8DDD0;
+}
 
 /* Theme 2: Regimental Navy & Gold (Traditional Naval / Joint Service) */
 body[data-theme="navy-gold"] {

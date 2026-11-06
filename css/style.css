@@ -716,6 +716,9 @@ body[data-font="poppins"] .category-title {
 .header-emblem { flex: none; height: auto; }
 .header-emblem--patch  { width: clamp(70px, 9vw, 105px); }
 .header-emblem--badges { width: clamp(100px, 13vw, 150px); }
+.header-emblem {
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.35));
+}
 
 @media (max-width: 640px) {
   .header-inner { flex-wrap: wrap; }

@@ -1,4 +1,4 @@
-:root {
+f:root {
   --cav-gold: #E5A823;
   --cav-gold-hover: #C98F15;
   --field-olive: #394220;
@@ -303,24 +303,37 @@ body {
   filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
 }
 
+/* "Then and Now" featured link as a full-width card */
 .featured-link-box {
   margin-top: 14px;
+  width: 100%;
 }
 
 .featured-link {
-  display: inline-block;
-  font-size: 1.05rem;
+  display: block;
+  width: 100%;
+  padding: 18px 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--cav-gold);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+  font-size: 1.15rem;
   font-weight: 700;
-  color: var(--field-olive);
+  color: var(--field-olive-dark);
+  text-align: center;
   text-decoration: none;
-  border-bottom: 2px solid var(--cav-gold);
-  padding-bottom: 2px;
+  transition: all 0.15s ease-in-out;
 }
 
-.featured-link:hover {
-  color: var(--cav-gold-hover);
+.featured-link:hover,
+.featured-link:focus-visible {
+  background: #FFFFFF;
+  border-color: var(--cav-gold);
+  color: var(--field-olive);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
-
 /* Subpage Utilities (Breadcrumbs, Tables, Content) */
 .sub-nav {
   background: var(--bg-surface);
